@@ -1,0 +1,46 @@
+title: "<gradient:#ff0000:#00ff00>Welcome to Settings</gradient>"
+
+type: "confirmation"
+
+inputs:
+  - id: "player_name"
+    type: "text"
+    label: "&bPlayer &lName"  # Color codes
+    initial: "Default Name"   # Simple text without gradient
+    max_length: 50           # Increased to accommodate any formatting
+    width: 300
+    label_visible: true
+
+  - id: "experience_level"
+    type: "number_range"
+    label: "<green>Experience Level</green>"
+    min: 1
+    max: 100
+    step: 1
+    initial: 1
+    width: 300
+    label_format: "%s: Level %s"
+
+  - id: "description"
+    type: "text"
+    label: "<yellow>Player Description</yellow>"
+    initial: "Tell us about yourself..."
+    max_length: 500          # Increased to accommodate formatting
+    width: 400
+    multiline:
+      min_rows: 3
+      max_columns: 50
+
+buttons:
+  confirm:
+    text: "<gradient:#4caf50:#8bc34a>✓ Confirm</gradient>"
+    description: "&aClick to &lconfirm &ayour changes"
+    color: "AEFFC1"
+    action:
+      type: "custom_click"
+      key: "cublexcore:player_settings/save"
+
+  cancel:
+    text: "<red>Cancel</red>"
+    description: "Click to cancel without saving"
+    color: "FFA0B1"

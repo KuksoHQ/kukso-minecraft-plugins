@@ -1,0 +1,118 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# 📋 Dialog Configuration Template
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This template shows best practices for creating dialog configurations.
+# Copy this file and rename it to create your own dialogs.
+#
+# 🚨 IMPORTANT NOTES:
+# • When using ColorManager formatting (gradients, hex colors, etc.) in 'initial' 
+#   text, make sure 'max_length' is LARGE ENOUGH for the formatted result!
+# • Gradients can expand to 100+ characters, so use max_length: 200+ for safety
+# • Simple color codes (&a, &b, etc.) add ~2 characters per code
+# • Run '/cubDialogs validate' to check for configuration issues
+#
+# 💡 FORMATTING EXAMPLES:
+# • Simple: "Hello World" (11 chars)
+# • Color codes: "&aHello &bWorld" (~15 chars after formatting)
+# • Hex colors: "#ff0000Hello #00ff00World" (~25 chars after formatting)  
+# • Gradients: "<gradient:#ff0000:#00ff00>Hello World</gradient>" (100+ chars!)
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+title: "&6Example Dialog Template"
+type: "confirmation"
+
+inputs:
+  # ───────────────────────────────────────────────────────────────────────────
+  # 📝 Text Input Examples
+  # ───────────────────────────────────────────────────────────────────────────
+  
+  # ✅ SAFE: Simple text input
+  - id: "username"
+    type: "text"
+    label: "&bUsername"
+    initial: "Enter your name"
+    max_length: 20              # Safe for simple text
+    width: 300
+    label_visible: true
+
+  # ⚠️ MEDIUM RISK: Color-coded text
+  - id: "display_name"
+    type: "text"
+    label: "&bDisplay Name"
+    initial: "&aAwesome &bPlayer"
+    max_length: 50              # Increased for color codes
+    width: 300
+
+  # 🚨 HIGH RISK: Gradient text (needs large max_length!)
+  - id: "fancy_title"
+    type: "text"
+    label: "&bFancy Title"
+    initial: "<gradient:#ff6b6b:#4ecdc4>Epic Player</gradient>"
+    max_length: 200             # LARGE value required!
+    width: 400
+
+  # ✅ SAFE: Multiline without initial formatting
+  - id: "description" 
+    type: "text"
+    label: "&eDescription"
+    initial: ""                 # Empty is safe
+    max_length: 500            # Large for multiline
+    width: 400
+    multiline:
+      min_rows: 3
+      max_columns: 50
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # 🔢 Number Range Input Examples  
+  # ───────────────────────────────────────────────────────────────────────────
+
+  - id: "level"
+    type: "number_range"
+    label: "&aExperience Level"
+    min: 1                      # Must be < max
+    max: 100                    # Must be > min
+    step: 1
+    initial: 50                 # Must be within min-max range
+    width: 300
+    label_format: "&aLevel: &6%s"
+
+  - id: "percentage"
+    type: "number_range"
+    label: "&ePercentage"
+    min: 0.0
+    max: 100.0
+    step: 0.1
+    initial: 50.0               # Within range
+    width: 350
+    label_format: "%s: %.1f%%"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔘 Button Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+buttons:
+  confirm:
+    text: "&a✓ Save Changes"
+    description: "&7Click to save your configuration"
+    color: "AEFFC1"
+    weight: 100
+    action:
+      type: "custom_click"
+      key: "example:save_config"
+
+  cancel:
+    text: "&c✗ Cancel"
+    description: "&7Click to discard changes"
+    color: "FFA0B1" 
+    weight: 100
+    # No action = closes dialog
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 📚 Additional Notes:
+# • Use '/cubDialogs validate' to check this configuration
+# • Test your dialogs after making changes
+# • Check the console for validation warnings
+# • Keep max_length generous when using formatting
+# ─────────────────────────────────────────────────────────────────────────────

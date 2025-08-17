@@ -16,3 +16,24 @@ permissions:
   cubDialogs.command.main:
     default: true
     description: Allows you to use the main command.
+  cubDialogs.admin.version:
+    default: op
+    description: Allows you to see the plugin version.
+  cubDialogs.admin.reload:
+    default: op
+    description: Allows you to reload the plugin.
+  cubDialogs.admin.open:
+    default: op
+    description: Allows you to open dialogs.
+  cubDialogs.admin.validate:
+    default: op
+    description: Allows you to validate dialogs.
+  cubDialogs.admin.help:
+    default: op
+    description: Allows you to see the help.
+  cubDialogs.admin.forceopen:
+    default: op
+    description: Allows you to force open dialogs for others.
+  cubDialogs.admin.forceclose:
+    default: op
+    description: Allows you to force close dialogs for others.

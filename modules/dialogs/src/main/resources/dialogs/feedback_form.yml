@@ -1,0 +1,37 @@
+title: "<gold>Feedback Form</gold>"
+type: "confirmation"
+
+inputs:
+  - id: "feedback"
+    type: "text"
+    label: "<aqua>Your Feedback</aqua>"
+    initial: ""
+    max_length: 500
+    width: 500
+    multiline:
+      min_rows: 5
+      max_columns: 50
+
+  - id: "rating"
+    type: "number_range"
+    label: "<yellow>Rating (1-5)</yellow>"
+    min: 1
+    max: 5
+    step: 1
+    initial: 3
+    width: 300
+    label_format: "%s: %s stars"
+
+buttons:
+  confirm:
+    text: "<green>Submit Feedback</green>"
+    description: "Click to submit your feedback"
+    color: "90EE90"
+    action:
+      type: "custom_click"
+      key: "cublexcore:feedback/submit"
+
+  cancel:
+    text: "<gray>Cancel</gray>"
+    description: "Click to cancel"
+    color: "A0A0A0"

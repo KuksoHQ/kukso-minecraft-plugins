@@ -3,24 +3,28 @@ commands:
   version:
     aliases: [ver]
     permissions:
-      - cublex.admin.version
+      - cubDialogs.admin.version
   reload:
     aliases: [rl, restart]
     permissions:
-      - cublex.admin.reload
+      - cubDialogs.admin.reload
   open:
     aliases: [op]
     permissions:
-      - cublex.admin.open
+      - cubDialogs.admin.open
+  validate:
+    aliases: [val]
+    permissions:
+      - cubDialogs.admin.validate
   help:
     aliases: [h]
     permissions:
-      - cublex.admin.help
+      - cubDialogs.admin.help
   forceopen:
     aliases: [fo]
     permissions:
-      - cublex.admin.forceopen
+      - cubDialogs.admin.forceopen
   forceclose:
     aliases: [fc]
     permissions:
-      - cublex.admin.forceclose
+      - cubDialogs.admin.forceclose

@@ -1,5 +1,6 @@
 package io.github.devbd1.cubDialogs.program;
 
+import io.github.devbd1.cubDialogs.utilities.DialogConfigValidator;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import io.papermc.paper.registry.data.dialog.DialogBase;
@@ -17,24 +18,23 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Loads dialogs.yml and builds Dialogs dynamically from configuration.
+ * Loads individual dialog files from /dialogs/ folder and builds Dialogs dynamically from the configuration.
  */
 public class DialogConfigManager {
     private static JavaPlugin plugin;
-    private static FileConfiguration dialogsConfig;
+    private static final Map<String, FileConfiguration> dialogConfigs = new ConcurrentHashMap<>();
+    private static final Set<String> availableDialogIds = ConcurrentHashMap.newKeySet();
 
     private DialogConfigManager() {}
 
     public static void init(JavaPlugin pl) {
         plugin = pl;
-        ensureDialogsFile();
-        dialogsConfig = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "dialogs.yml"));
+        ensureDialogsFolder();
+        loadAllDialogConfigs();
     }
 
     public static NamedTextColor parseNamedColor(String v) {
@@ -45,45 +45,97 @@ public class DialogConfigManager {
         return color;
     }
 
-    private static void ensureDialogsFile() {
+    private static void ensureDialogsFolder() {
         File dataFolder = plugin.getDataFolder();
         if (!dataFolder.exists()) {
             //noinspection ResultOfMethodCallIgnored
             dataFolder.mkdirs();
         }
-        File dialogsFile = new File(dataFolder, "dialogs.yml");
-        if (!dialogsFile.exists()) {
-            // Provide a default file if you bundle it in your resources
-            try {
-                plugin.saveResource("dialogs.yml", false);
-            } catch (IllegalArgumentException ignored) {
-                // No bundled resource; create empty structure
-                YamlConfiguration cfg = new YamlConfiguration();
-                cfg.createSection("dialogs");
+
+        File dialogsFolder = new File(dataFolder, "dialogs");
+        if (!dialogsFolder.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            dialogsFolder.mkdirs();
+            plugin.getLogger().info("Created dialogs folder at: " + dialogsFolder.getPath());
+        }
+
+        // Copy default dialog files from resources if they exist
+        copyDefaultDialogFiles(dialogsFolder);
+    }
+
+    private static void copyDefaultDialogFiles(File dialogsFolder) {
+        // List of default dialog files to copy from resources
+        String[] defaultDialogs = {"dialog_configuration_template.yml", "player_settings.yml", "feedback_form.yml", "exp_config.yml"};
+
+        for (String dialogFile : defaultDialogs) {
+            File targetFile = new File(dialogsFolder, dialogFile);
+            if (!targetFile.exists()) {
                 try {
-                    cfg.save(dialogsFile);
-                } catch (Exception e) {
-                    plugin.getLogger().severe("Failed to create dialogs.yml: " + e.getMessage());
+                    plugin.saveResource("dialogs/" + dialogFile, false);
+                    plugin.getLogger().info("Created default dialog file: " + dialogFile);
+                } catch (IllegalArgumentException ignored) {
+                    // Resource doesn't exist in jar, skip
+                    plugin.getLogger().fine("Default dialog resource not found: dialogs/" + dialogFile);
                 }
             }
         }
     }
 
+    private static void loadAllDialogConfigs() {
+        File dialogsFolder = new File(plugin.getDataFolder(), "dialogs");
+        if (!dialogsFolder.exists() || !dialogsFolder.isDirectory()) {
+            plugin.getLogger().warning("Dialogs folder not found or is not a directory!");
+            return;
+        }
+
+        File[] yamlFiles = dialogsFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".yml"));
+        if (yamlFiles == null || yamlFiles.length == 0) {
+            plugin.getLogger().warning("No dialog configuration files found in dialogs folder!");
+            return;
+        }
+
+        dialogConfigs.clear();
+        availableDialogIds.clear();
+
+        for (File yamlFile : yamlFiles) {
+            String dialogId = yamlFile.getName().substring(0, yamlFile.getName().length() - 4); // Remove .yml extension
+
+            try {
+                FileConfiguration config = YamlConfiguration.loadConfiguration(yamlFile);
+                dialogConfigs.put(dialogId, config);
+                availableDialogIds.add(dialogId);
+                plugin.getLogger().info("Loaded dialog configuration: " + dialogId);
+            } catch (Exception e) {
+                plugin.getLogger().severe("Failed to load dialog configuration from " + yamlFile.getName() + ": " + e.getMessage());
+            }
+        }
+
+        plugin.getLogger().info("Loaded " + dialogConfigs.size() + " dialog configurations");
+
+        // Validate all loaded configurations
+        List<DialogConfigValidator.ValidationIssue> issues = DialogConfigValidator.validateAllDialogs(plugin);
+        DialogConfigValidator.logValidationIssues(plugin, issues);
+    }
+
     public static Dialog buildDialog(String id) {
-        if (dialogsConfig == null) {
+        if (plugin == null) {
             // Lazy safety if init wasn't called
             init(JavaPlugin.getProvidingPlugin(DialogConfigManager.class));
         }
 
         plugin.getLogger().info("[DEBUG] Building dialog with ID: " + id);
 
-        ConfigurationSection root = dialogsConfig.getConfigurationSection("dialogs." + id);
-        if (root == null) {
-            plugin.getLogger().warning("Dialog id not found in dialogs.yml: " + id);
+        FileConfiguration dialogConfig = dialogConfigs.get(id);
+        if (dialogConfig == null) {
+            plugin.getLogger().warning("Dialog configuration not found for ID: " + id);
+            plugin.getLogger().info("Available dialog IDs: " + String.join(", ", availableDialogIds));
             return null;
         }
 
-        plugin.getLogger().info("[DEBUG] Found dialog config section for: " + id);
+        plugin.getLogger().info("[DEBUG] Found dialog config for: " + id);
+
+        // The root of the dialog config is the entire file, not a subsection
+        ConfigurationSection root = dialogConfig;
 
         // Title
         Component title = readComponent(root.getConfigurationSection("title"),
@@ -415,7 +467,6 @@ public class DialogConfigManager {
         return color != null ? Component.text(text, color) : Component.text(text);
     }
 
-    // java
     private static TextColor namedOrHex(String value) {
         if (value == null || value.isBlank()) return null;
 
@@ -436,17 +487,37 @@ public class DialogConfigManager {
         return hex; // may be null if invalid
     }
 
-    // Add this method inside the DialogConfigManager class
+    /**
+     * Gets all available dialog IDs.
+     * @return List of dialog IDs (file names without .yml extension)
+     */
     public static java.util.List<String> getDialogIds() {
-        if (dialogsConfig == null) {
+        if (plugin == null) {
             throw new IllegalStateException("DialogConfigManager is not initialized. Call DialogConfigManager.init(plugin) first.");
         }
 
-        org.bukkit.configuration.ConfigurationSection dialogsSection = dialogsConfig.getConfigurationSection("dialogs");
-        if (dialogsSection == null) {
-            return java.util.List.of();
+        return new java.util.ArrayList<>(availableDialogIds);
+    }
+
+    /**
+     * Reloads all dialog configurations from the dialogs folder.
+     * Useful for runtime configuration updates.
+     */
+    public static void reloadDialogConfigs() {
+        if (plugin == null) {
+            throw new IllegalStateException("DialogConfigManager is not initialized. Call DialogConfigManager.init(plugin) first.");
         }
 
-        return new java.util.ArrayList<>(dialogsSection.getKeys(false));
+        loadAllDialogConfigs();
+        plugin.getLogger().info("Reloaded all dialog configurations");
+    }
+
+    /**
+     * Checks if a dialog with the given ID exists.
+     * @param dialogId The dialog ID to check
+     * @return true if the dialog exists, false otherwise
+     */
+    public static boolean hasDialog(String dialogId) {
+        return availableDialogIds.contains(dialogId);
     }
 }
