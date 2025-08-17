@@ -1,0 +1,8 @@
+name: CubDialogs
+version: '1.0.0'
+main: io.github.devbd1.cubDialogs.Main
+api-version: '1.21'
+load: STARTUP
+authors: [ DevBD1 ]
+description: Spigot development library, built for the latest version.
+website: https://cublex.net
