@@ -1,0 +1,26 @@
+# Commands
+commands:
+  version:
+    aliases: [ver]
+    permissions:
+      - cublex.admin.version
+  reload:
+    aliases: [rl, restart]
+    permissions:
+      - cublex.admin.reload
+  open:
+    aliases: [op]
+    permissions:
+      - cublex.admin.open
+  help:
+    aliases: [h]
+    permissions:
+      - cublex.admin.help
+  forceopen:
+    aliases: [fo]
+    permissions:
+      - cublex.admin.forceopen
+  forceclose:
+    aliases: [fc]
+    permissions:
+      - cublex.admin.forceclose

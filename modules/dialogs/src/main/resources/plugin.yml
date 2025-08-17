@@ -6,3 +6,13 @@ load: STARTUP
 authors: [ DevBD1 ]
 description: Spigot development library, built for the latest version.
 website: https://cublex.net
+commands:
+  cubDialogs:
+    aliases: [cdia]
+    permission: cubDialogs.command.main
+    permission-message: You don't have permission to use this command.
+    usage: /<command>
+permissions:
+  cubDialogs.command.main:
+    default: true
+    description: Allows you to use the main command.
