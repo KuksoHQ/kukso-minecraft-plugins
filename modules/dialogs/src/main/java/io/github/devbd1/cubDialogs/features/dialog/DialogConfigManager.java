@@ -1,4 +1,4 @@
-package io.github.devbd1.cubDialogs.program;
+package io.github.devbd1.cubDialogs.features.dialog;
 
 import io.github.devbd1.cubDialogs.utilities.DialogConfigValidator;
 import io.papermc.paper.dialog.Dialog;
@@ -65,7 +65,7 @@ public class DialogConfigManager {
 
     private static void copyDefaultDialogFiles(File dialogsFolder) {
         // List of default dialog files to copy from resources
-        String[] defaultDialogs = {"dialog_configuration_template.yml", "player_settings.yml", "feedback_form.yml", "exp_config.yml"};
+        String[] defaultDialogs = {"template_confirmation_type.yml", "player_settings.yml", "feedback_form.yml", "exp_config.yml"};
 
         for (String dialogFile : defaultDialogs) {
             File targetFile = new File(dialogsFolder, dialogFile);

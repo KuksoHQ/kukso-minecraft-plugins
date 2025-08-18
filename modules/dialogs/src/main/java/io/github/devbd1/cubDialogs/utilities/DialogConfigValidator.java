@@ -1,6 +1,5 @@
 package io.github.devbd1.cubDialogs.utilities;
 
-import io.github.devbd1.cubDialogs.program.DialogConfigManager;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

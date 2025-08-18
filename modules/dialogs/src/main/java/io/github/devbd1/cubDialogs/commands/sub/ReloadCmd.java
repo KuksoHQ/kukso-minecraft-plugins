@@ -48,7 +48,7 @@ public class ReloadCmd implements CmdInterface {
             }
 
             // Reload all dialog configurations
-            io.github.devbd1.cubDialogs.program.DialogConfigManager.reloadDialogConfigs();
+            io.github.devbd1.cubDialogs.features.dialog.DialogConfigManager.reloadDialogConfigs();
 
             // Send a success message to the command sender
             sender.sendMessage("§aConfiguration, and dialogs reloaded successfully! You need to restart the server to reload server links and command aliases.");

@@ -2,8 +2,8 @@ package io.github.devbd1.cubDialogs;
 
 import io.github.devbd1.cubDialogs.commands.CmdRegistrar;
 import io.github.devbd1.cubDialogs.listeners.DialogEventListener;
-import io.github.devbd1.cubDialogs.program.DialogConfigManager;
-import io.github.devbd1.cubDialogs.program.ServerLinksManager;
+import io.github.devbd1.cubDialogs.features.dialog.DialogConfigManager;
+import io.github.devbd1.cubDialogs.features.serverLinks.ServerLinksManager;
 import io.github.devbd1.cubDialogs.utilities.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

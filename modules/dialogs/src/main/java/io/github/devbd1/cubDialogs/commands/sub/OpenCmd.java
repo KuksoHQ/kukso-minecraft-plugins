@@ -2,8 +2,8 @@ package io.github.devbd1.cubDialogs.commands.sub;
 
 import io.github.devbd1.cubDialogs.commands.CmdConfig;
 import io.github.devbd1.cubDialogs.commands.CmdInterface;
-import io.github.devbd1.cubDialogs.program.DialogBuilder;
-import io.github.devbd1.cubDialogs.program.DialogConfigManager;
+import io.github.devbd1.cubDialogs.features.dialog.DialogBuilder;
+import io.github.devbd1.cubDialogs.features.dialog.DialogConfigManager;
 import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;

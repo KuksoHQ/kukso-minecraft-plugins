@@ -1,4 +1,4 @@
-package io.github.devbd1.cubDialogs.program;
+package io.github.devbd1.cubDialogs.features.serverLinks;
 
 import io.github.devbd1.cubDialogs.utilities.ColorManager;
 import io.github.devbd1.cubDialogs.utilities.ConfigManager;
@@ -8,8 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import net.kyori.adventure.text.Component;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 
 /**
