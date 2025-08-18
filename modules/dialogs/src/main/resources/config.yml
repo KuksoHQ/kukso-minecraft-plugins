@@ -1,30 +1,70 @@
+#
+# Server Links. For typed links, Minecraft uses its own translations, so the label field won't be displayed. Custom links will use your specified labels.
+# You can start using by deleting the # symbol at the beginning of each line.
+#
+serverLinks:
+  WEBSITE:
+    url: "https://www.cublex.net"
+  COMMUNITY:
+    url: "https://discord.gg/Hqq3CdnenN"
+  #FORUMS:
+  #  url: "https://forums.example.com"
+  #SUPPORT:
+  #  url: "https://support.example.com"
+  #NEWS:
+  #  url: "https://news.example.com"
+  #ANNOUNCEMENTS:
+  #  url: "https://announcements.example.com"
+  #STATUS:
+  #  url: "https://status.example.com"
+  #FEEDBACK:
+  #  url: "https://feedback.example.com"
+  #REPORT_BUG:
+  #  url: "https://reportbug.example.com"
+  #COMMUNITY_GUIDELINES:
+  #  url: "https://rules.example.com"
+#
+# Custom Links. You can use custom labels.
+#
+customLinks:
+  DONATE:
+    url: "https://buymeacoffee.com/devbd1"
+    label: "#FF5733💰 <gradient:#FF5733:#33FF57>Donate</gradient>"
+#  VOTE:
+#    url: "https://vote.example.com"
+#    label: "🗳️ &6Vote for Us"
+#  STORE:
+#    url: "https://store.example.com"
+#    label: "🛒 Store"
+#
 # Commands
+#
 commands:
   version:
     aliases: [ver]
     permissions:
       - cubDialogs.admin.version
   reload:
-    aliases: [rl, restart]
+#    aliases: [rl, restart]
     permissions:
       - cubDialogs.admin.reload
   open:
-    aliases: [op]
+#    aliases: [op]
     permissions:
       - cubDialogs.admin.open
   validate:
-    aliases: [val]
+#    aliases: [val]
     permissions:
       - cubDialogs.admin.validate
   help:
-    aliases: [h]
+#    aliases: [h]
     permissions:
       - cubDialogs.admin.help
   forceopen:
-    aliases: [fo]
+#    aliases: [fo]
     permissions:
       - cubDialogs.admin.forceopen
   forceclose:
-    aliases: [fc]
+#    aliases: [fc]
     permissions:
       - cubDialogs.admin.forceclose

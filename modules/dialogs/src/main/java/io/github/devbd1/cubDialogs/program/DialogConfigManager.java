@@ -216,16 +216,21 @@ public class DialogConfigManager {
         String type = config.getString("type", "text").toLowerCase(Locale.ROOT);
         plugin.getLogger().info("[DEBUG] Input type: " + type);
 
-        // Parse label
+        // Parse label - FIXED VERSION
         Component label;
         Object labelObj = config.get("label");
         if (labelObj instanceof java.util.Map<?, ?> labelMap) {
+            // Complex label object (with text/color properties)
             org.bukkit.configuration.MemoryConfiguration labelConfig = new org.bukkit.configuration.MemoryConfiguration();
             for (Map.Entry<?, ?> entry : labelMap.entrySet()) {
                 labelConfig.set(entry.getKey().toString(), entry.getValue());
             }
             label = readComponent(labelConfig, Component.text(id));
+        } else if (labelObj instanceof String labelString) {
+            // Simple string label - parse with MiniMessage or legacy formatting
+            label = parseFormattedText(labelString);
         } else {
+            // Fallback to ID if no label found
             label = Component.text(id);
         }
 
@@ -281,10 +286,10 @@ public class DialogConfigManager {
                     for (Map.Entry<?, ?> entry : multiMap.entrySet()) {
                         multiConfig.set(entry.getKey().toString(), entry.getValue());
                     }
-                    int minRows = multiConfig.getInt("min_rows", 1);
+                    int maxLines = multiConfig.getInt("max_lines", 1);
                     int maxColumns = multiConfig.getInt("max_columns", 50);
-                    builder = builder.multiline(TextDialogInput.MultilineOptions.create(minRows, maxColumns));
-                    plugin.getLogger().info("[DEBUG] Applied multiline - minRows:" + minRows + ", maxColumns:" + maxColumns);
+                    builder = builder.multiline(TextDialogInput.MultilineOptions.create(maxLines, maxColumns));
+                    plugin.getLogger().info("[DEBUG] Applied multiline - maxLines:" + maxLines + ", maxColumns:" + maxColumns);
                 }
 
                 yield builder.build();
@@ -298,6 +303,29 @@ public class DialogConfigManager {
         plugin.getLogger().info("[DEBUG] Built input result: " + (result != null ? "SUCCESS" : "FAILED"));
         return result;
     }
+
+    /**
+     * Parses formatted text (MiniMessage format like <aqua>text</aqua> or legacy &a format)
+     */
+    private static Component parseFormattedText(String text) {
+        if (text == null || text.isEmpty()) {
+            return Component.empty();
+        }
+
+        // Use MiniMessage to parse the text
+        try {
+            return net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(text);
+        } catch (Exception e) {
+            // If MiniMessage parsing fails, try legacy format
+            try {
+                return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(text);
+            } catch (Exception e2) {
+                // If both fail, return plain text
+                return Component.text(text);
+            }
+        }
+    }
+
 
     // Update readComponent to handle both ConfigurationSection and Configuration
     private static Component readComponent(org.bukkit.configuration.Configuration config, Component def) {
@@ -442,10 +470,10 @@ public class DialogConfigManager {
 
                 ConfigurationSection multi = in.getConfigurationSection("multiline");
                 if (multi != null) {
-                    int minRows = multi.getInt("min_rows", 1);
+                    int maxLines = multi.getInt("max_lines", 1);
                     int maxColumns = multi.getInt("max_columns", 50);
-                    builder = builder.multiline(TextDialogInput.MultilineOptions.create(minRows, maxColumns));
-                    plugin.getLogger().info("[DEBUG] Applied multiline - minRows:" + minRows + ", maxColumns:" + maxColumns);
+                    builder = builder.multiline(TextDialogInput.MultilineOptions.create(maxLines, maxColumns));
+                    plugin.getLogger().info("[DEBUG] Applied multiline - maxLines:" + maxLines + ", maxColumns:" + maxColumns);
                 }
 
                 yield builder.build();

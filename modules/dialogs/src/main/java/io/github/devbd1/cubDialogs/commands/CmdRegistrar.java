@@ -1,9 +1,7 @@
 package io.github.devbd1.cubDialogs.commands;
 
 import io.github.devbd1.cubDialogs.Main;
-import io.github.devbd1.cubDialogs.commands.sub.HelpCmd;
-import io.github.devbd1.cubDialogs.commands.sub.OpenCmd;
-import io.github.devbd1.cubDialogs.commands.sub.ValidateCmd;
+import io.github.devbd1.cubDialogs.commands.sub.*;
 import org.bukkit.command.PluginCommand;
 
 public class CmdRegistrar {
@@ -20,6 +18,7 @@ public class CmdRegistrar {
         CmdManager mgr = new CmdManager();
         mgr.register(new OpenCmd());
         mgr.register(new ValidateCmd());
+        mgr.register(new ReloadCmd());
 
         cmd.setExecutor(mgr);
         cmd.setTabCompleter(mgr);

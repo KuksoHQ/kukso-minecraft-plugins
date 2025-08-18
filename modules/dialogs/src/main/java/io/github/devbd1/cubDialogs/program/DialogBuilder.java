@@ -14,7 +14,7 @@ public class DialogBuilder {
 
         Dialog dialog = DialogConfigManager.buildDialog(dialogId);
         if (dialog == null) {
-            sender.sendMessage("Could not build dialog: " + dialogId + " (check dialogs.yml)");
+            sender.sendMessage("Could not build dialog: " + dialogId + " (check dialogs folder.)");
             return false;
         }
 

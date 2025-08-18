@@ -18,13 +18,14 @@ inputs:
     min: 1
     max: 5
     step: 1
-    initial: 3
-    width: 300
-    label_format: "%s: %s stars"
+    initial: 5
+    width: 100
+    # Remove or comment out label_format to use default behavior
+    # label_format: "%s: %s"
 
 buttons:
   confirm:
-    text: "<green>Submit Feedback</green>"
+    text: "Submit Feedback"
     description: "Click to submit your feedback"
     color: "90EE90"
     action:
@@ -32,6 +33,6 @@ buttons:
       key: "cublexcore:feedback/submit"
 
   cancel:
-    text: "<gray>Cancel</gray>"
+    text: "Cancel"
     description: "Click to cancel"
     color: "A0A0A0"
