@@ -1,34 +1,33 @@
-title: "</green>Configure your new experience value</green>"
+title: "Template: EXP and Level Setter"
 type: "confirmation"
 
-buttons:
-  confirm:
-    text: "Confirm"
-    description: "Click to confirm your input."
-    color: "#AEFFC1"
-    weight: 100
-    action:
-      type: "custom_click"
-      key: "papermc:user_input/confirm"
+bodies:
+  - type: "plain_message"
+    message: "<gradient:#ff6b6b:#4ecdc4>You can set your level and experience to desired values.</gradient>"
+    width: 150
 
-  cancel:
-    text: "Discard"
-    description: "Click to discard your input."
-    color: "#FFA0B1"
-    weight: 100
-    action: null
+  - type: "item"
+    material: "EXPERIENCE_BOTTLE"
+    amount: 64
+    display_name: "§b§lLegendary Experience Bottle"
+    lore:
+      - "§7It contains unlimited"
+      - "§7amount of experince!"
+    show_tooltip: true
+    show_stack_count: true
+    width: 300
+    height: 300
 
 inputs:
   - id: "level"
     type: "number_range"
     label:
-      text: "Level"
-      color: "green"
+      text: "§2Level"
     min: 0
-    max: 100
+    max: 999
     step: 1
-    initial: 0
-    width: 300
+    initial: 499
+    width: 930
 
   - id: "experience"
     type: "number_range"
@@ -39,7 +38,7 @@ inputs:
     max: 100
     step: 1
     initial: 0
-    width: 300
+    width: 310
     label_format: "%s: %s percent to the next level"
 
   - id: "player_name"
@@ -47,10 +46,25 @@ inputs:
     label:
       text: "Player Name"
       color: "blue"
-    initial: "?? name ??"
+    #initial: "has no effect"
     max_length: 16
     width: 300
     label_visible: true
     multiline:
-      min_rows: 2
-      max_columns: 50
+      max_lines: 1
+      max_columns: 18
+
+buttons:
+  confirm:
+    text: "<gradient:#4caf50:#8bc34a>Confirm</gradient>"
+    description: "&aClick to &lconfirm &ayour changes with #FF5733 colored text"
+    action:
+      type: "custom_click"
+      key: "cublexcore:exp_config/confirm"
+    width: 100
+
+  cancel:
+    text: "&cCancel"
+    description: "<gradient:#ff0000:#800000>Cancel without saving</gradient>"
+    width: 100
+    action: null

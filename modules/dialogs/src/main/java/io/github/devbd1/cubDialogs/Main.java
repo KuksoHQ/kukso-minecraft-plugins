@@ -1,9 +1,9 @@
 package io.github.devbd1.cubDialogs;
 
 import io.github.devbd1.cubDialogs.commands.CmdRegistrar;
-import io.github.devbd1.cubDialogs.listeners.DialogEventListener;
-import io.github.devbd1.cubDialogs.features.dialog.DialogConfigManager;
-import io.github.devbd1.cubDialogs.features.serverLinks.ServerLinksManager;
+import io.github.devbd1.cubDialogs.listeners.ExpConfigEventListener;
+import io.github.devbd1.cubDialogs.dialog.DialogConfigManager;
+import io.github.devbd1.cubDialogs.serverLinks.ServerLinksManager;
 import io.github.devbd1.cubDialogs.utilities.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,7 +28,7 @@ public final class Main extends JavaPlugin {
             CmdRegistrar.register(this);
 
             // Register event listeners
-            getServer().getPluginManager().registerEvents(new DialogEventListener(), this);
+            getServer().getPluginManager().registerEvents(new ExpConfigEventListener(), this);
 
             // Initialize ServerLinksManager (this sets the static instance)
             serverLinksManager = new ServerLinksManager(this);

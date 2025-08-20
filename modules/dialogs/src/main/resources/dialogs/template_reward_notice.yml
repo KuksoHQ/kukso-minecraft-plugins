@@ -1,0 +1,22 @@
+title: "Reward Dialog"
+type: "notice"
+
+bodies:
+  - type: "item"
+    material: "DIAMOND_SWORD"
+    amount: 1
+    display_name: "&b&lLegendary Sword"
+    lore:
+      - "&7A powerful weapon"
+      - "&7Forged by ancient smiths"
+    description: "<green>You have earned this legendary reward!</green>"
+    show_tooltip: true
+    show_stack_count: false
+    width: 300
+    height: 300
+
+
+button:
+  text: "Claim Reward"
+  description: "Click to claim your reward"
+  color: "gold"

@@ -1,5 +1,6 @@
-package io.github.devbd1.cubDialogs.utilities;
+package io.github.devbd1.cubDialogs.dialog;
 
+import io.github.devbd1.cubDialogs.utilities.ColorManager;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -163,7 +164,11 @@ public class DialogConfigValidator {
         if ("number_range".equals(type)) {
             issues.addAll(validateNumberRangeInput(dialogId, inputId, inputMap));
         }
-        
+
+        if ("boolean".equals(type)) {
+            issues.addAll(validateBooleanInput(dialogId, inputId, inputMap));
+        }
+
         return issues;
     }
     
@@ -262,7 +267,28 @@ public class DialogConfigValidator {
         
         return issues;
     }
-    
+    /**
+     * Validates a boolean input configuration
+     */
+    private static List<ValidationIssue> validateBooleanInput(String dialogId, String inputId, Map<?, ?> inputMap) {
+        List<ValidationIssue> issues = new ArrayList<>();
+
+        // Boolean inputs have no required fields other than id, which is already checked
+
+        // Optional values checks
+        if (inputMap.containsKey("initial") && !(inputMap.get("initial") instanceof Boolean)) {
+            issues.add(new ValidationIssue(
+                    ValidationIssue.Severity.WARNING,
+                    dialogId,
+                    inputId,
+                    "Boolean input 'initial' should be a boolean value",
+                    "Change 'initial' to true or false"
+            ));
+        }
+
+        return issues;
+    }
+
     /**
      * Validates button configurations
      */

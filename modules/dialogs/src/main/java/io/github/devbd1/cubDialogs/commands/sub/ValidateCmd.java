@@ -1,7 +1,7 @@
 package io.github.devbd1.cubDialogs.commands.sub;
 
 import io.github.devbd1.cubDialogs.commands.CmdInterface;
-import io.github.devbd1.cubDialogs.utilities.DialogConfigValidator;
+import io.github.devbd1.cubDialogs.dialog.DialogConfigValidator;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 

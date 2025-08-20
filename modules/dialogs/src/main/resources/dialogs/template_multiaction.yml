@@ -1,0 +1,46 @@
+title: "Server Actions Menu"
+type: "multi_action"
+
+body:
+  type: "plain_message"
+  message: "<gradient:#8a2be2:#1e90ff>Select an action from the options below.</gradient>"
+  width: 400
+
+buttons:
+  - text: "🏠 Teleport Spawn"
+    description: "Return to your home location"
+    action:
+      type: "run_command"
+      command: "spawn"
+    width: 150
+
+  - text: "⚔️ Show Exp Config"
+    description: "Set your EXP level"
+    action:
+      type: "show_dialog"
+      id: "exp_config"
+    width: 150
+
+  - text: "🎒 Open Store"
+    description: "Browse available items"
+    action:
+      type: "open_url"
+      url: "https://cublex.net/store"
+    width: 150
+
+  - text: "✉️ Messages"
+    description: "Check your messages"
+    action:
+      type: "custom_click"
+      key: "cublexcore:messages/view"
+    width: 150
+
+  - text: "❌ Close"
+    description: "Close this menu"
+    action:
+      type: "close"
+    width: 150
+
+# Layout configuration
+columns: 2
+max_height: 300

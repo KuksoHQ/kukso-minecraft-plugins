@@ -1,4 +1,4 @@
-package io.github.devbd1.cubDialogs.features.serverLinks;
+package io.github.devbd1.cubDialogs.serverLinks;
 
 import io.github.devbd1.cubDialogs.utilities.ColorManager;
 import io.github.devbd1.cubDialogs.utilities.ConfigManager;

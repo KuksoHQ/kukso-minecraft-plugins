@@ -1,0 +1,18 @@
+# server_rules_dialog.yml
+title: "Server Rules"
+type: "notice"
+
+body:
+  type: "plain_message"
+  message: "<gradient:#ff6b6b:#4ecdc4>Please follow these server rules:</gradient>\n\n1. Be respectful to all players\n2. No griefing or stealing\n3. No hacking or exploits\n4. Keep chat family-friendly\n5. Have fun!"
+  width: 400
+
+button:
+  text: "I Understand"
+  description: "Acknowledge these rules"
+  color: "green"
+  action:
+    type: "close"
+
+# This title appears on the button in the dialog list
+external_title: "📜 Server Rules"

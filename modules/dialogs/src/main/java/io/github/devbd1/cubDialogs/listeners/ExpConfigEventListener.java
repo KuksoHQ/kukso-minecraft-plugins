@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public final class DialogEventListener implements Listener {
-    private static final Key CONFIRM_ID = Key.key("papermc:user_input/confirm");
+public final class ExpConfigEventListener implements Listener {
+    private static final Key CONFIRM_ID = Key.key("cublexcore:exp_config/confirm");
 
     @EventHandler
     public void onCustomClick(PlayerCustomClickEvent event) {

@@ -1,0 +1,76 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# 📋 Dialog Configuration Template for "notice" Type
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# This template shows best practices for creating dialog configurations.
+# Copy this file and rename it to create your own dialogs.
+#
+# 🚨 IMPORTANT NOTES:
+# • When using ColorManager formatting (gradients, hex colors, etc.) in 'initial'
+#   text, make sure 'max_length' is LARGE ENOUGH for the formatted result!
+# • Gradients can expand to 100+ characters, so use max_length: 200+ for safety
+# • Simple color codes (&a, &b, etc.) add ~2 characters per code
+# • Or you can refuse using colored text in some parts.
+#
+# • Run '/cubDialogs validate' to check for configuration issues!
+#
+# 💡 COLOR FORMATTING EXAMPLES:
+# • Simple: "Hello World" (11 chars)
+# • Color codes: "&aHello &bWorld" (~15 chars after formatting)
+# • Hex colors: "#ff0000Hello #00ff00World" (~25 chars after formatting)
+# • Gradients: "<gradient:#ff0000:#00ff00>Hello World</gradient>" (100+ chars!)
+#
+# INFORMATION
+# • Every dialog type must have a title, external_title and a type.
+# • Any dialog type can use bodies, and inputs configurations.
+# • "notice" dialog type have a button on the very bottom to close the screen.
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+title: "Important Notice"
+external_title: "Template: Notice"
+type: "notice"
+can_close_with_escape: false
+
+# The program respects the order of elements in the body list.
+bodies:
+  - type: "item"
+    material: "BARRIER"
+    amount: 9
+    display_name: "§c§lLogin Blocker"
+    lore:
+      - "§7A powerful weapon"
+      - "§7to prevent login."
+    description: "<- that's a barrier!"
+    show_tooltip: true
+    show_stack_count: true
+    width: 16
+    height: 16
+  - type: "plain_message"
+    message: "<gradient:#ff6b6b:#4ecdc4>Server will be down for maintenance at 3 AM EST.</gradient>"
+    width: 300
+
+inputs:
+  - id: "preferences"
+    type: "boolean"
+    label: "&bDon't show me again."
+    label_visible: true
+    initial: false
+    on_true: "accept" # optional
+    on_false: "decline" # optional
+  - id: "choose"
+    type: "single_option"
+    label: "&bChoose: "
+    label_visible: true
+    width: 200
+    entries:
+      - "Option 1"
+      - "Option 2"
+      - "Option 3"
+
+button:
+  text: "&a&lI &2Understand"
+  description: "Click to acknowledge this &nnotice&r"
+  width: 150
+  action:
+    type: "close"
