@@ -13,7 +13,7 @@ public class ConfirmationDialogTypeHandler implements TypeInterface {
 
     @Override
     public DialogType buildDialogType(ConfigurationSection config) {
-        ConfigurationSection buttonsSec = config != null ? config.getConfigurationSection("buttons") : null;
+        ConfigurationSection buttonsSec = config != null ? config.getConfigurationSection("exit_buttons") : null;
 
         if (buttonsSec == null) {
             // Fallback buttons

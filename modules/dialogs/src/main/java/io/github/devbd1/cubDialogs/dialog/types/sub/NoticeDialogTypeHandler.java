@@ -13,7 +13,7 @@ public class NoticeDialogTypeHandler implements TypeInterface {
 
     @Override
     public DialogType buildDialogType(ConfigurationSection config) {
-        ConfigurationSection buttonSec = config != null ? config.getConfigurationSection("button") : null;
+        ConfigurationSection buttonSec = config != null ? config.getConfigurationSection("exit_button") : null;
 
         if (buttonSec == null) {
             // Fallback button

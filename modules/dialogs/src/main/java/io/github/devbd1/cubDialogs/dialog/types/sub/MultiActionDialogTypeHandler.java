@@ -69,20 +69,20 @@ public class MultiActionDialogTypeHandler implements TypeInterface {
         // If no buttons were configured, provide default buttons
         if (buttons.isEmpty()) {
             ActionButton action1 = ActionButton.create(
-                    Component.text("Action 1", namedOrHex("blue")),
-                    Component.text("Click to perform action 1."),
+                    Component.text("These are", namedOrHex("blue")),
+                    Component.text("You should configure buttons in this dialog configuration."),
                     100,
                     null
             );
             ActionButton action2 = ActionButton.create(
-                    Component.text("Action 2", namedOrHex("green")),
-                    Component.text("Click to perform action 2."),
+                    Component.text("Default", namedOrHex("green")),
+                    Component.text("You should configure buttons in this dialog configuration."),
                     100,
                     null
             );
             ActionButton cancel = ActionButton.create(
-                    Component.text("Cancel", namedOrHex("red")),
-                    Component.text("Click to cancel."),
+                    Component.text("Buttons", namedOrHex("red")),
+                    Component.text("You should configure buttons in this dialog configuration."),
                     100,
                     null
             );
@@ -96,8 +96,9 @@ public class MultiActionDialogTypeHandler implements TypeInterface {
 
         // Get exit action if configured (optional)
         ActionButton exitAction = null;
-        if (config != null && config.isConfigurationSection("exit_action")) {
-            exitAction = buildButton(config, "Action", "Click to perform action.", "blue", 100);;
+        if (config != null && config.isConfigurationSection("exit_button")) {
+            ConfigurationSection exitActionSection = config.getConfigurationSection("exit_button");
+            exitAction = buildButton(exitActionSection, "Action", "Click to perform action.", "blue", 100);
         }
 
         return DialogType.multiAction(buttons, exitAction, columns);

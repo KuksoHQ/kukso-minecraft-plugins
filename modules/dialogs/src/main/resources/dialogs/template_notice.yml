@@ -68,7 +68,7 @@ inputs:
       - "Option 2"
       - "Option 3"
 
-button:
+exit_button:
   text: "&a&lI &2Understand"
   description: "Click to acknowledge this &nnotice&r"
   width: 150
