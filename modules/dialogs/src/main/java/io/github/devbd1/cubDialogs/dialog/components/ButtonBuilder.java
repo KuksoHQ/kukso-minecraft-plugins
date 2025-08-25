@@ -1,6 +1,5 @@
-package io.github.devbd1.cubDialogs.dialog.builders;
+package io.github.devbd1.cubDialogs.dialog.components;
 
-import io.github.devbd1.cubDialogs.dialog.DialogBuilder;
 import io.github.devbd1.cubDialogs.dialog.DialogConfigManager;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.registry.data.dialog.ActionButton;
@@ -12,7 +11,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static net.kyori.adventure.text.event.ClickEvent.changePage;
-import static net.kyori.adventure.text.event.ClickEvent.showDialog;
 
 /**
  * Handles the creation of dialog buttons based on configuration data.
@@ -75,10 +73,20 @@ public class ButtonBuilder {
     private DialogAction buildAction(ConfigurationSection sec) {
         if (sec == null) return null;
 
-        String type = sec.getString("type", "close").toLowerCase(java.util.Locale.ROOT);
+        String type = sec.getString("type", "return").toLowerCase(java.util.Locale.ROOT);
         return switch (type) {
             case "close" -> {
-                yield null;
+                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
+                    if (audience instanceof org.bukkit.entity.Player player) {
+                        player.closeInventory();
+                    }
+                }));
+            }
+
+            case "return" -> {
+                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
+                    audience.closeDialog();
+                }));
             }
 
             case "copy_to_clipboard" -> {

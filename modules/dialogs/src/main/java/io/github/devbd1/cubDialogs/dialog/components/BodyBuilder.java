@@ -1,4 +1,4 @@
-package io.github.devbd1.cubDialogs.dialog.builders;
+package io.github.devbd1.cubDialogs.dialog.components;
 
 import io.github.devbd1.cubDialogs.dialog.DialogConfigManager;
 import io.papermc.paper.registry.data.dialog.body.DialogBody;

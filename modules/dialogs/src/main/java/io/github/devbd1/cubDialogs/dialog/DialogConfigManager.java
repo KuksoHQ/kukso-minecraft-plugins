@@ -1,8 +1,8 @@
 package io.github.devbd1.cubDialogs.dialog;
 
-import io.github.devbd1.cubDialogs.dialog.builders.BodyBuilder;
-import io.github.devbd1.cubDialogs.dialog.builders.ButtonBuilder;
-import io.github.devbd1.cubDialogs.dialog.builders.InputBuilder;
+import io.github.devbd1.cubDialogs.dialog.components.BodyBuilder;
+import io.github.devbd1.cubDialogs.dialog.components.ButtonBuilder;
+import io.github.devbd1.cubDialogs.dialog.components.InputBuilder;
 
 import io.github.devbd1.cubDialogs.dialog.types.TypeInterface;
 import io.github.devbd1.cubDialogs.dialog.types.TypeRegistrar;
