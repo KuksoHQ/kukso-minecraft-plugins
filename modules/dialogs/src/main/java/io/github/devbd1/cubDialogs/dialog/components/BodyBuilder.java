@@ -69,8 +69,6 @@ public class BodyBuilder {
     }
 
     private DialogBody buildItemBody(Configuration config) {
-        //plugin.getLogger().info("[DEBUG] Building item dialog body");
-
         // Get item configuration
         String materialName = config.getString("material", "STONE");
         int amount = config.getInt("amount", 1);
@@ -80,11 +78,9 @@ public class BodyBuilder {
         // Get item dialog body specific settings
         boolean showTooltip = config.getBoolean("show_tooltip", true);
         boolean showStackCount = config.getBoolean("show_stack_count", true);
-        int width = config.getInt("width", 300);
-        int height = config.getInt("height", 300);
+        int width = config.getInt("width", 256);  // Changed from 300 to 256
+        int height = config.getInt("height", 256);  // Changed from 300 to 256
         String desc = config.getString("description", null);
-
-        //plugin.getLogger().info("[DEBUG] Item body - material:" + materialName + ", amount:" + amount + ", showTooltip:" + showTooltip + ", showStackCount:" + showStackCount);
 
         try {
             // Create ItemStack
@@ -117,22 +113,28 @@ public class BodyBuilder {
 
             // Build the item dialog body
             var builder = DialogBody.item(itemStack);
-            
-            if (width > 0) {
+
+            // Also add validation to ensure values don't exceed maximum
+            if (width > 0 && width <= 256) {
                 builder = builder.width(width);
+            } else if (width > 256) {
+                plugin.getLogger().warning("[DEBUG] Width value " + width + " exceeds maximum 256 for material: " + materialName);
+                builder = builder.width(256);
             }
-            
-            if (height > 0) {
+
+            if (height > 0 && height <= 256) {
                 builder = builder.height(height);
+            } else if (height > 256) {
+                plugin.getLogger().warning("[DEBUG] Height value " + height + " exceeds maximum 256 for material: " + materialName);
+                builder = builder.height(256);
             }
-            
+
             builder = builder.showTooltip(showTooltip)
                     .showDecorations(showStackCount);
 
             if (desc != null && !desc.isBlank()) {
                 builder = builder.description(DialogBody.plainMessage(DialogConfigManager.parseFormattedText(desc), 100));
             }
-
 
             return builder.build();
 
