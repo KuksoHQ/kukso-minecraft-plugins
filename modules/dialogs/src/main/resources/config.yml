@@ -61,7 +61,7 @@ commands:
     permissions:
       - cubDialogs.admin.help
   forceopen:
-#    aliases: [fo]
+    aliases: [fo]
     permissions:
       - cubDialogs.admin.forceopen
   forceclose:
