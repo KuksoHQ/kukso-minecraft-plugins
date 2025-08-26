@@ -15,7 +15,6 @@
 - Give Feedback / Report Bugs
 - Register / Login screen
 
-No, before proceeding I want to make everything crystal clear.
 
 1- Every dialog must have "type". Supported types: "confirmation", "multi_action" and "notice"
 2- Every dialog type can have bodies section which includes "plain_message" and/or "item" entries

@@ -23,7 +23,7 @@ inputs:
     # Remove or comment out label_format to use default behavior
     # label_format: "%s: %s"
 
-buttons:
+exit_buttons:
   confirm:
     text: "Submit Feedback"
     description: "Click to submit your feedback"

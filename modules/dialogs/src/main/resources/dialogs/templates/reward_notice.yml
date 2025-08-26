@@ -12,11 +12,11 @@ bodies:
     description: "<green>You have earned this legendary reward!</green>"
     show_tooltip: true
     show_stack_count: false
-    width: 300
-    height: 300
+    width: 16
+    height: 16
 
 
-button:
+exit_buttons:
   text: "Claim Reward"
   description: "Click to claim your reward"
   color: "gold"

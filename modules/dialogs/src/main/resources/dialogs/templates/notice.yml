@@ -21,16 +21,19 @@
 # • Gradients: "<gradient:#ff0000:#00ff00>Hello World</gradient>" (100+ chars!)
 #
 # INFORMATION
-# • Every dialog type must have a title, external_title and a type.
+# • Every dialog type must have a type, title, and external_title.
 # • Any dialog type can use bodies, and inputs configurations.
 # • "notice" dialog type have a button on the very bottom to close the screen.
 #
 # ═══════════════════════════════════════════════════════════════════════════════
 
+type: "notice"
 title: "Important Notice"
 external_title: "Template: Notice"
-type: "notice"
 can_close_with_escape: false
+enabled: true
+permission_to_open: "cubDialogs.dialog.open.notice"
+permission_to_open_remote: "cubDialogs.dialog.remote.notice"
 
 # The program respects the order of elements in the body list.
 bodies:

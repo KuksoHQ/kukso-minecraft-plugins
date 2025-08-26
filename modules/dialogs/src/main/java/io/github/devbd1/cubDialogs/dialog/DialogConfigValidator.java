@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -43,38 +44,60 @@ public class DialogConfigValidator {
         public String getMessage() { return message; }
         public String getSuggestion() { return suggestion; }
     }
-    
+
     /**
      * Validates all dialog configurations and returns a list of issues found
      */
     public static List<ValidationIssue> validateAllDialogs(JavaPlugin plugin) {
         List<ValidationIssue> issues = new ArrayList<>();
-        
+
         File dialogsFolder = new File(plugin.getDataFolder(), "dialogs");
         if (!dialogsFolder.exists() || !dialogsFolder.isDirectory()) {
             return issues; // Empty list if no dialogs folder
         }
-        
-        File[] yamlFiles = dialogsFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".yml"));
-        if (yamlFiles == null) return issues;
-        
+
+        List<File> yamlFiles = collectYamlFilesRecursive(dialogsFolder);
         for (File yamlFile : yamlFiles) {
-            String dialogId = yamlFile.getName().substring(0, yamlFile.getName().length() - 4);
+            String dialogId = toRelativeId(dialogsFolder, yamlFile);
             try {
                 FileConfiguration config = YamlConfiguration.loadConfiguration(yamlFile);
                 issues.addAll(validateDialog(dialogId, config));
             } catch (Exception e) {
                 issues.add(new ValidationIssue(
-                    ValidationIssue.Severity.ERROR,
-                    dialogId,
-                    null,
-                    "Failed to load configuration: " + e.getMessage(),
-                    "Check YAML syntax and file encoding"
+                        ValidationIssue.Severity.ERROR,
+                        dialogId,
+                        null,
+                        "Failed to load configuration: " + e.getMessage(),
+                        "Check YAML syntax and file encoding"
                 ));
             }
         }
-        
+
         return issues;
+    }
+
+    private static List<File> collectYamlFilesRecursive(File root) {
+        List<File> files = new ArrayList<>();
+        File[] children = root.listFiles();
+        if (children == null) return files;
+
+        for (File child : children) {
+            if (child.isDirectory()) {
+                files.addAll(collectYamlFilesRecursive(child));
+            } else if (child.isFile() && child.getName().toLowerCase(Locale.ROOT).endsWith(".yml")) {
+                files.add(child);
+            }
+        }
+        return files;
+    }
+
+    private static String toRelativeId(File root, File file) {
+        String rel = root.toPath().relativize(file.toPath()).toString();
+        rel = rel.replace(File.separatorChar, '/');
+        if (rel.toLowerCase(Locale.ROOT).endsWith(".yml")) {
+            rel = rel.substring(0, rel.length() - 4);
+        }
+        return rel;
     }
     
     /**

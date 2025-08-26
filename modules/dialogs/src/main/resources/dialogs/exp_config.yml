@@ -13,10 +13,11 @@ bodies:
     lore:
       - "§7It contains unlimited"
       - "§7amount of experince!"
+    description: "<- that's!"
     show_tooltip: true
     show_stack_count: true
-    width: 300
-    height: 300
+    width: 16
+    height: 16
 
 inputs:
   - id: "level"
@@ -54,12 +55,12 @@ inputs:
       max_lines: 1
       max_columns: 18
 
-buttons:
+exit_buttons:
   confirm:
     text: "<gradient:#4caf50:#8bc34a>Confirm</gradient>"
     description: "&aClick to &lconfirm &ayour changes with #FF5733 colored text"
     action:
-      type: "custom_click"
+      type: "custom"
       key: "cublexcore:exp_config/confirm"
     width: 100
 

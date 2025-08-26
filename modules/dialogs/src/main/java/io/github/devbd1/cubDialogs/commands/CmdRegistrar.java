@@ -16,7 +16,8 @@ public class CmdRegistrar {
         }
 
         CmdManager mgr = new CmdManager();
-        mgr.register(new OpenCmd());
+        mgr.register(new OpenCmd(plugin));
+        mgr.register(new ForceOpenCmd(plugin));
         mgr.register(new ValidateCmd());
         mgr.register(new ReloadCmd());
 

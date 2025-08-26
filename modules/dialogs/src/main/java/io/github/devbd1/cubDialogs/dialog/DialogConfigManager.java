@@ -74,21 +74,49 @@ public class DialogConfigManager {
     }
 
     private static void copyDefaultDialogFiles(File dialogsFolder) {
-        String[] defaultDialogs = {"template_confirmation.yml", "template_multiaction.yml", "template_notice.yml", "template_reward_notice.yml", "exp_config.yml", "feedback_form.yml", "player_settings.yml", "server_rules.yml"};
+        // Non-template example configs that should live directly under /dialogs
+        String[] baseDialogs = {
+                "exp_config.yml",
+                "feedback_form.yml",
+                "server_rules.yml"
+        };
 
-        for (String dialogFile : defaultDialogs) {
+        // Template files that should live under /dialogs/templates
+        String[] templateDialogs = {
+                "confirmation.yml",
+                "multiaction.yml",
+                "notice.yml",
+                "reward_notice.yml"
+        };
+
+        // Copy base dialogs to dialogs/
+        for (String dialogFile : baseDialogs) {
             File targetFile = new File(dialogsFolder, dialogFile);
             if (!targetFile.exists()) {
                 try {
                     plugin.saveResource("dialogs/" + dialogFile, false);
                     plugin.getLogger().info("Created default dialog file: " + dialogFile);
                 } catch (IllegalArgumentException ignored) {
-                    // Resource doesn't exist in jar, skip
                     plugin.getLogger().fine("Default dialog resource not found: dialogs/" + dialogFile);
                 }
             }
         }
+
+        // Copy templates to dialogs/templates/
+        File templatesFolder = new File(dialogsFolder, "templates");
+        for (String dialogFile : templateDialogs) {
+            File targetFile = new File(templatesFolder, dialogFile);
+            if (!targetFile.exists()) {
+                try {
+                    plugin.saveResource("dialogs/templates/" + dialogFile, false);
+                    plugin.getLogger().info("Created default template dialog file: " + dialogFile);
+                } catch (IllegalArgumentException ignored) {
+                    plugin.getLogger().fine("Default dialog resource not found: dialogs/templates/" + dialogFile);
+                }
+            }
+        }
     }
+
 
     private static void loadAllDialogConfigs() {
         File dialogsFolder = new File(plugin.getDataFolder(), "dialogs");
@@ -97,8 +125,8 @@ public class DialogConfigManager {
             return;
         }
 
-        File[] yamlFiles = dialogsFolder.listFiles((dir, name) -> name.toLowerCase().endsWith(".yml"));
-        if (yamlFiles == null || yamlFiles.length == 0) {
+        List<File> yamlFiles = collectYamlFilesRecursive(dialogsFolder);
+        if (yamlFiles.isEmpty()) {
             plugin.getLogger().warning("No dialog configuration files found in dialogs folder!");
             return;
         }
@@ -107,7 +135,7 @@ public class DialogConfigManager {
         availableDialogIds.clear();
 
         for (File yamlFile : yamlFiles) {
-            String dialogId = yamlFile.getName().substring(0, yamlFile.getName().length() - 4); // Remove .yml extension
+            String dialogId = toRelativeId(dialogsFolder, yamlFile);
 
             try {
                 FileConfiguration config = YamlConfiguration.loadConfiguration(yamlFile);
@@ -115,7 +143,7 @@ public class DialogConfigManager {
                 availableDialogIds.add(dialogId);
                 plugin.getLogger().info("Loaded dialog configuration: " + dialogId);
             } catch (Exception e) {
-                plugin.getLogger().severe("Failed to load dialog configuration from " + yamlFile.getName() + ": " + e.getMessage());
+                plugin.getLogger().severe("Failed to load dialog configuration from " + yamlFile.getPath() + ": " + e.getMessage());
             }
         }
 
@@ -124,6 +152,59 @@ public class DialogConfigManager {
         // Validate all loaded configurations
         List<DialogConfigValidator.ValidationIssue> issues = DialogConfigValidator.validateAllDialogs(plugin);
         DialogConfigValidator.logValidationIssues(plugin, issues);
+    }
+
+    private static List<File> collectYamlFilesRecursive(File root) {
+        List<File> files = new ArrayList<>();
+        File[] children = root.listFiles();
+        if (children == null) return files;
+
+        for (File child : children) {
+            if (child.isDirectory()) {
+                files.addAll(collectYamlFilesRecursive(child));
+            } else if (child.isFile() && child.getName().toLowerCase(Locale.ROOT).endsWith(".yml")) {
+                files.add(child);
+            }
+        }
+        return files;
+    }
+
+    private static String toRelativeId(File root, File file) {
+        String rel = root.toPath().relativize(file.toPath()).toString();
+        rel = rel.replace(File.separatorChar, '/');
+        if (rel.toLowerCase(Locale.ROOT).endsWith(".yml")) {
+            rel = rel.substring(0, rel.length() - 4);
+        }
+        return rel;
+    }
+
+    /**
+     * Returns true if the dialog is enabled in its config. Defaults to true when missing.
+     */
+    public static boolean isEnabled(String id) {
+        FileConfiguration cfg = dialogConfigs.get(id);
+        if (cfg == null) return false;
+        return cfg.getBoolean("enabled", true);
+    }
+
+    /**
+     * Reads the permission required for a viewer to open this dialog for themselves.
+     * Falls back to a sensible default if missing.
+     */
+    public static String getPermissionToOpen(String id) {
+        FileConfiguration cfg = dialogConfigs.get(id);
+        if (cfg == null) return "cubDialogs.dialog.open.*";
+        return cfg.getString("permission_to_open", "cubDialogs.dialog.open.*");
+    }
+
+    /**
+     * Reads the permission required to open this dialog for another player (remote).
+     * Falls back to a sensible default if missing.
+     */
+    public static String getPermissionToOpenRemote(String id) {
+        FileConfiguration cfg = dialogConfigs.get(id);
+        if (cfg == null) return "cubDialogs.dialog.remote.*";
+        return cfg.getString("permission_to_open_remote", "cubDialogs.dialog.remote.*");
     }
 
     public static Dialog buildDialog(String id) {
@@ -147,9 +228,17 @@ public class DialogConfigManager {
         ConfigurationSection root = dialogConfig;
 
         // Title
-        Component title = readComponent(root.getConfigurationSection("title"),
-                Component.text("Dialog"));
+        String titleText = root.getString("title", "Default Title");
+        Component title = parseFormattedText(titleText);
         //plugin.getLogger().info("[DEBUG] Dialog title: " + title.toString());
+
+        // External Title
+        String externalTitleText = root.getString("external_title", "Default Title");
+        Component externalTitle = parseFormattedText(externalTitleText);
+        //plugin.getLogger().info("[DEBUG] Dialog externalTitle: " + externalTitle.toString());
+
+        boolean canCloseWithEscape = root.getBoolean("can_close_with_escape", true);
+
 
         // Inputs - Fixed approach
         List<DialogInput> inputs = new ArrayList<>();
@@ -198,11 +287,11 @@ public class DialogConfigManager {
         List<?> bodiesList = root.getList("bodies");
         if (bodiesList != null && !bodiesList.isEmpty()) {
             plugin.getLogger().info("[DEBUG] Processing " + bodiesList.size() + " dialog bodies...");
-            
+
             for (int i = 0; i < bodiesList.size(); i++) {
                 Object bodyData = bodiesList.get(i);
                 plugin.getLogger().info("[DEBUG] Processing body " + i + " of type: " + bodyData.getClass().getName());
-                
+
                 DialogBody body = processBodyData(bodyData);
                 if (body != null) {
                     dialogBodies.add(body);
@@ -221,18 +310,22 @@ public class DialogConfigManager {
         DialogBase base;
         if (!dialogBodies.isEmpty()) {
             base = DialogBase.builder(title)
+                    .externalTitle(externalTitle)
+                    .canCloseWithEscape(canCloseWithEscape)
                     .body(dialogBodies)
                     .inputs(inputs)
                     .build();
             plugin.getLogger().info("[DEBUG] DialogBase created with " + dialogBodies.size() + " bodies and " + inputs.size() + " inputs");
         } else {
             base = DialogBase.builder(title)
+                    .externalTitle(externalTitle)
+                    .canCloseWithEscape(canCloseWithEscape)
                     .inputs(inputs)
                     .build();
             plugin.getLogger().info("[DEBUG] DialogBase created with " + inputs.size() + " inputs (no bodies)");
         }
 
-        String type = root.getString("type", "confirmation").toLowerCase(Locale.ROOT);
+        String type = root.getString("type", "notice").toLowerCase(Locale.ROOT);
         TypeInterface handler = TypeRegistrar.getHandler(type);
 
         DialogType dialogType;

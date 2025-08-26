@@ -1,5 +1,7 @@
-title: "Server Actions Menu"
 type: "multi_action"
+title: "Server Actions Menu"
+external_title: "Template: Multi Action"
+can_close_with_escape: true
 
 # Layout configuration
 columns: 3

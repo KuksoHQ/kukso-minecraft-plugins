@@ -5,11 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class DialogBuilder {
-    /**
-     * Builds and shows a dialog using config-defined dialogs.
-     * Usage: /cubDialogs open <dialogId>
-     * If no id is provided, falls back to "feedback_form".
-     */
+    //private DialogBuilder() {}
+
     public boolean build(CommandSender sender, String[] args) {
         final String dialogId = (args != null && args.length > 0) ? args[0] : "feedback_form";
 
@@ -23,9 +20,6 @@ public class DialogBuilder {
         return true;
     }
 
-    /**
-     * Builds and shows a dialog directly by ID.
-     */
     public boolean build(Player player, String dialogId) {
         if (dialogId == null || dialogId.isBlank()) {
             player.sendMessage("§cDialog ID cannot be null or blank!");
