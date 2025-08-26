@@ -33,7 +33,7 @@ inputs:
   - id: "experience"
     type: "number_range"
     label:
-      text: "Experience"
+      text: "&6Experience"
       color: "green"
     min: 0
     max: 100
@@ -44,9 +44,7 @@ inputs:
 
   - id: "player_name"
     type: "text"
-    label:
-      text: "Player Name"
-      color: "blue"
+    label: "&5Player Name"
     #initial: "has no effect"
     max_length: 16
     width: 300

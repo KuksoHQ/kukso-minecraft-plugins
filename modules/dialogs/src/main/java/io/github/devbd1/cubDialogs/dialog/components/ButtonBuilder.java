@@ -1,6 +1,7 @@
 package io.github.devbd1.cubDialogs.dialog.components;
 
 import io.github.devbd1.cubDialogs.dialog.DialogConfigManager;
+import io.github.devbd1.cubDialogs.utilities.CommandPlaceholderUtility;
 import io.papermc.paper.dialog.Dialog;
 import io.papermc.paper.registry.data.dialog.ActionButton;
 import io.papermc.paper.registry.data.dialog.action.DialogAction;
@@ -130,13 +131,36 @@ public class ButtonBuilder {
                 yield DialogAction.staticAction(ClickEvent.openUrl(url));
             }
 
+            // Execute as the player (with <player>/<item> placeholders)
             case "run_command" -> {
                 String command = sec.getString("command");
                 if (command == null || command.isBlank()) {
                     plugin.getLogger().warning("Missing command for run_command action");
                     yield null;
                 }
-                yield DialogAction.staticAction(ClickEvent.runCommand(command));
+                var root = sec.getRoot(); // use root config to inspect bodies
+                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
+                    String resolved = CommandPlaceholderUtility.resolveCommandPlaceholders(command, audience, root);
+                    if (audience instanceof org.bukkit.entity.Player player) {
+                        // Dispatch as the player (no leading slash)
+                        org.bukkit.Bukkit.dispatchCommand(player, resolved);
+                    }
+                }));
+            }
+
+            // Execute as the console (with <player>/<item> placeholders)
+            case "console_command" -> {
+                String command = sec.getString("command");
+                if (command == null || command.isBlank()) {
+                    plugin.getLogger().warning("Missing command for console_command action");
+                    yield null;
+                }
+                var root = sec.getRoot();
+                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
+                    String resolved = CommandPlaceholderUtility.resolveCommandPlaceholders(command, audience, root);
+                    var console = org.bukkit.Bukkit.getConsoleSender();
+                    org.bukkit.Bukkit.dispatchCommand(console, resolved);
+                }));
             }
 
             case "suggest_command" -> {
@@ -145,8 +169,11 @@ public class ButtonBuilder {
                     plugin.getLogger().warning("Missing command for suggest_command action");
                     yield null;
                 }
+                // Suggest can’t be resolved per-viewer at click time with a static ClickEvent,
+                // so keep it as-is (or refactor later if needed).
                 yield DialogAction.staticAction(ClickEvent.suggestCommand(command));
             }
+
 
             case "custom" -> {
                 String key = sec.getString("key", null); // "papermc:user_input/confirm"

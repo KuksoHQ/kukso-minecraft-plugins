@@ -33,7 +33,6 @@ external_title: "Template: Notice"
 can_close_with_escape: false
 enabled: true
 permission_to_open: "cubDialogs.dialog.open.notice"
-permission_to_open_remote: "cubDialogs.dialog.remote.notice"
 
 # The program respects the order of elements in the body list.
 bodies:

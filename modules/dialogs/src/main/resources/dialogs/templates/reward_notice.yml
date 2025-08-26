@@ -1,5 +1,9 @@
 title: "Reward Dialog"
 type: "notice"
+external_title: "Template: Notice"
+can_close_with_escape: false
+enabled: true
+permission_to_open: "cubDialogs.dialog.open.notice"
 
 bodies:
   - type: "item"
@@ -16,7 +20,12 @@ bodies:
     height: 16
 
 
-exit_buttons:
+exit_button:
   text: "Claim Reward"
   description: "Click to claim your reward"
   color: "gold"
+  action:
+    type: "console_command"
+    # You can use https://www.gamergeeks.net/apps/minecraft/give-command-generator to generate a give command.
+    command: >-
+      give <player> diamond_sword[custom_name=[{"text":"Legendary Sword","italic":false}],lore=[[{"text":"&7A powerful weapon","italic":false}],[{"text":"&7Forged by ancient smiths","italic":false}]]]

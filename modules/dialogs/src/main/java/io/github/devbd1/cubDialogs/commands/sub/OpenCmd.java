@@ -88,7 +88,6 @@ public class OpenCmd implements CmdInterface {
 
         // 3) Resolve permissions from config
         final String permOpen = DialogConfigManager.getPermissionToOpen(id);
-        final String permRemote = DialogConfigManager.getPermissionToOpenRemote(id);
 
         // 4) Resolve target viewer (self vs remote)
         final boolean hasTarget = args.length > 1;
@@ -100,12 +99,6 @@ public class OpenCmd implements CmdInterface {
             if (viewer == null) {
                 sender.sendMessage("§cPlayer '" + targetName + "' is not online or does not exist.");
                 return false;
-            }
-
-            // Sender must be allowed to open remotely
-            if (!sender.hasPermission(permRemote)) {
-                sender.sendMessage("§cYou do not have permission to open this dialog remotely.");
-                return true;
             }
 
             // Also ensure the target viewer is permitted to view this dialog
