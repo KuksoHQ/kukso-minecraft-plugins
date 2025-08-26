@@ -8,14 +8,12 @@ import io.papermc.paper.registry.data.dialog.action.DialogAction;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import static net.kyori.adventure.text.event.ClickEvent.changePage;
 
-/**
- * Handles the creation of dialog buttons based on configuration data.
- */
 public class ButtonBuilder {
     private final JavaPlugin plugin;
 
@@ -23,16 +21,6 @@ public class ButtonBuilder {
         this.plugin = plugin;
     }
 
-    /**
-     * Builds an ActionButton from a configuration section.
-     *
-     * @param sec Configuration section containing button settings
-     * @param defText Default text to use if not specified in configuration
-     * @param defDesc Default description to use if not specified in configuration
-     * @param defColor Default color to use if not specified in configuration
-     * @param defWidth Default width to use if not specified in configuration
-     * @return An ActionButton instance
-     */
     public ActionButton buildButton(ConfigurationSection sec, String defText, String defDesc, String defColor, int defWidth) {
         if (sec == null) {
             return ActionButton.create(
@@ -49,11 +37,9 @@ public class ButtonBuilder {
 
         DialogAction action = buildAction(sec.getConfigurationSection("action"));
 
-        // Apply ColorManager formatting to button text and description
         String formattedText = io.github.devbd1.cubDialogs.utilities.ColorManager.applyColorFormatting(text);
         String formattedDesc = io.github.devbd1.cubDialogs.utilities.ColorManager.applyColorFormatting(desc);
 
-        // Parse the formatted text using MiniMessage/Adventure
         Component textComponent = DialogConfigManager.parseFormattedText(formattedText);
         Component descComponent = DialogConfigManager.parseFormattedText(formattedDesc);
 
@@ -65,30 +51,18 @@ public class ButtonBuilder {
         );
     }
 
-    /**
-     * Builds a DialogAction from a configuration section.
-     *
-     * @param sec Configuration section containing action settings
-     * @return A DialogAction instance or null if no action or unknown action type
-     */
     private DialogAction buildAction(ConfigurationSection sec) {
         if (sec == null) return null;
 
         String type = sec.getString("type", "return").toLowerCase(java.util.Locale.ROOT);
         return switch (type) {
-            case "close" -> {
-                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
-                    if (audience instanceof org.bukkit.entity.Player player) {
-                        player.closeInventory();
-                    }
-                }));
-            }
+            case "close" -> DialogAction.staticAction(ClickEvent.callback(audience -> {
+                if (audience instanceof org.bukkit.entity.Player player) {
+                    player.closeInventory();
+                }
+            }));
 
-            case "return" -> {
-                yield DialogAction.staticAction(ClickEvent.callback(audience -> {
-                    audience.closeDialog();
-                }));
-            }
+            case "return" -> DialogAction.staticAction(ClickEvent.callback(audience -> audience.closeDialog()));
 
             case "copy_to_clipboard" -> {
                 String text = sec.getString("text");
@@ -97,27 +71,22 @@ public class ButtonBuilder {
                 }
                 yield DialogAction.staticAction(ClickEvent.copyToClipboard(text));
             }
+
             case "show_dialog" -> {
                 String dialogId = sec.getString("id");
                 if (dialogId == null || dialogId.isBlank()) {
                     plugin.getLogger().warning("Missing dialog ID for show_dialog action");
                     yield null;
                 }
-
-                // Check if dialog exists first
                 if (!DialogConfigManager.hasDialog(dialogId)) {
                     plugin.getLogger().warning("Dialog ID does not exist: " + dialogId);
                     yield null;
                 }
-
-                // Build the dialog
                 Dialog dialog = DialogConfigManager.buildDialog(dialogId);
                 if (dialog == null) {
                     plugin.getLogger().warning("Failed to build dialog: " + dialogId);
                     yield null;
                 }
-
-                // Return the action without showing the dialog immediately
                 yield DialogAction.staticAction(ClickEvent.showDialog(dialog));
             }
 
@@ -127,28 +96,26 @@ public class ButtonBuilder {
                     plugin.getLogger().warning("Missing URL for open_url action");
                     yield null;
                 }
-
                 yield DialogAction.staticAction(ClickEvent.openUrl(url));
             }
 
-            // Execute as the player (with <player>/<item> placeholders)
             case "run_command" -> {
                 String command = sec.getString("command");
                 if (command == null || command.isBlank()) {
                     plugin.getLogger().warning("Missing command for run_command action");
                     yield null;
                 }
-                var root = sec.getRoot(); // use root config to inspect bodies
+                var root = sec.getRoot();
                 yield DialogAction.staticAction(ClickEvent.callback(audience -> {
                     String resolved = CommandPlaceholderUtility.resolveCommandPlaceholders(command, audience, root);
                     if (audience instanceof org.bukkit.entity.Player player) {
-                        // Dispatch as the player (no leading slash)
-                        org.bukkit.Bukkit.dispatchCommand(player, resolved);
+                        Bukkit.dispatchCommand(player, resolved);
+                    } else {
+                        plugin.getLogger().warning("Cannot run player command: audience is not a player.");
                     }
                 }));
             }
 
-            // Execute as the console (with <player>/<item> placeholders)
             case "console_command" -> {
                 String command = sec.getString("command");
                 if (command == null || command.isBlank()) {
@@ -158,8 +125,15 @@ public class ButtonBuilder {
                 var root = sec.getRoot();
                 yield DialogAction.staticAction(ClickEvent.callback(audience -> {
                     String resolved = CommandPlaceholderUtility.resolveCommandPlaceholders(command, audience, root);
-                    var console = org.bukkit.Bukkit.getConsoleSender();
-                    org.bukkit.Bukkit.dispatchCommand(console, resolved);
+
+                    // Safety guard: refuse if unresolved %...% remain
+                    if (resolved.contains("%")) {
+                        plugin.getLogger().warning("Refusing to execute console command with unresolved placeholders: " + resolved);
+                        return;
+                    }
+
+                    var console = Bukkit.getConsoleSender();
+                    Bukkit.dispatchCommand(console, resolved);
                 }));
             }
 
@@ -169,14 +143,11 @@ public class ButtonBuilder {
                     plugin.getLogger().warning("Missing command for suggest_command action");
                     yield null;
                 }
-                // Suggest can’t be resolved per-viewer at click time with a static ClickEvent,
-                // so keep it as-is (or refactor later if needed).
                 yield DialogAction.staticAction(ClickEvent.suggestCommand(command));
             }
 
-
             case "custom" -> {
-                String key = sec.getString("key", null); // "papermc:user_input/confirm"
+                String key = sec.getString("key", null);
                 yield DialogAction.customClick(Key.key(key), null);
             }
 
