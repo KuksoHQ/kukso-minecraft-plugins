@@ -20,6 +20,14 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        
+        // Dependency check: ensure CublexCore is present and enabled
+        if (!isCublexCorePresent()) {
+            getLogger().severe("CublexCore dependency is missing or not enabled. Disabling CubDialogs.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         try {
             // Initialize configuration managers
             ConfigManager.init(this);
@@ -47,5 +55,12 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         instance = null;
         // Plugin shutdown logic
+    }
+
+    // Simple runtime check for CublexCore presence
+    private boolean isCublexCorePresent() {
+        var pm = getServer().getPluginManager();
+        var plugin = pm.getPlugin("CublexCore");
+        return plugin != null && plugin.isEnabled();
     }
 }
