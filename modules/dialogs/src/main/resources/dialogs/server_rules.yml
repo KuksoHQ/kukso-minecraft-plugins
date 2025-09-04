@@ -1,11 +1,14 @@
-# server_rules_dialog.yml
-title: "Server Rules"
 type: "notice"
+title: "📜 Server Rules"
+external_title: "📜 Server Rules"
+can_close_with_escape: false
+enabled: true
+#permission_to_open: ""
 
-body:
-  type: "plain_message"
-  message: "<gradient:#ff6b6b:#4ecdc4>Please follow these server rules:</gradient>\n\n1. Be respectful to all players\n2. No griefing or stealing\n3. No hacking or exploits\n4. Keep chat family-friendly\n5. Have fun!"
-  width: 400
+bodies:
+  - type: "plain_message"
+    message: "<gradient:#ff6b6b:#4ecdc4>Please follow these server rules:</gradient>\n\n1. Be respectful to all players\n2. No griefing or stealing\n3. No hacking or exploits\n4. Keep chat family-friendly\n5. Have fun!"
+    width: 300
 
 button:
   text: "I Understand"
@@ -14,5 +17,19 @@ button:
   action:
     type: "close"
 
-# This title appears on the button in the dialog list
-external_title: "📜 Server Rules"
+inputs:
+  - id: "preferences"
+    type: "boolean"
+    label: "&bDon't show me again."
+    label_visible: true
+    initial: false
+    on_true: "accept" # optional
+    on_false: "decline" # optional
+
+exit_button:
+  text: "&a&lI Understand and Accept"
+  description: "Click to acknowledge the &6Server Rules&r!"
+  width: 150
+  action:
+    type: "custom"
+    key: "cubdialogs:server_rules/exit"
