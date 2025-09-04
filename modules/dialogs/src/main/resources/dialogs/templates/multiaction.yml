@@ -36,7 +36,7 @@ buttons:
   - text: "✉️ Messages"
     description: "Check your messages"
     action:
-      type: "custom_click"
+      type: "custom"
       key: "cublexcore:messages/view"
     width: 150
 
