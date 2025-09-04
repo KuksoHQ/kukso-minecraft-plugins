@@ -6,14 +6,14 @@ load: STARTUP
 authors: [ DevBD1 ]
 description: Spigot development library, built for the latest version.
 website: https://cublex.net
-#depend:
-#  - ProtocolLib
 softdepend:
   - PlaceholderAPI
 #  - CubItems
 #  - CubLoots
 #  - CubSense
 #  - CubConquest
+#depend:
+  - CublexCore
 commands:
   cubDialogs:
     aliases: [cdia]
