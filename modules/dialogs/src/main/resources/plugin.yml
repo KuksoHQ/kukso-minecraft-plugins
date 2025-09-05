@@ -1,11 +1,11 @@
 name: CubDialogs
 version: ${version}
-main: io.github.devbd1.cubDialogs.Main
+main: io.github.devbd1.CubDialogs.Main
 api-version: '1.21'
 load: STARTUP
 authors: [ DevBD1 ]
-description: Spigot development library, built for the latest version.
-website: https://cublex.net
+description: Create custom screens.
+website: https://labs.cublex.net
 softdepend:
   - PlaceholderAPI
 #  - CubItems
@@ -13,35 +13,35 @@ softdepend:
 #  - CubSense
 #  - CubConquest
 #depend:
-  - CublexCore
+  - Cub
 commands:
-  cubDialogs:
+  CubDialogs:
     aliases: [cdia]
-    permission: cubDialogs.command.main
+    permission: CubDialogs.command.main
     permission-message: You don't have permission to use this command.
     usage: /<command>
 permissions:
-  cubDialogs.command.main:
+  CubDialogs.command.main:
     default: true
     description: Allows you to use the main command.
-  cubDialogs.admin.version:
+  CubDialogs.admin.version:
     default: op
     description: Allows you to see the plugin version.
-  cubDialogs.admin.reload:
+  CubDialogs.admin.reload:
     default: op
     description: Allows you to reload the plugin.
-  cubDialogs.admin.open:
+  CubDialogs.admin.open:
     default: op
     description: Allows you to open dialogs.
-  cubDialogs.admin.validate:
+  CubDialogs.admin.validate:
     default: op
     description: Allows you to validate dialogs.
-  cubDialogs.admin.help:
+  CubDialogs.admin.help:
     default: op
     description: Allows you to see the help.
-  cubDialogs.admin.forceopen:
+  CubDialogs.admin.forceopen:
     default: op
     description: Allows you to force open dialogs for others.
-  cubDialogs.admin.forceclose:
+  CubDialogs.admin.forceclose:
     default: op
     description: Allows you to force close dialogs for others.
