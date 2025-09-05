@@ -1,5 +1,6 @@
 title: "Template: EXP and Level Setter"
 type: "confirmation"
+permission_to_open: "cubDialogs.dialog.open.templates"
 
 bodies:
   - type: "plain_message"

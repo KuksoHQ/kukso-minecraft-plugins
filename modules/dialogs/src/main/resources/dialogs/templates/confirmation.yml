@@ -22,6 +22,7 @@
 
 title: "&6Example Dialog Template"
 type: "confirmation"
+permission_to_open: "cubDialogs.dialog.open.templates"
 
 inputs:
   # ───────────────────────────────────────────────────────────────────────────
@@ -32,7 +33,7 @@ inputs:
   - id: "username"
     type: "text"
     label: "&bUsername"
-    initial: "Enter your name"
+    initial: ">_" # No color codes allowed!
     max_length: 20 # Safe for simple text
     width: 300
     label_visible: true
@@ -41,7 +42,7 @@ inputs:
   - id: "display_name"
     type: "text"
     label: "&bDisplay Name"
-    initial: "&aAwesome &bPlayer"
+    initial: ">_" # No color codes allowed!
     max_length: 50 # Increased for color codes
     width: 300
 
@@ -49,7 +50,7 @@ inputs:
   - id: "fancy_title"
     type: "text"
     label: "&bFancy Title"
-    initial: "<gradient:#ff6b6b:#4ecdc4>Epic Player</gradient>"
+    initial: ">_" # No color codes allowed!
     max_length: 200 # LARGE value required!
     width: 400
 
@@ -70,23 +71,41 @@ inputs:
 
   - id: "level"
     type: "number_range"
-    label: "&aExperience Level"
+    label: "&aPercent Bar"
     min: 1 # Must be < max
     max: 100 # Must be > min
     step: 1
     initial: 50 # Must be within min-max range
     width: 300
-    label_format: "&aLevel: &6%s"
+    label_format: "%s: %s percent" # No color codes allowed!
 
   - id: "percentage"
     type: "number_range"
-    label: "&ePercentage"
+    label: "&eAnother Bar"
     min: 0.0
     max: 100.0
     step: 0.1
-    initial: 50.0 # Within range
+    initial: 20.0 # Within range
     width: 350
-    label_format: "%s: %.1f%%"
+    label_format: "%s: %s percent" # No color codes allowed!
+
+  - id: "preferences"
+    type: "boolean"
+    label: "&bDon't show me again."
+    label_visible: true
+    initial: false
+    on_true: "accept" # optional
+    on_false: "decline" # optional
+
+  - id: "choose"
+    type: "single_option"
+    label: "&bChoose: "
+    label_visible: true
+    width: 200
+    entries:
+      - "Option 1"
+      - "Option 2"
+      - "Option 3"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # 🔘 Button Configuration

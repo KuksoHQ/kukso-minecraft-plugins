@@ -2,6 +2,7 @@ type: "multi_action"
 title: "Server Actions Menu"
 external_title: "Template: Multi Action"
 can_close_with_escape: true
+permission_to_open: "cubDialogs.dialog.open.templates"
 
 # Layout configuration
 columns: 3

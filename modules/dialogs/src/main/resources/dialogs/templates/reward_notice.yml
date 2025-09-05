@@ -3,7 +3,7 @@ type: "notice"
 external_title: "Template: Notice"
 can_close_with_escape: false
 enabled: true
-permission_to_open: "cubDialogs.dialog.open.notice"
+permission_to_open: "cubDialogs.dialog.open.templates"
 
 bodies:
   - type: "item"

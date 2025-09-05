@@ -3,7 +3,7 @@ title: "📜 Server Rules"
 external_title: "📜 Server Rules"
 can_close_with_escape: false
 enabled: true
-#permission_to_open: ""
+permission_to_open: "cubDialogs.dialog.open.templates"
 
 bodies:
   - type: "plain_message"
