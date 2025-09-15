@@ -3,6 +3,15 @@ plugins {
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
+def versionFile = file("version.txt")
+if (versionFile.exists()) {
+    version = versionFile.text.trim()
+} else {
+    versionFile.text = project.version?.toString() ?: "0.0.1"
+    version = versionFile.text.trim()
+}
+println "[CubDialogs] Using project.version = ${version}"
+
 group = 'io.github.devbd1'
 
 repositories {
@@ -49,12 +58,13 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    def props = [version: version]
-    inputs.properties props
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
-        expand(version: project.version)
-        expand props
+        // Use project.version directly; no separate props map
+        expand(version: project.version.toString())
+    }
+    doFirst {
+        println "[CubDialogs] processResources expanding plugin.yml with version=${project.version}"
     }
 }
 
@@ -64,24 +74,13 @@ tasks.register("printJdk") {
     }
 }
 
-// Version bump logic
-def versionFile = file("version.txt")
-if (versionFile.exists()) {
-    version = versionFile.text.trim()
-} else {
-    versionFile.text = version
-    println "version.txt not found, created with version: $version"
-}
-
 tasks.register("bumpVersion") {
     doLast {
         if (!versionFile.exists()) {
             throw new GradleException("version.txt not found.")
         }
-
         def currentVersion = versionFile.text.trim()
         def releaseType = project.hasProperty("releaseType") ? project.releaseType : "patch"
-
         def (major, minor, patch) = currentVersion.tokenize('.').collect { it.toInteger() }
 
         switch (releaseType) {
@@ -97,6 +96,8 @@ tasks.register("bumpVersion") {
 
         def newVersion = "${major}.${minor}.${patch}"
         versionFile.text = newVersion
+        // Keep current build consistent with bumped value
+        project.version = newVersion
         println "🔁 Version bumped: $currentVersion → $newVersion"
     }
 }

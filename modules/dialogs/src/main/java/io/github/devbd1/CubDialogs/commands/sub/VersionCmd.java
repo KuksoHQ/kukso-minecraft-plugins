@@ -3,6 +3,7 @@ package io.github.devbd1.CubDialogs.commands.sub;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import io.github.devbd1.CubDialogs.API.CubDialogsAPI;
 import io.github.devbd1.CubDialogs.commands.CmdConfig;
 import io.github.devbd1.CubDialogs.commands.CmdInterface;
 import org.bukkit.Bukkit;
@@ -53,7 +54,7 @@ public class VersionCmd implements CmdInterface {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("CubDialogs");
-        String pluginVersion = plugin != null ? plugin.getDescription().getVersion() : "unknown";
+        String pluginVersion = plugin != null ? plugin.getPluginMeta().getVersion() : "unknown";
         //String apiVersion = CubDialogsAPI.getApiVersion();
 
         sender.sendMessage("CubDialogs version: " + pluginVersion);
