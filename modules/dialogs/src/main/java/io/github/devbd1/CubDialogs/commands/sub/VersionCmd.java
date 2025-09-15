@@ -1,29 +1,32 @@
 package io.github.devbd1.CubDialogs.commands.sub;
 
+import io.github.devbd1.CubDialogs.commands.CmdConfig;
 import io.github.devbd1.CubDialogs.commands.CmdInterface;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
 
 public class VersionCmd implements CmdInterface {
+    String CMD_NAME = "version";
+
     @Override
     public String getName() {
-        return "";
+        return CMD_NAME;
     }
 
     @Override
     public List<String> getAliases() {
-        return List.of();
+        return CmdConfig.getAliases(CMD_NAME);
     }
 
     @Override
     public List<String> getPermissions() {
-        return List.of();
+        return CmdConfig.getPermissions(CMD_NAME);
     }
 
     @Override
     public String getDescription() {
-        return CmdInterface.super.getDescription();
+        return "Shows plugin version, API version, and checks the latest tag on GitHub.";
     }
 
     @Override
