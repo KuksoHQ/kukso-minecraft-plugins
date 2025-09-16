@@ -1,6 +1,9 @@
 
 https://i.ibb.co/bMm4Pmpc/Cub-Dialogs-1.png
 
+ADDONS SYSTEM!
+Example: https://github.com/DevBD1/ExpConfigAddon
+
 ## 📦 To be added
 ### Features:
 - CublexCore logging support
