@@ -2,7 +2,7 @@ package io.github.devbd1.CubDialogs;
 
 import io.github.devbd1.CubDialogs.commands.CmdRegistrar;
 import io.github.devbd1.CubDialogs.API.CubDialogsAPI;
-import io.github.devbd1.CubDialogs.addons.AddonManager;
+import io.github.devbd1.CubDialogs.API.addon.AddonManager;
 import io.github.devbd1.CubDialogs.commands.CmdRegistrar;
 import io.github.devbd1.CubDialogs.dialog.DialogActionBridge;
 import io.github.devbd1.CubDialogs.dialog.DialogConfigManager;

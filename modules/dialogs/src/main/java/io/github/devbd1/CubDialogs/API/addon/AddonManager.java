@@ -1,4 +1,4 @@
-package io.github.devbd1.CubDialogs.addons;
+package io.github.devbd1.CubDialogs.API.addon;
 
 import io.github.devbd1.CubDialogs.API.addon.AddonContext;
 import io.github.devbd1.CubDialogs.API.addon.CubDialogsAddon;
@@ -127,7 +127,7 @@ public class AddonManager {
         }
         
         // Create addon context
-        AddonContext context = new io.github.devbd1.CubDialogs.addons.SimpleAddonContext(
+        AddonContext context = new io.github.devbd1.CubDialogs.API.addon.SimpleAddonContext(
                 plugin,
                 addonId,
                 apiVersion

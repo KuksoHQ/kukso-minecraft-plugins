@@ -1,4 +1,4 @@
-package io.github.devbd1.CubDialogs.addons;
+package io.github.devbd1.CubDialogs.API.addon;
 
 import io.github.devbd1.CubDialogs.API.addon.AddonContext;
 import org.bukkit.Server;
