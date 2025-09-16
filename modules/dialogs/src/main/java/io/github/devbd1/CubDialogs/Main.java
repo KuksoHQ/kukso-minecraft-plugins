@@ -85,7 +85,7 @@ public final class Main extends JavaPlugin {
         actionRegistry = new SimpleDialogActionRegistry(getLogger());
 
         // Bootstrap the API with this registry and our plugin version
-        CubDialogsAPI.bootstrap(actionRegistry, getDescription().getVersion());
+        CubDialogsAPI.bootstrap(actionRegistry, "1.0.0");
 
         // Create and register the bridge
         actionBridge = new DialogActionBridge(this);
