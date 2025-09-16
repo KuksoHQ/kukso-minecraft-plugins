@@ -12,6 +12,14 @@ import io.github.devbd1.CubDialogs.utilities.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public final class Main extends JavaPlugin {
 
@@ -98,10 +106,12 @@ public final class Main extends JavaPlugin {
         // Create the addon manager
         addonManager = new AddonManager(this, CubDialogsAPI.getApiVersion());
 
-        // Create addons directory if it doesn't exist
         File addonsDir = new File(getDataFolder(), "addons");
         if (!addonsDir.exists() && !addonsDir.mkdirs()) {
             getLogger().warning("Failed to create addons directory");
+        } else {
+            // Copy addons from resources if the directory is empty or if files are missing
+            copyAddonsFromResources(addonsDir);
         }
 
         // Load addons
@@ -114,4 +124,70 @@ public final class Main extends JavaPlugin {
     public AddonManager getAddonManager() {
         return addonManager;
     }
+
+    /**
+     * Copies addon files from the plugin's resources to the addons directory
+     * if they don't already exist.
+     *
+     * @param addonsDir The target addons directory
+     */
+    private void copyAddonsFromResources(File addonsDir) {
+        try {
+            // Check if the resource directory exists
+            JarFile jarFile = new JarFile(getFile());
+            Enumeration<JarEntry> entries = jarFile.entries();
+            boolean foundAddons = false;
+
+            // First, collect all addon files from resources
+            List<String> resourceAddons = new ArrayList<>();
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+                String name = entry.getName();
+                if (name.startsWith("addons/") && name.endsWith(".jar") && !entry.isDirectory()) {
+                    foundAddons = true;
+                    resourceAddons.add(name);
+                }
+            }
+
+            if (!foundAddons) {
+                getLogger().info("No addon files found in resources.");
+                jarFile.close();
+                return;
+            }
+
+            // Copy each addon file if it doesn't exist in the target directory
+            for (String resourcePath : resourceAddons) {
+                String fileName = resourcePath.substring(resourcePath.lastIndexOf('/') + 1);
+                File targetFile = new File(addonsDir, fileName);
+
+                if (!targetFile.exists()) {
+                    getLogger().info("Copying addon from resources: " + fileName);
+                    try (InputStream in = getResource(resourcePath);
+                         FileOutputStream out = new FileOutputStream(targetFile)) {
+
+                        if (in == null) {
+                            getLogger().warning("Could not find resource: " + resourcePath);
+                            continue;
+                        }
+
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = in.read(buffer)) > 0) {
+                            out.write(buffer, 0, length);
+                        }
+                        getLogger().info("Successfully copied addon: " + fileName);
+                    } catch (IOException e) {
+                        getLogger().warning("Failed to copy addon " + fileName + ": " + e.getMessage());
+                    }
+                } else {
+                    getLogger().info("Addon already exists: " + fileName);
+                }
+            }
+
+            jarFile.close();
+        } catch (IOException e) {
+            getLogger().warning("Error copying addons from resources: " + e.getMessage());
+        }
+    }
+
 }
