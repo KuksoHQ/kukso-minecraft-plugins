@@ -21,6 +21,7 @@ public class CmdRegistrar {
         mgr.register(new ValidateCmd());
         mgr.register(new ReloadCmd());
         mgr.register(new VersionCmd());
+        mgr.register(new AddonsCmd());
 
         cmd.setExecutor(mgr);
         cmd.setTabCompleter(mgr);
