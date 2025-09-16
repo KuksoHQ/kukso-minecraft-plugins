@@ -55,10 +55,10 @@ public class VersionCmd implements CmdInterface {
     public boolean execute(CommandSender sender, String[] args) {
         Plugin plugin = Bukkit.getPluginManager().getPlugin("CubDialogs");
         String pluginVersion = plugin != null ? plugin.getPluginMeta().getVersion() : "unknown";
-        //String apiVersion = CubDialogsAPI.getApiVersion();
+        String apiVersion = CubDialogsAPI.getApiVersion();
 
         sender.sendMessage("CubDialogs version: " + pluginVersion);
-        //sender.sendMessage("API version: " + apiVersion);
+        sender.sendMessage("API version: " + apiVersion);
         sender.sendMessage("Checking latest version...");
 
         var bukkitScheduler = Bukkit.getScheduler();
