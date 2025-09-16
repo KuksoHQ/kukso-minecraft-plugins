@@ -33,4 +33,12 @@ public interface DialogActionRegistry {
      * @return total number of listeners removed
      */
     int clear();
+    
+    /**
+     * Executes all registered listeners for the given context.
+     * This is used internally by the dialog event bridge.
+     *
+     * @param context the context to pass to listeners
+     */
+    void executeListeners(DialogActionContext context);
 }
