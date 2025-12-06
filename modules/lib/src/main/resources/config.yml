@@ -5,6 +5,11 @@ logging-enabled: false # enable/disable logging into a separate file under /plug
 restful-enabled: false # enable/disable REST API on your server. Check https://labs.cublex.net/docs/category/common-in-all-plugins
 debug-mode: false # enable/disable DEBUG mode
 
+# Localization
+supported_langs:
+  - 'en'
+  - 'tr'
+
 # Variables (as placeholders) that are used in the localization strings
 prefix: "#ffc13b[CublexCore] &r"
 test-prefix: "&c[CublexCore] &r"

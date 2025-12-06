@@ -5,7 +5,7 @@ plugins {
     id 'signing'
 }
 
-group = 'io.github.devbd1'
+group = 'io.github.cublexlabs'
 
 def versionFile = file("version.txt")
 if (versionFile.exists()) {
@@ -84,7 +84,7 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes(
-                'Main-Class': 'io.github.devbd1.cublexcore.Main' // optional, not needed for plugins
+                'Main-Class': 'io.github.cublexlabs.cublexcore.Main' // optional, not needed for plugins
         )
     }
 
@@ -170,7 +170,7 @@ publishing {
                 developers {
                     developer {
                         id.set("DevBD1")
-                        name.set("Burak Dorman")
+                        name.set("M. Burak Dorman")
                         email.set("burakdorman@gmail.com")
                     }
                 }
@@ -202,7 +202,6 @@ publishing {
 //                password = project.findProperty("cublexToken")
 //            }
 //        }
-
     }
 }
 
