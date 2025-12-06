@@ -17,20 +17,26 @@ import java.util.List;
 import java.util.Map;
 
 public final class ConfigManager {
-    private static FileConfiguration config;
+    private static ConfigManager instance;
+    private FileConfiguration config;
     private static final List<String> SUPPORTED_LANGS = List.of("en", "tr");
 
-    private static JavaPlugin plugin;
-//    public static void setPlugin(JavaPlugin plugin) {
-//        ConfigManager.plugin = plugin;
-//    }
+    private JavaPlugin plugin;
 
     private ConfigManager() { }
+
+    public static ConfigManager getInstance() {
+        if (instance == null) {
+            instance = new ConfigManager();
+        }
+        return instance;
+    }
 
     /**
      * Initializes the ConfigManager. Must be called from onEnable().
      */
-    public static void init(JavaPlugin plugin) {
+    public void init(JavaPlugin plugin) {
+        this.plugin = plugin;
         plugin.saveDefaultConfig();
         // copy *all* bundled langs
         copyLanguageFiles(plugin);
@@ -40,7 +46,7 @@ public final class ConfigManager {
     }
 
     /** Ensure each lang/<code>.yml exists on disk */
-    private static void copyLanguageFiles(JavaPlugin plugin) {
+    private void copyLanguageFiles(JavaPlugin plugin) {
         Path langDir = plugin.getDataFolder().toPath().resolve("lang");
         try {
             Files.createDirectories(langDir);
@@ -65,7 +71,7 @@ public final class ConfigManager {
      * Ensures the language file exists under plugins/{plugin}/lang,
      * copying it from the JAR if necessary.
      */
-    private static void loadLanguageFile(JavaPlugin plugin, String lang) {
+    private void loadLanguageFile(JavaPlugin plugin, String lang) {
         Path langDir  = plugin.getDataFolder().toPath().resolve("lang");
         Path langFile = langDir.resolve(lang + ".yml");
         try {
@@ -82,7 +88,7 @@ public final class ConfigManager {
     /**
      * Logs the current configuration status to console.
      */
-    public static void printStatus(JavaPlugin plugin) {
+    public void printStatus(JavaPlugin plugin) {
         plugin.getLogger().info("Config Status:");
         plugin.getLogger().info(" - Server Name: "     + getString("server-name",       "Cublex.net"));
         plugin.getLogger().info(" - Default Language: " + getFallbackLanguage());
@@ -106,7 +112,7 @@ public final class ConfigManager {
     /**
      * Validates that the config key is non-null and matches allowed characters.
      */
-    private static void validateKey(String key) {
+    private void validateKey(String key) {
         if (key == null || !key.matches("[\\w.-]+")) {
             throw new IllegalArgumentException("Invalid config key: " + key);
         }
@@ -115,7 +121,7 @@ public final class ConfigManager {
     /**
      * Reads a string value or returns the default if missing/empty.
      */
-    public static String getString(String key, String def) {
+    public String getString(String key, String def) {
         validateKey(key);
         String v = config.getString(key);
         if (v == null || v.isEmpty()) {
@@ -128,7 +134,7 @@ public final class ConfigManager {
     /**
      * Reads a boolean value or returns the default if missing.
      */
-    public static boolean getBoolean(String key, boolean def) {
+    public boolean getBoolean(String key, boolean def) {
         validateKey(key);
         if (!config.contains(key)) {
             plugin.getLogger().warning("Missing '" + key + "', using default: " + def);
@@ -140,7 +146,7 @@ public final class ConfigManager {
     /**
      * Reads an integer value or returns the default if missing.
      */
-    public static int getInt(String key, int def) {
+    public int getInt(String key, int def) {
         validateKey(key);
         if (!config.contains(key)) {
             plugin.getLogger().warning("Missing '" + key + "', using default: " + def);
@@ -152,7 +158,7 @@ public final class ConfigManager {
     /**
      * Reads a double value or returns the default if missing.
      */
-    public static double getDouble(String key, double def) {
+    public double getDouble(String key, double def) {
         validateKey(key);
         if (!config.contains(key)) {
             plugin.getLogger().warning("Missing '" + key + "', using default: " + def);
@@ -165,7 +171,7 @@ public final class ConfigManager {
      * Reads a List<T> or returns the default list if missing.
      */
     @SuppressWarnings("unchecked")
-    public static <T> List<T> getList(String key, List<T> def) {
+    public <T> List<T> getList(String key, List<T> def) {
         validateKey(key);
         List<T> v = (List<T>) config.getList(key);
         if (v == null) {
@@ -178,7 +184,7 @@ public final class ConfigManager {
     /**
      * Returns all top-level string entries as placeholders.
      */
-    public static Map<String,String> getAllAsPlaceholders() {
+    public Map<String,String> getAllAsPlaceholders() {
         Map<String,String> m = new HashMap<>();
         config.getKeys(false).forEach(k -> {
             String v = config.getString(k);
@@ -188,7 +194,7 @@ public final class ConfigManager {
     }
 
     /** Helper to fetch and lowercase the fallback language. */
-    private static String getFallbackLanguage() {
+    private String getFallbackLanguage() {
 
         return getString("fallback-language", "en").toLowerCase();
     }
@@ -197,7 +203,7 @@ public final class ConfigManager {
      * Returns the underlying FileConfiguration object.
      * @return The current configuration
      */
-    public static FileConfiguration getConfig() {
+    public FileConfiguration getConfig() {
         if (config == null) {
             throw new IllegalStateException("ConfigManager has not been initialized. Call init() first.");
         }

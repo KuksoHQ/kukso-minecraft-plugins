@@ -46,8 +46,8 @@ public class LoggingManager {
         this.logger  = plugin.getLogger();
         // Path is correct: go up one level from CublexCore to plugins/, then to sibling logs_custom/
         this.logDir  = Path.of(".", "logs_custom", "server_logs");
-        this.logging = ConfigManager.getBoolean("logging-enabled", false);
-        this.debugging = ConfigManager.getBoolean("debug-mode", false);
+        this.logging = ConfigManager.getInstance().getBoolean("logging-enabled", false);
+        this.debugging = ConfigManager.getInstance().getBoolean("debug-mode", false);
 
         try {
             Files.createDirectories(logDir);

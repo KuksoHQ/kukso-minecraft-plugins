@@ -22,9 +22,9 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         // --- config & localization
         saveDefaultConfig();
-        ConfigManager.init(this);
+        ConfigManager.getInstance().init(this);
         Lang.load(this);
-        ConfigManager.printStatus(this);
+        ConfigManager.getInstance().printStatus(this);
 
         // --- core services
         logger = new LoggingManager(this);

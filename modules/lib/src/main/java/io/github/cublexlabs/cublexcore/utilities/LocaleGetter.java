@@ -43,6 +43,6 @@ public class LocaleGetter {
 
     public static String getDefaultLocale() {
 
-        return ConfigManager.getString("fallback-language", "en").toLowerCase();
+        return ConfigManager.getInstance().getString("fallback-language", "en").toLowerCase();
     }
 }

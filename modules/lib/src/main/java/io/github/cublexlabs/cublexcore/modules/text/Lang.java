@@ -84,7 +84,7 @@ public class Lang {
         }
 
         Map<String, String> staticPlaceholders = flatten(lang);
-        staticPlaceholders.putAll(ConfigManager.getAllAsPlaceholders());
+        staticPlaceholders.putAll(ConfigManager.getInstance().getAllAsPlaceholders());
 
         logger.log("[DEBUG] Static placeholders: " + staticPlaceholders);
         logger.log("[DEBUG] Dynamic placeholders: " + dynamic);

@@ -61,7 +61,7 @@ public class CorlexAPIImplementer implements CorlexAPI {
         // 1) Reload the plugin’s core config
         plugin.reloadConfig();
         // 2) Re-initialize ConfigManager so it picks up any new defaults
-        ConfigManager.init(plugin);
+        ConfigManager.getInstance().init(plugin);
         // 3) Reload all language files into Lang’s in-memory map
 //        Lang.reload();
         // 4) Log that we’ve reloaded everything
@@ -70,7 +70,7 @@ public class CorlexAPIImplementer implements CorlexAPI {
 
     @Override
     public boolean isLoggingEnabled() {
-        return ConfigManager.getBoolean("logging-enabled", false);
+        return ConfigManager.getInstance().getBoolean("logging-enabled", false);
     }
 
 //    @Override

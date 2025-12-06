@@ -45,10 +45,10 @@ public class ReloadCmd implements SubCommand {
         logger.info("§6[CublexCore] §f'/cublex reload' command used by §e" + sender.getName());
 
         plugin.reloadConfig();
-        ConfigManager.init(plugin);
+        ConfigManager.getInstance().init(plugin);
         Lang.load(plugin);
 
-        ConfigManager.printStatus(plugin);
+        ConfigManager.getInstance().printStatus(plugin);
 
         sender.sendMessage("§6CublexCore §freloaded.");
         // Lang.send(sender, "command.reload.success");

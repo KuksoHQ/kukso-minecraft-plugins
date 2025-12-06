@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class CommandConfig {
     private static ConfigurationSection getCommandSection(String command) {
-        return ConfigManager.getConfig().getConfigurationSection("commands." + command);
+        return ConfigManager.getInstance().getConfig().getConfigurationSection("commands." + command);
     }
 
     public static List<String> getAliases(String command) {
