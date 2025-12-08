@@ -20,7 +20,6 @@ public final class ConfigManager {
     private static ConfigManager instance;
     private FileConfiguration config;
     private static final List<String> SUPPORTED_LANGS = List.of("en", "tr");
-
     private JavaPlugin plugin;
 
     private ConfigManager() { }

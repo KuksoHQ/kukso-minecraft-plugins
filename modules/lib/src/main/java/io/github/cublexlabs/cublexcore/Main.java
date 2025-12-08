@@ -37,7 +37,7 @@ public class Main extends JavaPlugin {
         // --- hooks (PlaceholderAPI, CubItems, RealisticSeasons…)
         HookRegistrar.register(this, logger);
 
-        // ** ProtocolLib packet‐translation hook **
+        // --- ProtocolLib packet‐translation hook
         ModuleRegistrar.register(this, api, logger);
 
         logger.log("CublexCore is fully enabled.");
