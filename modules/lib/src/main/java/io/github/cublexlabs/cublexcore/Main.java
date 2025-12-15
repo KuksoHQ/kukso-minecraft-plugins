@@ -1,6 +1,6 @@
 package io.github.cublexlabs.cublexcore;
 
-import io.github.cublexlabs.cublexcore.commands.CommandRegistrar;
+import io.github.cublexlabs.cublexcore.commands.CmdRegistrar;
 import io.github.cublexlabs.cublexcore.hooks.HookRegistrar;
 import io.github.cublexlabs.cublexcore.modules.ModuleRegistrar;
 import io.github.cublexlabs.cublexcore.services.ServiceRegistrar;
@@ -32,7 +32,7 @@ public class Main extends JavaPlugin {
         ServiceRegistrar.registerAll(this, api, logger);
 
         // --- commands
-        CommandRegistrar.register(this, logger);
+        CmdRegistrar.register(this, logger);
 
         // --- hooks (PlaceholderAPI, CubItems, RealisticSeasons…)
         HookRegistrar.register(this, logger);

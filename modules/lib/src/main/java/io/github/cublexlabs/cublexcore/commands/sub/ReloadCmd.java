@@ -1,7 +1,7 @@
 package io.github.cublexlabs.cublexcore.commands.sub;
 
-import io.github.cublexlabs.cublexcore.commands.SubCommand;
-import io.github.cublexlabs.cublexcore.commands.CommandConfig;
+import io.github.cublexlabs.cublexcore.commands.CmdInterface;
+import io.github.cublexlabs.cublexcore.commands.CmdConfig;
 import io.github.cublexlabs.cublexcore.modules.logger.LoggingManager;
 import io.github.cublexlabs.cublexcore.modules.text.Lang;
 import io.github.cublexlabs.cublexcore.utilities.ConfigManager;
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.util.List;
 
-public class ReloadCmd implements SubCommand {
+public class ReloadCmd implements CmdInterface {
     String CMD_NAME = "reload";
     private final JavaPlugin plugin;
     private final LoggingManager logger;
@@ -27,12 +27,12 @@ public class ReloadCmd implements SubCommand {
 
     @Override
     public List<String> getPermissions() {
-        return CommandConfig.getPermissions(CMD_NAME);
+        return CmdConfig.getPermissions(CMD_NAME);
     }
 
     @Override
     public List<String> getAliases() {
-        return CommandConfig.getAliases(CMD_NAME);
+        return CmdConfig.getAliases(CMD_NAME);
     }
 
     @Override

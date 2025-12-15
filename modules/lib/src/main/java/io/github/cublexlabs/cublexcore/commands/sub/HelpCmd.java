@@ -1,20 +1,20 @@
 package io.github.cublexlabs.cublexcore.commands.sub;
 
-import io.github.cublexlabs.cublexcore.commands.SubCommand;
-import io.github.cublexlabs.cublexcore.commands.CommandConfig;
-import io.github.cublexlabs.cublexcore.commands.CommandManager;
+import io.github.cublexlabs.cublexcore.commands.CmdInterface;
+import io.github.cublexlabs.cublexcore.commands.CmdConfig;
+import io.github.cublexlabs.cublexcore.commands.CmdManager;
 
 import io.github.cublexlabs.cublexcore.modules.logger.LoggingManager;
 import org.bukkit.command.CommandSender;
 import java.util.List;
 import java.util.Collection;
 
-public class HelpCmd implements SubCommand {
+public class HelpCmd implements CmdInterface {
     String CMD_NAME = "help";
     private final LoggingManager logger;
-    private final CommandManager manager;
+    private final CmdManager manager;
 
-    public HelpCmd(CommandManager manager, LoggingManager logger) {
+    public HelpCmd(CmdManager manager, LoggingManager logger) {
         this.manager = manager;
         this.logger = logger;
     }
@@ -27,12 +27,12 @@ public class HelpCmd implements SubCommand {
     @Override
     public List<String> getPermissions()
     {
-        return CommandConfig.getPermissions(CMD_NAME);
+        return CmdConfig.getPermissions(CMD_NAME);
     }
 
     @Override
     public List<String> getAliases() {
-        return CommandConfig.getAliases(CMD_NAME);
+        return CmdConfig.getAliases(CMD_NAME);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class HelpCmd implements SubCommand {
         sender.sendMessage("§8§m------§r §aCublexCore Help §8§m------");
         if (manager == null) return true;
     
-    Collection<SubCommand> commands = manager.getCommands();
-    for (SubCommand cmd : commands) {
+    Collection<CmdInterface> commands = manager.getCommands();
+    for (CmdInterface cmd : commands) {
         List<String> permissions = cmd.getPermissions();
         boolean hasPermission = permissions.isEmpty() || 
         permissions.stream().anyMatch(sender::hasPermission);

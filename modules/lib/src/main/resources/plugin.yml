@@ -13,14 +13,16 @@ softdepend:
   - CubLoots
   - CubSense
   - CubConquest
+  - CubDungeons
   - RealisticSeasons
   - PlaceholderAPI
+# You can manage each subcommand in config.yml
 commands:
   cublex:
-    description: CublexCore main command
     usage: /cublex <help|ver|reload|getKey|testLogger>
     permission: cublexcore.admin
-
+    description: CublexCore main command
+# Permissions are dynamically set for each command in config.yml
 permissions:
   cublexcore.admin:
     description: Allows high-level admin access to any command
@@ -29,6 +31,7 @@ permissions:
     description: Allows low-level access to some admin commands
   cublexcore.user:
     description: Allows access to user commands
+  cublexcore.command.root:
+    description: Use it with specific perm(s) of a subcommand
   cublexcore.cmd.testlogger:
     description: Allows access to /cublex testlogger command
-    default: op

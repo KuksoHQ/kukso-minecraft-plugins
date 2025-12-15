@@ -1,16 +1,16 @@
 package io.github.cublexlabs.cublexcore.commands;
 import org.bukkit.command.*;
 import java.util.*;
-public class CommandManager implements CommandExecutor, TabCompleter {
-    private final Map<String, SubCommand> commands = new HashMap<>();
+public class CmdManager implements CommandExecutor, TabCompleter {
+    private final Map<String, CmdInterface> commands = new HashMap<>();
     private final Map<String, String> aliasToCommand = new HashMap<>();
     
-    public void register(SubCommand cmd) {
+    public void register(CmdInterface cmd) {
         String name = cmd.getName().toLowerCase();
         commands.put(name, cmd);
         
         // Register aliases from config
-        for (String alias : CommandConfig.getAliases(name)) {
+        for (String alias : CmdConfig.getAliases(name)) {
             String lowerAlias = alias.toLowerCase();
             if (aliasToCommand.containsKey(lowerAlias)) {
                 // Log warning about alias collision
@@ -20,7 +20,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         }
     }
     
-    public Collection<SubCommand> getCommands() {
+    public Collection<CmdInterface> getCommands() {
         return commands.values();
     }
     
@@ -37,7 +37,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             subCmdName = aliasToCommand.get(subCmdName);
         }
         
-        SubCommand sub = commands.get(subCmdName);
+        CmdInterface sub = commands.get(subCmdName);
         if (sub == null) {
             sender.sendMessage("§cUnknown subcommand: " + args[0]);
             return true;
@@ -57,11 +57,11 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             List<String> suggestions = new ArrayList<>();
             // Add main commands and their aliases if player has permission
-            for (SubCommand subCmd : commands.values()) {
+            for (CmdInterface subCmd : commands.values()) {
                 String cmdName = subCmd.getName().toLowerCase();
                 if (hasAnyPermission(sender, getEffectivePermissions(cmdName, subCmd))) {
                     suggestions.add(subCmd.getName());
-                    suggestions.addAll(CommandConfig.getAliases(subCmd.getName()));
+                    suggestions.addAll(CmdConfig.getAliases(subCmd.getName()));
                 }
             }
             return suggestions;
@@ -72,7 +72,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             subCmdName = aliasToCommand.get(subCmdName);
         }
         
-        SubCommand sub = commands.get(subCmdName);
+        CmdInterface sub = commands.get(subCmdName);
         if (sub == null || !hasAnyPermission(sender, getEffectivePermissions(subCmdName, sub))) {
             return Collections.emptyList();
         }
@@ -84,9 +84,9 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     /**
      * Gets effective permissions by combining config permissions and SubCommand permissions
      */
-    private List<String> getEffectivePermissions(String commandName, SubCommand subCommand) {
-        List<String> configPermissions = CommandConfig.getPermissions(commandName);
-        List<String> interfacePermissions = subCommand.getPermissions();
+    private List<String> getEffectivePermissions(String commandName, CmdInterface cmdInterface) {
+        List<String> configPermissions = CmdConfig.getPermissions(commandName);
+        List<String> interfacePermissions = cmdInterface.getPermissions();
         
         // Handle null safety
         if (configPermissions == null) configPermissions = Collections.emptyList();

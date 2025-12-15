@@ -1,7 +1,7 @@
 package io.github.cublexlabs.cublexcore.commands.sub;
 
-import io.github.cublexlabs.cublexcore.commands.CommandConfig;
-import io.github.cublexlabs.cublexcore.commands.SubCommand;
+import io.github.cublexlabs.cublexcore.commands.CmdConfig;
+import io.github.cublexlabs.cublexcore.commands.CmdInterface;
 import io.github.cublexlabs.cublexcore.modules.text.Lang;
 import io.github.cublexlabs.cublexcore.utilities.LocaleGetter;
 import org.bukkit.command.CommandSender;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.*;
 
-public class GetKeyValueCmd implements SubCommand{
+public class GetKeyValueCmd implements CmdInterface {
     @Override
     public String getName() {
         return "lang";
@@ -18,12 +18,12 @@ public class GetKeyValueCmd implements SubCommand{
     @Override
     public List<String> getPermissions()
     {
-        return CommandConfig.getPermissions("lang");
+        return CmdConfig.getPermissions("lang");
     }
 
     @Override
     public List<String> getAliases() {
-        return CommandConfig.getAliases("lang");
+        return CmdConfig.getAliases("lang");
     }
 
     @Override

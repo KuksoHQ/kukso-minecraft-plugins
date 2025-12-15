@@ -5,7 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.List;
 import java.util.Collections;
 
-public class CommandConfig {
+public class CmdConfig {
     private static ConfigurationSection getCommandSection(String command) {
         return ConfigManager.getInstance().getConfig().getConfigurationSection("commands." + command);
     }

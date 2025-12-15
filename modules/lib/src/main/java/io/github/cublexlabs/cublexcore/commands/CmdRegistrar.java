@@ -6,8 +6,8 @@ import io.github.cublexlabs.cublexcore.commands.test.*;
 import io.github.cublexlabs.cublexcore.modules.logger.LoggingManager;
 import org.bukkit.command.PluginCommand;
 
-public final class CommandRegistrar {
-    private CommandRegistrar() {}
+public final class CmdRegistrar {
+    private CmdRegistrar() {}
 
     public static void register(Main plugin, LoggingManager logger) {
         PluginCommand cmd = plugin.getCommand("cublex");
@@ -17,7 +17,7 @@ public final class CommandRegistrar {
             return;
         }
 
-        CommandManager mgr = new CommandManager();
+        CmdManager mgr = new CmdManager();
         mgr.register(new GetKeyValueCmd());
         mgr.register(new HelpCmd(mgr, logger));
         mgr.register(new ReloadCmd(plugin, logger));

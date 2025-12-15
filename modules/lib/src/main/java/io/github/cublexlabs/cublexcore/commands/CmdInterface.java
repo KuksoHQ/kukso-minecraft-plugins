@@ -6,7 +6,7 @@ import java.util.List;
    /**
     * Represents a subcommand that can be registered with the command manager.
     */
-   public interface SubCommand {
+   public interface CmdInterface {
     String DEFAULT_DESCRIPTION = "No description provided.";
     String COMMAND_PREFIX = "/";
 

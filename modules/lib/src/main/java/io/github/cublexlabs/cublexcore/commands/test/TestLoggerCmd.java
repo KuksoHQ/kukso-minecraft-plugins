@@ -1,7 +1,7 @@
 package io.github.cublexlabs.cublexcore.commands.test;
 
-import io.github.cublexlabs.cublexcore.commands.CommandConfig;
-import io.github.cublexlabs.cublexcore.commands.SubCommand;
+import io.github.cublexlabs.cublexcore.commands.CmdConfig;
+import io.github.cublexlabs.cublexcore.commands.CmdInterface;
 import io.github.cublexlabs.cublexcore.modules.logger.LoggingManager;
 import io.github.cublexlabs.cublexcore.modules.logger.PlayerLogger;
 import org.bukkit.Location;
@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.nio.file.Path;
 import java.util.List;
 
-public class TestLoggerCmd implements SubCommand {
+public class TestLoggerCmd implements CmdInterface {
     
     private final LoggingManager loggingManager;
     private final PlayerLogger playerLogger;
@@ -31,12 +31,12 @@ public class TestLoggerCmd implements SubCommand {
     
     @Override
     public List<String> getPermissions() {
-        return CommandConfig.getPermissions("admin_cmds");
+        return CmdConfig.getPermissions("admin_cmds");
     }
 
     @Override
     public List<String> getAliases() {
-        return CommandConfig.getAliases("admin_cmds");
+        return CmdConfig.getAliases("admin_cmds");
     }
     
     @Override
