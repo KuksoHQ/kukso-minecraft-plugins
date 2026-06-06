@@ -1,0 +1,83 @@
+# To ensure the permission system and world load/unload system
+# work correctly, you MUST define a fallback world.
+fallback-world: world_spawn
+# Enable or disable modules by setting them to true or false.
+# Disabled modules are not initialized and do not register any events,
+# which improves server performance.
+modules:
+  grief-prevention: true
+  world-border: true
+  pvp-handling: true
+  custom-logger: true
+# World access permission format:
+# kuksoworlds.access.<world_name>
+worlds:
+  - name: world_spawn # folder name of your custom world
+    type: VOID # available types: VOID, NORMAL, NETHER, END
+    prevent-grief: true # prevents breaking, placing, and interaction
+    world-border:
+      size: 1010 # distance from the center to the border edge
+      center: # center point of the border (square)
+        x: 0
+        z: 0
+    spawn: # used by teleport and spawn-related commands
+      x: 0.5
+      y: 0
+      z: -62.5
+      yaw: 0
+      pitch: -5.0
+# Command configuration section.
+# Here you can define aliases and required permissions for each command.
+#
+# If a command section is removed:
+# - The command will have no aliases (other than its default name)
+# - The command will not require any permissions to be used
+#
+# The "permissions" field is a list.
+# You can define multiple permissions for the same command.
+commands:
+  create:
+    permissions:
+      - kuksoworlds.command.create
+      - kuksoworlds.command.admin
+  delete:
+    aliases: [del]
+    permissions:
+      - kuksoworlds.command.delete
+      - kuksoworlds.command.admin
+  list:
+    aliases: [ls]
+    permissions:
+      - kuksoworlds.command.list
+      - kuksoworlds.command.admin
+  load:
+    permissions:
+      - kuksoworlds.command.load
+      - kuksoworlds.command.admin
+  recycle:
+    permissions:
+      - kuksoworlds.command.recycle
+      - kuksoworlds.command.admin
+  reload:
+    aliases: [rl]
+    permissions:
+      - kuksoworlds.command.reload
+      - kuksoworlds.command.admin
+  setspawn:
+    permissions:
+      - kuksoworlds.command.setspawn
+      - kuksoworlds.command.admin
+  teleport:
+    aliases: [tp]
+    permissions:
+      - kuksoworlds.command.teleport
+      - kuksoworlds.command.admin
+  unload:
+    permissions:
+      - kuksoworlds.command.unload
+      - kuksoworlds.command.admin
+  version:
+    aliases: [ver]
+    permissions:
+      - kuksoworlds.command.version
+      - kuksoworlds.command.admin

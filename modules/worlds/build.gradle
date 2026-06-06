@@ -1,0 +1,114 @@
+plugins {
+    id 'java'
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+}
+
+group = 'com.kukso.mc'
+
+def versionFile = file("version.txt")
+if (versionFile.exists()) {
+    version = versionFile.text.trim()
+} else {
+    versionFile.text = project.version?.toString() ?: "0.0.1"
+    version = versionFile.text.trim()
+}
+println "[KuksoWorlds] Using project.version = ${version}"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+}
+
+dependencies {
+    compileOnly("org.spigotmc:spigot-api:1.21.4-R0.1-SNAPSHOT")
+    compileOnly("com.kukso.mc:kukso-mc-lib:2.0.0")
+    compileOnly("org.jetbrains:annotations:24.0.1")
+    compileOnly("me.clip:placeholderapi:2.11.6")
+}
+
+tasks {
+    runServer {
+        // Configure the Minecraft version for our task.
+        // This is the only required configuration besides applying the plugin.
+        // Your plugin's jar (or shadowJar if present) will be used automatically.
+        minecraftVersion("1.21")
+    }
+}
+
+def targetJavaVersion = 21
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        // Use project.version directly; no separate props map
+        expand(version: project.version.toString())
+    }
+    doFirst {
+        println "[KuksoWorlds] processResources expanding plugin.yml with version=${project.version}"
+    }
+}
+
+tasks.register("printJdk") {
+    doLast {
+        println "Running with: " + System.getProperty("java.version")
+    }
+}
+
+tasks.register("bumpVersion") {
+    doLast {
+        if (!versionFile.exists()) {
+            throw new GradleException("version.txt not found.")
+        }
+        def currentVersion = versionFile.text.trim()
+        def releaseType = project.hasProperty("releaseType") ? project.releaseType : "patch"
+        def (major, minor, patch) = currentVersion.tokenize('.').collect { it.toInteger() }
+
+        switch (releaseType) {
+            case "major":
+                major++; minor = 0; patch = 0; break
+            case "minor":
+                minor++; patch = 0; break
+            case "patch":
+                patch++; break
+            default:
+                throw new GradleException("Unknown releaseType: $releaseType. Use major, minor or patch.")
+        }
+
+        def newVersion = "${major}.${minor}.${patch}"
+        versionFile.text = newVersion
+        // Keep current build consistent with bumped value
+        project.version = newVersion
+        println "Version bumped: $currentVersion → $newVersion"
+    }
+}
+
+tasks.register("bumpAndBuild") {
+    dependsOn "bumpVersion", "build"
+}
