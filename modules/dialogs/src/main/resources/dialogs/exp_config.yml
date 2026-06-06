@@ -1,0 +1,70 @@
+title: "Template: EXP and Level Setter"
+type: "confirmation"
+permission_to_open: "cubDialogs.dialog.open.templates"
+
+bodies:
+  - type: "plain_message"
+    message: "<gradient:#ff6b6b:#4ecdc4>You can set your level and experience to desired values.</gradient>"
+    width: 150
+
+  - type: "item"
+    material: "EXPERIENCE_BOTTLE"
+    amount: 64
+    display_name: "§b§lLegendary Experience Bottle"
+    lore:
+      - "§7It contains unlimited"
+      - "§7amount of experince!"
+    description: "<- that's!"
+    show_tooltip: true
+    show_stack_count: true
+    width: 16
+    height: 16
+
+inputs:
+  - id: "level"
+    type: "number_range"
+    label:
+      text: "§2Level"
+    min: 0
+    max: 999
+    step: 1
+    initial: 499
+    width: 930
+
+  - id: "experience"
+    type: "number_range"
+    label:
+      text: "&6Experience"
+      color: "green"
+    min: 0
+    max: 100
+    step: 1
+    initial: 0
+    width: 310
+    label_format: "%s: %s percent to the next level"
+
+  - id: "player_name"
+    type: "text"
+    label: "&5Player Name"
+    #initial: "has no effect"
+    max_length: 16
+    width: 300
+    label_visible: true
+    multiline:
+      max_lines: 1
+      max_columns: 18
+
+exit_buttons:
+  confirm:
+    text: "<gradient:#4caf50:#8bc34a>Confirm</gradient>"
+    description: "&aClick to &lconfirm &ayour changes with #FF5733 colored text"
+    action:
+      type: "custom"
+      key: "cublexcore:exp_config/confirm"
+    width: 100
+
+  cancel:
+    text: "&cCancel"
+    description: "<gradient:#ff0000:#800000>Cancel without saving</gradient>"
+    width: 100
+    action: null

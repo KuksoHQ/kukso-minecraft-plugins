@@ -1,0 +1,55 @@
+type: "multi_action"
+title: "Server Actions Menu"
+external_title: "Template: Multi Action"
+can_close_with_escape: true
+permission_to_open: "cubDialogs.dialog.open.templates"
+
+# Layout configuration
+columns: 3
+
+body:
+  type: "plain_message"
+  message: "<gradient:#8a2be2:#1e90ff>Select an action from the options below.</gradient>"
+  width: 400
+
+buttons:
+  - text: "🏠 Teleport Spawn"
+    description: "Return to your home location!"
+    action:
+      type: "run_command"
+      command: "spawn"
+    width: 150
+
+  - text: "⚔️ Show Exp Config"
+    description: "Set your EXP level"
+    action:
+      type: "show_dialog"
+      id: "exp_config"
+    width: 150
+
+  - text: "🎒 Open Store"
+    description: "Browse available items"
+    action:
+      type: "open_url"
+      url: "https://cublex.net/store"
+    width: 150
+
+  - text: "✉️ Messages"
+    description: "Check your messages"
+    action:
+      type: "custom"
+      key: "cublexcore:messages/view"
+    width: 150
+
+  - text: "❌ Close"
+    description: "Close this menu"
+    action:
+      type: "close"
+    width: 150
+
+exit_button:
+  text: "test button"
+  description: "just click to Close"
+  width: 300
+  action:
+    type: "close"

@@ -1,0 +1,47 @@
+name: CubDialogs
+version: ${version}
+main: io.github.devbd1.CubDialogs.Main
+api-version: '1.21'
+load: STARTUP
+authors: [ DevBD1 ]
+description: Create custom screens.
+website: https://labs.cublex.net
+softdepend:
+  - PlaceholderAPI
+#  - CubItems
+#  - CubLoots
+#  - CubSense
+#  - CubConquest
+#depend:
+  - Cub
+commands:
+  CubDialogs:
+    aliases: [cdia]
+    permission: CubDialogs.command.main
+    permission-message: You don't have permission to use this command.
+    usage: /<command>
+permissions:
+  CubDialogs.command.main:
+    default: true
+    description: Allows you to use the main command.
+  CubDialogs.admin.version:
+    default: op
+    description: Allows you to see the plugin version.
+  CubDialogs.admin.reload:
+    default: op
+    description: Allows you to reload the plugin.
+  CubDialogs.admin.open:
+    default: op
+    description: Allows you to open dialogs.
+  CubDialogs.admin.validate:
+    default: op
+    description: Allows you to validate dialogs.
+  CubDialogs.admin.help:
+    default: op
+    description: Allows you to see the help.
+  CubDialogs.admin.forceopen:
+    default: op
+    description: Allows you to force open dialogs for others.
+  CubDialogs.admin.forceclose:
+    default: op
+    description: Allows you to force close dialogs for others.
