@@ -1,13 +1,13 @@
 
-https://i.ibb.co/bMm4Pmpc/Cub-Dialogs-1.png
+https://i.ibb.co/bMm4Pmpc/Kukso-Dialogs-1.png
 
 ADDONS SYSTEM!
 Example: https://github.com/DevBD1/ExpConfigAddon
 
-## 📦 To be added
+## ðŸ“¦ To be added
 ### Features:
-- CublexCore logging support
-- CublexCore localization support
+- KuksoLib logging support
+- KuksoLib localization support
 - Command to reload server links
 
 ### Pre-set Dialog Screens:

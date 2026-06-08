@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "kukso-minecraft-*-v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build all release jars
+        run: ./gradlew build
+      - name: Upload release jars
+        uses: softprops/action-gh-release@v2
+        with:
+          files: modules/*/build/libs/Kukso*-Paper-*.jar
+      - name: Generate KuksoLib JavaDocs
+        if: startsWith(github.ref_name, 'kukso-minecraft-lib-v')
+        run: ./gradlew :lib:javadoc
+      - name: Checkout website pages
+        if: startsWith(github.ref_name, 'kukso-minecraft-lib-v')
+        uses: actions/checkout@v4
+        with:
+          repository: KuksoHQ/kuksohq.github.io
+          ref: gh-pages
+          path: website-pages
+          token: ${{ secrets.GH_PAT_PAGES }}
+      - name: Publish KuksoLib JavaDocs
+        if: startsWith(github.ref_name, 'kukso-minecraft-lib-v')
+        shell: bash
+        run: |
+          version="${GITHUB_REF_NAME#kukso-minecraft-lib-v}"
+          target="website-pages/api/minecraft/lib"
+          rm -rf "$target/v$version" "$target/latest"
+          mkdir -p "$target/v$version" "$target/latest"
+          cp -R modules/lib/build/docs/javadoc/. "$target/v$version/"
+          cp -R modules/lib/build/docs/javadoc/. "$target/latest/"
+          cd website-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/minecraft/lib
+          git commit -m "Publish Minecraft KuksoLib JavaDocs v$version" || exit 0
+          git push
+      - name: Publish library tags
+        if: startsWith(github.ref_name, 'kukso-minecraft-lib-v') && vars.ENABLE_MAVEN_PUBLISH == 'true'
+        run: ./gradlew :lib:publish
+        env:
+          KUKSO_USER: ${{ secrets.KUKSO_USER }}
+          KUKSO_TOKEN: ${{ secrets.KUKSO_TOKEN }}

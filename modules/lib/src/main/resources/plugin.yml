@@ -1,37 +1,37 @@
-name: CublexCore
-main: io.github.cublexlabs.cublexcore.Main
+name: KuksoLib
+main: com.kukso.minecraft.lib.Main
 version: ${version}
 api-version: '1.21'
 load: STARTUP
 authors: [ DevBD1 ]
 description: Spigot development library, built for the latest version. It is a dependency for my Minecraft plugins.
-website: https://labs.cublex.net
+website: https://labs.kukso.net
 depend:
   - ProtocolLib
 softdepend:
-  - CubItems
-  - CubLoots
-  - CubSense
-  - CubConquest
-  - CubDungeons
+  - KuksoItems
+  - KuksoLoots
+  - KuksoSense
+  - KuksoConquest
+  - KuksoDungeons
   - RealisticSeasons
   - PlaceholderAPI
 # You can manage each subcommand in config.yml
 commands:
-  cublex:
-    usage: /cublex <help|ver|reload|getKey|testLogger>
-    permission: cublexcore.admin
-    description: CublexCore main command
+  kukso:
+    usage: /kukso <help|ver|reload|getKey|testLogger>
+    permission: kuksolib.admin
+    description: KuksoLib main command
 # Permissions are dynamically set for each command in config.yml
 permissions:
-  cublexcore.admin:
+  kuksolib.admin:
     description: Allows high-level admin access to any command
     default: op
-  cublexcore.mod:
+  kuksolib.mod:
     description: Allows low-level access to some admin commands
-  cublexcore.user:
+  kuksolib.user:
     description: Allows access to user commands
-  cublexcore.command.root:
+  kuksolib.command.root:
     description: Use it with specific perm(s) of a subcommand
-  cublexcore.cmd.testlogger:
-    description: Allows access to /cublex testlogger command
+  kuksolib.cmd.testlogger:
+    description: Allows access to /kukso testlogger command

@@ -1,17 +1,17 @@
 # lang/en.yml
 test:
-  rainbow: "<gradient:#ff0000:#00ffff>Corlex</gradient> is here!"
+  rainbow: "<gradient:#ff0000:#00ffff>KuksoLib</gradient> is here!"
 
 error:
   no-permission: "{prefix}You don't have permission to do that."
   player-only: "{prefix}This command can only be used by players."
 
-corlex:
+kuksolib:
   welcome: "{prefix}Welcome, {player}! You are in {world}."
   status: "{prefix}You have {coins} coins and your rank is {rank}."
   reload:
-    success: "{prefix}Corlex config and language files reloaded."
-    no-permission: "{prefix}You don't have permission to reload Corlex."
+    success: "{prefix}KuksoLib config and language files reloaded."
+    no-permission: "{prefix}You don't have permission to reload KuksoLib."
 
 landlex:
   claim-success: "{prefix}Land claimed successfully!"

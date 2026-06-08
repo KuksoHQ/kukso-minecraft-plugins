@@ -1,11 +1,11 @@
 name: KuksoWorlds
-main: com.kukso.mc.worlds.Main
+main: com.kukso.minecraft.worlds.Main
 version: ${version}
 api-version: '1.21'
 load: POSTWORLD
 authors: [ DevBD1 ]
 description: Lightweight custom world manager with essential features.
-website: https://labs.cublex.net
+website: https://labs.kukso.net
 depend:
   - KuksoLib
 softdepend:

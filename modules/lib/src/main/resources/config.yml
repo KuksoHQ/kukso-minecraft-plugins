@@ -1,8 +1,8 @@
 # Static variables. These cannot be changed during runtime. You must stop the server to make changes here
-server-name: cublex.net
+server-name: kukso.net
 fallback-language: en # it is used when the player's client locale is not supported
-logging-enabled: false # enable/disable logging into a separate file under /plugins/CublexCore folder (universal)
-restful-enabled: false # enable/disable REST API on your server. Check https://labs.cublex.net/docs/category/common-in-all-plugins
+logging-enabled: false # enable/disable logging into a separate file under /plugins/KuksoLib folder (universal)
+restful-enabled: false # enable/disable REST API on your server. Check https://labs.kukso.net/docs/category/common-in-all-plugins
 debug-mode: false # enable/disable DEBUG mode
 
 # Localization
@@ -11,8 +11,8 @@ supported_langs:
   - 'tr'
 
 # Variables (as placeholders) that are used in the localization strings
-prefix: "#ffc13b[CublexCore] &r"
-test-prefix: "&c[CublexCore] &r"
+prefix: "#ffc13b[KuksoLib] &r"
+test-prefix: "&c[KuksoLib] &r"
 discord: "https://discord.gg/Hqq3CdnenN" # Chat and announcements
 telegram: "" # Announcements and replies
 mobile-app: "" # In-app purchases and spending shop
@@ -37,29 +37,29 @@ gui:
 commands:
   admin_cmds:
     permissions:
-      - cublexcore.admin.*
+      - kuksolib.admin.*
   version:
     aliases: [ver]
     permissions:
-      - cublexcore.admin.version
-      - cublexcore.admin.*
+      - kuksolib.admin.version
+      - kuksolib.admin.*
   reload:
     aliases: [rl, restart]
     permissions:
-      - cublexcore.admin.reload
-      - cublexcore.admin.*
+      - kuksolib.admin.reload
+      - kuksolib.admin.*
   lang:
     aliases: [language, l]
     permissions:
-      - cublexcore.admin.lang
-      - cublexcore.mod.lang
+      - kuksolib.admin.lang
+      - kuksolib.mod.lang
   log:
     aliases: [logs]
     permissions:
-      - cublexcore.admin.log
-      - cublexcore.mod.log
+      - kuksolib.admin.log
+      - kuksolib.mod.log
   gui:
     aliases: [menu, interface]
     permissions:
-      - cublexcore.gui
-      - cublexcore.user.gui
+      - kuksolib.gui
+      - kuksolib.user.gui

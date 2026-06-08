@@ -1,4 +1,4 @@
-name: Publish CublexCore to Maven Central
+name: Publish KuksoLib to Maven Central
 
 on:
   push:

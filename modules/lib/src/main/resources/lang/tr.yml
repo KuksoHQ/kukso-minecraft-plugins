@@ -1,47 +1,47 @@
 # lang/tr.yml
 
 error:
-  no-permission: "{prefix}Bunu yapmak için izniniz yok."
-  player-only: "{prefix}Bu komut sadece oyuncular tarafından kullanılabilir."
+  no-permission: "{prefix}Bunu yapmak iÃ§in izniniz yok."
+  player-only: "{prefix}Bu komut sadece oyuncular tarafÄ±ndan kullanÄ±labilir."
 
-corlex:
-  welcome: "{prefix}{player}, {world} dünyasına hoş geldin!"
-  status: "{prefix}{coins} altının var ve rütben {rank}."
+kuksolib:
+  welcome: "{prefix}{player}, {world} dÃ¼nyasÄ±na hoÅŸ geldin!"
+  status: "{prefix}{coins} altÄ±nÄ±n var ve rÃ¼tben {rank}."
   reload:
-    success: "{prefix}Corlex yapılandırması ve dil dosyaları yeniden yüklendi."
-    no-permission: "{prefix}Corlex'i yeniden yükleme izniniz yok."
+    success: "{prefix}KuksoLib yapÄ±landÄ±rmasÄ± ve dil dosyalarÄ± yeniden yÃ¼klendi."
+    no-permission: "{prefix}KuksoLib'i yeniden yÃ¼kleme izniniz yok."
 
 landlex:
-  claim-success: "{prefix}Bölge başarıyla alındı!"
-  already-claimed: "{prefix}Bu bölge zaten alınmış."
+  claim-success: "{prefix}BÃ¶lge baÅŸarÄ±yla alÄ±ndÄ±!"
+  already-claimed: "{prefix}Bu bÃ¶lge zaten alÄ±nmÄ±ÅŸ."
 
 realisticseasons:
   season:
     now:
-      winter: "&3&lKış &fbaşladı&f!"
-      autumn: "&6&lSonbahar &fbaşladı&f!"
-      spring: "&d&lİlkbahar &fbaşladı&f!"
-      summer: "&e&lYaz &fbaşladı&f!"
+      winter: "&3&lKÄ±ÅŸ &fbaÅŸladÄ±&f!"
+      autumn: "&6&lSonbahar &fbaÅŸladÄ±&f!"
+      spring: "&d&lÄ°lkbahar &fbaÅŸladÄ±&f!"
+      summer: "&e&lYaz &fbaÅŸladÄ±&f!"
     name:
-      winter: "&3&lKış"
+      winter: "&3&lKÄ±ÅŸ"
       autumn: "&6&lSonbahar"
-      spring: "&d&lİlkbahar"
+      spring: "&d&lÄ°lkbahar"
       summer: "&e&lYaz"
-  no-permission: "&cBu işlemi yapma iznin yok!"
-  seasons-disabled-in-this-world: "&cBu dünyada mevsimler devre dışı"
-  world-is-restoring: "&cBu dünya şu anda geri yükleniyor!"
-  current-date: "&aBugünün tarihi: &2$1, $2 $3, yıl $4"
-  current-season: "§aGeçerli mevsim: &2$1"
-  air-temperature: "&aŞu anki hava sıcaklığı: $1"
-  until-next-season: "&aSonraki mevsime ($1) kalan gün: $2 gün"
-  until-next-event: "&aSonraki etkinliğe ($1) kalan gün: $2 gün"
-  current-time: "&aŞu anki saat: &2$1"
+  no-permission: "&cBu iÅŸlemi yapma iznin yok!"
+  seasons-disabled-in-this-world: "&cBu dÃ¼nyada mevsimler devre dÄ±ÅŸÄ±"
+  world-is-restoring: "&cBu dÃ¼nya ÅŸu anda geri yÃ¼kleniyor!"
+  current-date: "&aBugÃ¼nÃ¼n tarihi: &2$1, $2 $3, yÄ±l $4"
+  current-season: "Â§aGeÃ§erli mevsim: &2$1"
+  air-temperature: "&aÅžu anki hava sÄ±caklÄ±ÄŸÄ±: $1"
+  until-next-season: "&aSonraki mevsime ($1) kalan gÃ¼n: $2 gÃ¼n"
+  until-next-event: "&aSonraki etkinliÄŸe ($1) kalan gÃ¼n: $2 gÃ¼n"
+  current-time: "&aÅžu anki saat: &2$1"
   active-events: "&aAktif etkinlikler: &2$1"
-  toggle-colors: "&aMevsim renkleri artık senin için &2$1"
-  temp-status: "&aSıcaklık sistemi artık senin için &2$1"
-  particles-status: "&aMevsim partikülleri artık senin için &2$1"
-  temp-fahrenheit: "&aSıcaklık artık &2Fahrenheit &aolarak gösterilecek"
-  temp-celcius: "&aSıcaklık artık &2Celsius &aolarak gösterilecek"
+  toggle-colors: "&aMevsim renkleri artÄ±k senin iÃ§in &2$1"
+  temp-status: "&aSÄ±caklÄ±k sistemi artÄ±k senin iÃ§in &2$1"
+  particles-status: "&aMevsim partikÃ¼lleri artÄ±k senin iÃ§in &2$1"
+  temp-fahrenheit: "&aSÄ±caklÄ±k artÄ±k &2Fahrenheit &aolarak gÃ¶sterilecek"
+  temp-celcius: "&aSÄ±caklÄ±k artÄ±k &2Celsius &aolarak gÃ¶sterilecek"
   enabled-text: "etkin"
-  disabled-text: "devre dışı"
-  current-biome: "§aGeçerli biyom: §r$1"
+  disabled-text: "devre dÄ±ÅŸÄ±"
+  current-biome: "Â§aGeÃ§erli biyom: Â§r$1"

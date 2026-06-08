@@ -1,12 +1,12 @@
-[![Wiki: 1.0](https://img.shields.io/badge/Wiki-Cublex_Labs-blue.svg)]([https://creativecommons.org/licenses/by/4.0/](https://labs.cublex.net/docs/category/common-in-all-plugins))
+[![Wiki: 1.0](https://img.shields.io/badge/Wiki-Kukso_Labs-blue.svg)]([https://creativecommons.org/licenses/by/4.0/](https://labs.kukso.net/docs/category/common-in-all-plugins))
 
-# CublexCore
-Modular API foundation for Cublex Labs plugins, centralizing core functions to simplify maintenance and reduce overall plugin size.
+# KuksoLib
+Modular API foundation for Kukso Labs plugins, centralizing core functions to simplify maintenance and reduce overall plugin size.
 
 ---
 ### Plugins using this library:
-- CubDialogs as of 2.x version
-- CubWorlds as of 2.x version
+- KuksoDialogs as of 2.x version
+- KuksoWorlds as of 2.x version
 
 ---
 ### Installation:
@@ -15,9 +15,9 @@ Modular API foundation for Cublex Labs plugins, centralizing core functions to s
 
 ---
 ### Core Features:
-- 🌍 **Native Localization:** Supports YAML-based i18n with `{placeholders}`, automatic fallback to the `{default-language}`
-- 🧾 **Centralized Log and Debug System:** Missing keys, fallback events, and in-game log viewing
-- 📌 **Placeholders:** Dynamic placeholders like {player}, {world}, {coins}, etc. and static placeholders from config.yml like {server-name}, {discord}, etc.
+- ðŸŒ **Native Localization:** Supports YAML-based i18n with `{placeholders}`, automatic fallback to the `{default-language}`
+- ðŸ§¾ **Centralized Log and Debug System:** Missing keys, fallback events, and in-game log viewing
+- ðŸ“Œ **Placeholders:** Dynamic placeholders like {player}, {world}, {coins}, etc. and static placeholders from config.yml like {server-name}, {discord}, etc.
 
 ---
 ### Terms and conditions
@@ -29,39 +29,39 @@ Plugin is under the All rights reserved license. You are not permitted to:
 - Claim ownership of the Software or its components.
 
 ---
-### Config.yml Example 🔧
+### Config.yml Example ðŸ”§
 ```yaml
 # Static variables. These cannot be changed during runtime. You must stop the server to make changes here
-server-name: cublex.net
+server-name: kukso.net
 fallback-language: en # it is used when the player's client locale is not supported
-logging-enabled: false # enable/disable logging into a separate file under /plugins/Corlex folder (universal)
-restful-enabled: false # enable/disable REST API on your server. Check https://dev.cublex.net/wiki/corlex/rest
+logging-enabled: false # enable/disable logging into a separate file under /plugins/KuksoLib folder (universal)
+restful-enabled: false # enable/disable REST API on your server. Check https://dev.kukso.net/wiki/kuksolib/rest
 debug-mode: false # enable/disable DEBUG mode
 
 # Variables (as placeholders) that are used in the localization strings
-prefix: "#ffc13b[CublexCore] &r"
-test-prefix: "&c[CublexCore] &r"
+prefix: "#ffc13b[KuksoLib] &r"
+test-prefix: "&c[KuksoLib] &r"
 discord: "https://discord.gg/Hqq3CdnenN" # Chat and announcements
 telegram: "" # Announcements and replies
 mobile-app: "" # In-app purchases and spending shop
 ```
 
 ---
-### 🧪 Example API Usage
+### ðŸ§ª Example API Usage
 
 ```java
-CorlexAPI api = Bukkit.getServicesManager().load(CorlexAPI.class);
-api.send(player, "corlex.welcome", Map.of("world", "Wilderness"));
+KuksoAPI api = Bukkit.getServicesManager().load(KuksoAPI.class);
+api.send(player, "kuksolib.welcome", Map.of("world", "Wilderness"));
 ```
-Because corlex.welcome has {prefix}, {player} and {world} placeholders. First 2 is filled by the program, and the last one given by the call.
+Because kuksolib.welcome has {prefix}, {player} and {world} placeholders. First 2 is filled by the program, and the last one given by the call.
 ```
-corlex:
+kuksolib:
   welcome: "{prefix}Welcome, {player}! You are in {world}."
 ```
 
 ---
 ### Future Plans
-- /cublex log recent command
+- /kukso log recent command
 - Client-side item-lore support for extreme localization
 - GUI API (paged layouts, close/back buttons, border styles)
 - Auto-merging of locale files on update

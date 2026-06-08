@@ -8,8 +8,8 @@ items:
         - "&7A sharp blade."
         - "&c+10 Strength"
       tr:
-        - "&7Keskin bir kılıç."
-        - "&c+10 Güç"
+        - "&7Keskin bir kÄ±lÄ±Ã§."
+        - "&c+10 GÃ¼Ã§"
     nbt:
-      customKey: strength_sword # it makes the item unique and if you have Corlex installed, it will apply client-side lore based on the client's locale
+      customKey: strength_sword
       rarity: "epic" # to be added in next versions

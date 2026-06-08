@@ -32,4 +32,4 @@ exit_button:
   width: 150
   action:
     type: "custom"
-    key: "cubdialogs:server_rules/exit"
+    key: "kuksodialogs:server_rules/exit"
