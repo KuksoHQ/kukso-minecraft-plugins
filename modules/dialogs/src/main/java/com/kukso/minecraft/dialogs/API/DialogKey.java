@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 /**
  * Namespaced identifier for a dialog custom event key.
- * Example: "cublexcore:exp_config/confirm"
+ * Example: "kukso:exp_config/confirm"
  *
- * namespace: "cublexcore"
+ * namespace: "kukso"
  * value:     "exp_config/confirm"
  */
 public final class DialogKey {

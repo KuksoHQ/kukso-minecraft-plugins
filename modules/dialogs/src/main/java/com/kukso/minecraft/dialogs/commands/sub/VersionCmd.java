@@ -78,7 +78,7 @@ public class VersionCmd implements CmdInterface {
                 int cmp = compareVersions(currentNorm, latestNorm);
                 if (cmp < 0) {
                     sender.sendMessage("Update available: " + latestTag + " (you have " + pluginVersion + ")");
-                    sender.sendMessage("Get it at: https://github.com/KuksolexLabs/KuksoDialogs/tags");
+                    sender.sendMessage("Get it at: https://github.com/KuksoHQ/kukso-minecraft-plugins/tags");
                 } else if (cmp == 0) {
                     sender.sendMessage("You are up to date (" + pluginVersion + ").");
                 } else {
@@ -99,7 +99,7 @@ public class VersionCmd implements CmdInterface {
 
         // Use GitHub API to list tags (first one is the latest by default order)
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.github.com/repos/KuksolexLabs/KuksoDialogs/tags"))
+                .uri(URI.create("https://api.github.com/repos/KuksoHQ/kukso-minecraft-plugins/tags"))
                 .timeout(Duration.ofSeconds(8))
                 .header("Accept", "application/vnd.github+json")
                 .build();

@@ -1,6 +1,0 @@
-name: ExpConfigAddon
-version: '1.0.0'
-main: io.github.devbd1.expConfigAddon.Main
-api-version: '1.21'
-authors: [ DevBD1 ]
-website: https://cublex.net

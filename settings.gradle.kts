@@ -23,8 +23,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "kukso-minecraft"
 
-include(":lib", ":dialogs", ":worlds", ":items")
+include(":lib", ":dialogs", ":dialogs-exp-config-addon", ":worlds", ":items")
 project(":lib").projectDir = file("modules/lib")
 project(":dialogs").projectDir = file("modules/dialogs")
+project(":dialogs-exp-config-addon").projectDir = file("modules/dialogs-exp-config-addon")
 project(":worlds").projectDir = file("modules/worlds")
 project(":items").projectDir = file("modules/items")

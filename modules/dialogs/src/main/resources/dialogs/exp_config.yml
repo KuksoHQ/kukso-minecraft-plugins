@@ -60,7 +60,7 @@ exit_buttons:
     description: "&aClick to &lconfirm &ayour changes with #FF5733 colored text"
     action:
       type: "custom"
-      key: "cublexcore:exp_config/confirm"
+      key: "kukso:exp_config/confirm"
     width: 100
 
   cancel:

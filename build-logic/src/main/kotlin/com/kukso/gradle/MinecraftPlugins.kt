@@ -52,6 +52,7 @@ class MinecraftBasePlugin : Plugin<Project> {
         return when (name) {
             "lib" -> "KuksoLib"
             "dialogs" -> "KuksoDialogs"
+            "dialogs-exp-config-addon" -> "KuksoDialogsExpConfigAddon"
             "worlds" -> "KuksoWorlds"
             "items" -> "KuksoItems"
             else -> "Kukso${name.replaceFirstChar { it.uppercase() }}"
@@ -78,7 +79,7 @@ class MinecraftLibraryPlugin : Plugin<Project> {
                     pom {
                         name.set("KuksoLib")
                         description.set("Core library for the Kukso Minecraft plugin ecosystem.")
-                        url.set("https://github.com/KuksoHQ/kukso-minecraft")
+                        url.set("https://github.com/KuksoHQ/kukso-minecraft-plugins")
                     }
                 }
             }

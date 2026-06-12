@@ -6,6 +6,7 @@ Gradle monorepo for Kukso Minecraft plugins.
 
 - `:lib` - `KuksoLib`, the shared Minecraft plugin library.
 - `:dialogs` - `KuksoDialogs`.
+- `:dialogs-exp-config-addon` - ExpConfig addon for KuksoDialogs.
 - `:worlds` - `KuksoWorlds`.
 - `:items` - `KuksoItems`.
 
