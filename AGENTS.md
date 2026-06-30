@@ -10,7 +10,7 @@ This is a Gradle Kotlin DSL monorepo for Kukso Minecraft Paperspigot plugins. Th
 - `modules/worlds` -> `:worlds`, world commands, generators, hooks, and lang files.
 - `modules/items` -> `:items`, item commands, utilities, and config resources.
 
-Java source lives in `src/main/java`; plugin descriptors, config files, language files, and templates live in `src/main/resources`. Shared Gradle conventions are in `build-logic/src/main/kotlin/com/kukso/gradle/MinecraftPlugins.kt`. Product vision belongs in `PRODUCT.md`. Release history belongs in `CHANGELOG.md`. Sprint planning and delivery notes belong under `docs/sprints/`. `docs/implementation-history/` is legacy reference only.
+Java source lives in `src/main/java`; plugin descriptors, config files, language files, and templates live in `src/main/resources`. Shared Gradle conventions are in `build-logic/src/main/kotlin/com/kukso/gradle/MinecraftPlugins.kt`. Product vision belongs in `PRODUCT.md`. Release history belongs in `CHANGELOG.md`. Sprint planning and delivery notes belong under `docs/sprints/`.
 
 ## Product And Release Sources
 
@@ -19,6 +19,8 @@ Java source lives in `src/main/java`; plugin descriptors, config files, language
 - Treat `CHANGELOG.md` as the canonical release record and release-to-sprint index.
 - Update `CHANGELOG.md` for release-relevant or user-visible changes, grouped by module or repository area when helpful.
 - Link released changelog entries back to the sprint docs that produced them. Sprint docs may note intended release targets, but the changelog owns final release history.
+- Use `docs/development-cycle.md` for the complete idea-to-release workflow.
+- Use `docs/releases/` for versioning, release prep, tag, and artifact rules.
 
 ## Agile/Scrum Workflow
 
@@ -31,7 +33,17 @@ Use `docs/sprints/` as the canonical planning and delivery record for future wor
 - Record intended release targets or changelog impact on sprint items when the work is release-relevant.
 - During implementation, record meaningful progress, blockers, scope changes, decisions, and verification results in the sprint work log.
 - At completion, update item status, review notes, validation output, shipped artifacts, and carryover as appropriate.
-- Do not add new entries under `docs/implementation-history/` unless the user explicitly requests legacy implementation-history documentation.
+- Do not create or recreate `docs/implementation-history/`.
+
+## Exit Workflow
+
+Use pull requests as the default exit path for completed work. Every PR should connect back to a sprint or backlog item, list changed modules or repository areas, include validation output, and call out changelog, version, config, and permission impact.
+
+Use Conventional Commit messages with the format `type(scope): summary`. Allowed types are `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, and `release`. Allowed scopes are `lib`, `dialogs`, `dialogs-exp-config-addon`, `worlds`, `items`, `docs`, `build-logic`, `ci`, and `repo`.
+
+Versioning is per module. Each module's `version.txt` is the source of truth for that module's artifact version. Stable versions use `X.Y.Z`; prereleases use `X.Y.Z-alpha.N`, `X.Y.Z-beta.N`, or `X.Y.Z-rc.N`. Change `version.txt` in a release prep PR by default, not in ordinary feature or fix PRs.
+
+Release tags use `kukso-minecraft-<module-slug>-v<version>` and are created from `main` by the manual GitHub release workflow. One module release publishes only that module's jar. Coordinated releases should run the workflow once per module.
 
 ## Build, Test, and Development Commands
 
@@ -54,9 +66,7 @@ Place unit tests in `modules/<module>/src/test/java` and name test classes `*Tes
 
 ## Commit & Pull Request Guidelines
 
-Recent history uses short imperative messages, sometimes with Conventional Commit prefixes. Good examples are `Add KuksoDialogs ExpConfig addon module`, `Make Gradle wrapper executable`, and `feat: Implemented localization method of KuksoLib`.
-
-PRs should include a short summary, changed modules, build/test output, linked issues if any, and notes for config or permission changes. Add screenshots or server logs for visible gameplay, command, or dialog behavior.
+Commits should use the repository Conventional Commit format described in Exit Workflow. PRs should follow `.github/pull_request_template.md`, include build/test output, and mention screenshots or server logs for visible gameplay, command, or dialog behavior.
 
 ## Security & Configuration Tips
 

@@ -1,6 +1,6 @@
 # Kukso Minecraft
 
-Gradle monorepo for Kukso Minecraft plugins.
+Gradle Kotlin DSL monorepo for Kukso Minecraft Paperspigot plugins.
 
 ## Modules
 

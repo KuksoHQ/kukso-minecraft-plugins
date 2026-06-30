@@ -2,6 +2,8 @@
 
 `docs/sprints/` is the canonical planning and delivery record for LLM-assisted and human development sessions in this repository. The process is intentionally lightweight Scrum: plan enough to make work traceable, keep records concise, and update the sprint as the work changes.
 
+For the complete idea-to-release flow, see `../development-cycle.md`.
+
 Sprints are monorepo-wide. Individual sprint items should identify their module or repository area, such as `:lib`, `:dialogs`, `:worlds`, `:items`, `build-logic`, or `docs`.
 
 ## Cadence
@@ -73,6 +75,6 @@ At sprint close or delivery time, summarize:
 
 Keep the retro short. Record what to keep, what to change next time, and follow-up candidates for the next sprint or backlog.
 
-## Legacy Notes
+## Retired Legacy Notes
 
-`docs/implementation-history/` remains available for old records. Do not add new entries there unless the user explicitly requests legacy implementation-history documentation.
+`docs/implementation-history/` has been retired. Do not create or recreate it; keep new planning and delivery records in `docs/sprints/`.
