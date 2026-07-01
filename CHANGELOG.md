@@ -21,6 +21,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `docs`: Added release workflow documentation for per-module SemVer, release prep PRs, tags, and GitHub releases.
 - `docs`: Added a full development cycle guide covering idea capture, sprint execution, PRs, release prep, and GitHub releases.
 - `ci`: Added a manual per-module release workflow that validates module versions and publishes only the selected module artifact.
+- `repo`: Added Claude Code project skills (`/sprint`, `/release-prep`) that encode the sprint and release workflows, a deterministic release-readiness check script, and a root `CLAUDE.md` importing `AGENTS.md`.
 
 ### Changed
 
@@ -29,11 +30,16 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `docs`: Migrated the 2026-06-07 KuksoWorlds localization implementation note into the sprint workflow at `docs/sprints/2026-06-07-sprint-1.md`.
 - `docs`: Standardized the PR and commit exit workflow around required PR checks and Conventional scoped commit messages.
 
+### Fixed
+
+- `ci`: Removed a dead nested KuksoLib publish workflow (`modules/lib/.github/workflows/publish.yml`) that echoed a secret-derived value and contradicted the per-module release process, and hardened `.gitignore` against committable secret files.
+
 ### Sprint Links
 
 - Sprint not assigned yet.
 - `docs/sprints/2026-06-07-sprint-1.md`
 - `docs/sprints/2026-06-30-sprint-1.md`
+- `docs/sprints/2026-07-01-sprint-2.md`
 
 ## Release Template
 

@@ -4,7 +4,10 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 
 ## Ready
 
-- _No ready items yet._
+- [ ] **Module/area:** All plugin modules
+  - **User value:** Regressions in parsing, validation, and command utilities are caught by `./gradlew test` instead of manual Paper server checks.
+  - **Acceptance criteria:** Each module with testable parsing/validation/command-utility logic gets a seeded `modules/<module>/src/test/java` tree with at least one focused `*Test` class covering real behavior (no placeholder asserts), and `./gradlew test` runs them green.
+  - **Validation:** `./gradlew test` and a review that the covered logic matches AGENTS.md testing guidelines.
 
 ## Candidate
 

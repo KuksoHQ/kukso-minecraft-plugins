@@ -5,3 +5,12 @@ out/
 *.iml
 run/
 *.log
+
+# Secrets and local environment
+.env
+.env.*
+*.pem
+*.key
+credentials*
+.DS_Store
+.claude/settings.local.json
