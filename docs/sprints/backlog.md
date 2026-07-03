@@ -8,7 +8,25 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 
 ## Candidate
 
-- _No candidate items yet._
+- [ ] **Module/area:** `:dialogs`, `:items`
+  - **User value:** Non-English players get localized dialog and item text consistent with `:lib` and `:worlds`.
+  - **Acceptance criteria:** Add `lang/` files (at minimum `en`, `tr`) for the `:dialogs` and `:items` modules, matching the existing `lang/` structure and key conventions used in `:lib` and `:worlds`.
+  - **Validation:** Manual Paper server check with a non-English locale, plus a review that lang keys match usages in code.
+
+- [ ] **Module/area:** `ci`
+  - **User value:** Style and formatting regressions are caught automatically instead of relying on manual review.
+  - **Acceptance criteria:** Add lint/format checks to `.github/workflows/build.yml` (e.g. a Java formatter/checkstyle step) that fail the workflow on violations.
+  - **Validation:** Push a deliberately misformatted change to a branch and confirm the workflow fails; confirm it passes on clean code.
+
+- [ ] **Module/area:** `:dialogs`, `:dialogs-exp-config-addon`
+  - **User value:** Simpler, less error-prone build wiring between the dialogs module and its example addon.
+  - **Acceptance criteria:** Evaluate replacing the embedded exp-config addon jar (currently bundled into `:dialogs` as a resource) with a proper Gradle project dependency or an explicit copy task, and document the tradeoffs before implementing.
+  - **Validation:** N/A until scoped; this item is evaluation-only until a decision is made.
+
+- [ ] **Module/area:** `docs`
+  - **User value:** Windows contributors are not silently blocked or given a broken checkout by the `.claude/skills` symlink.
+  - **Acceptance criteria:** Document that Windows contributors need `git config core.symlinks=true` (and Developer Mode or admin rights) for the `.agents/skills` -> `.claude/skills` symlink to check out correctly; add this note to the relevant contributor-facing doc.
+  - **Validation:** Read-through of the added documentation note.
 
 ## Blocked
 
