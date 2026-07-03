@@ -29,7 +29,7 @@ public class GetKeyValueCmd implements CmdInterface {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         if (args.length < 1) {
-            sender.sendMessage("Â§7Usage: /kukso lang [lang] <key> [key=value]...");
+            sender.sendMessage("§7Usage: /kukso lang [lang] <key> [key=value]...");
             return true;
         }
 
@@ -41,14 +41,14 @@ public class GetKeyValueCmd implements CmdInterface {
             // /kukso lang en kukso.status ...
             locale = args[0].toLowerCase();
             if (args.length < 2) {
-                sender.sendMessage("Â§7Usage: /kukso lang <lang> <key> [key=value]...");
+                sender.sendMessage("§7Usage: /kukso lang <lang> <key> [key=value]...");
                 return true;
             }
             key = args[1];
             placeholderStartIndex = 2;
         } else {
             if (!(sender instanceof Player player)) {
-                sender.sendMessage("Â§cConsole must specify a language.");
+                sender.sendMessage("§cConsole must specify a language.");
                 return true;
             }
             locale = LocaleGetter.getPlayerLocale(player);
@@ -57,7 +57,7 @@ public class GetKeyValueCmd implements CmdInterface {
         }
 
         if (!Lang.getTranslations().containsKey(locale)) {
-            sender.sendMessage("Â§cInvalid language: " + locale);
+            sender.sendMessage("§cInvalid language: " + locale);
             return true;
         }
 

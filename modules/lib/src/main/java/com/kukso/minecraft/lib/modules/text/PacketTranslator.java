@@ -70,15 +70,15 @@ public class PacketTranslator {
         for (int i = 0; i < extra.size(); i++) {
             JsonElement el = extra.get(i);
 
-            // 1) EÄŸer direkt string ise
+            // 1) Eğer direkt string ise
             if (el.isJsonPrimitive() && el.getAsJsonPrimitive().isString()) {
                 String str = el.getAsString();
                 if (str.startsWith("translate.")) {
-                    // ... [Ã–nceki gibi iÅŸlenir]
+                    // ... [Önceki gibi işlenir]
                 }
             }
 
-            // 2) EÄŸer obje ve iÃ§inde "text" alanÄ± varsa
+            // 2) Eğer obje ve içinde "text" alanı varsa
             if (el.isJsonObject()) {
                 JsonObject obj = el.getAsJsonObject();
                 if (obj.has("text")) {
@@ -108,11 +108,11 @@ public class PacketTranslator {
                             template = "";
                         }
 
-                        // template: Ã‡evrilmiÅŸ ve parametreleri doldurulmuÅŸ mesaj
+                        // template: Çevrilmiş ve parametreleri doldurulmuş mesaj
                         String colored = ColorManager.applyColorFormatting(template);
                         obj.addProperty("text", colored);
 
-                        // opsiyonel: click_event, hover_event silmek iÃ§in:
+                        // opsiyonel: click_event, hover_event silmek için:
                         // obj.remove("click_event");
                         // obj.remove("hover_event");
                     }

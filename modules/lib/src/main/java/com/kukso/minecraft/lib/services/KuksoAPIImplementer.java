@@ -58,13 +58,13 @@ public class KuksoAPIImplementer implements KuksoAPI {
 
     @Override
     public void reload() {
-        // 1) Reload the pluginâ€™s core config
+        // 1) Reload the plugin’s core config
         plugin.reloadConfig();
         // 2) Re-initialize ConfigManager so it picks up any new defaults
         ConfigManager.getInstance().init(plugin);
-        // 3) Reload all language files into Langâ€™s in-memory map
+        // 3) Reload all language files into Lang’s in-memory map
 //        Lang.reload();
-        // 4) Log that weâ€™ve reloaded everything
+        // 4) Log that we’ve reloaded everything
         logger.log("KuksoLib configuration and language files reloaded.");
     }
 

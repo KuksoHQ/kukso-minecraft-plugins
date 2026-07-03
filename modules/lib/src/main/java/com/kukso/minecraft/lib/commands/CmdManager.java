@@ -27,7 +27,7 @@ public class CmdManager implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("Â§7Use /kukso <subcommand>");
+            sender.sendMessage("§7Use /kukso <subcommand>");
             return true;
         }
         
@@ -39,13 +39,13 @@ public class CmdManager implements CommandExecutor, TabCompleter {
         
         CmdInterface sub = commands.get(subCmdName);
         if (sub == null) {
-            sender.sendMessage("Â§cUnknown subcommand: " + args[0]);
+            sender.sendMessage("§cUnknown subcommand: " + args[0]);
             return true;
         }
         
         // Check permissions using both config and SubCommand interface
         if (!hasAnyPermission(sender, getEffectivePermissions(subCmdName, sub))) {
-            sender.sendMessage("Â§cYou don't have permission to use this command.");
+            sender.sendMessage("§cYou don't have permission to use this command.");
             return true;
         }
         

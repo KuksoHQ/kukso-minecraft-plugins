@@ -10,7 +10,7 @@ public class ModuleRegistrar {
     }
     public static void register(Main plugin, KuksoAPI api, LoggingManager logger) {
 
-        // ** ProtocolLib packetâ€translation hook **
+        // ** ProtocolLib packet-translation hook **
         PacketTranslator.init(plugin, api, logger);
     }
 }

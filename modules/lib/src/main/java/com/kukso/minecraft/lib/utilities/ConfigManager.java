@@ -1,9 +1,9 @@
 /**
  * Singleton helper to manage the configuration.
- * â€¢ Call init(plugin) inside onEnable().
- * â€¢ Copies â€œlang/{fallback}.ymlâ€ from bundled resources if missing.
- * â€¢ Provides getString/getBoolean/getInt/getDouble/getList for safe reads with defaults.
- * â€¢ printStatus() logs current config settings to console.
+ * • Call init(plugin) inside onEnable().
+ * • Copies “lang/{fallback}.yml” from bundled resources if missing.
+ * • Provides getString/getBoolean/getInt/getDouble/getList for safe reads with defaults.
+ * • printStatus() logs current config settings to console.
  */
 package com.kukso.minecraft.lib.utilities;
 

@@ -55,7 +55,7 @@ public class VersionCmd implements CmdInterface {
         String version;
         List<String> authors;
 
-        ChatColorHandler.sendMessage(sender, "Â§eÂ§oChecking &6Â§oKuksoLib Â§eÂ§oplugin version, please wait...");
+        ChatColorHandler.sendMessage(sender, "§e§oChecking &6§oKuksoLib §e§oplugin version, please wait...");
         try {
             // Paper API (>=1.20.5) -> getPluginMeta()
             Method metaMethod = JavaPlugin.class.getMethod("getPluginMeta");
@@ -81,7 +81,7 @@ public class VersionCmd implements CmdInterface {
         //ChatColorHandler.sendMessage(sender, "&6[" + name + "] &cversion: " + version);
         //ChatColorHandler.sendMessage(sender, "&6[" + name + "] &cauthors: " + String.join(", ", authors));
 
-        ChatColorHandler.sendMessage(sender, "Â§eThis server is running &6" + name + " Â§eversion Â§6" + version + " Â§eby Â§6" + authors + "Â§e." + " (Implementing KuksoAPI version &6" + version + "&e)");
+        ChatColorHandler.sendMessage(sender, "§eThis server is running &6" + name + " §eversion §6" + version + " §eby §6" + authors + "§e." + " (Implementing KuksoAPI version &6" + version + "&e)");
 
         // Version check
         checker.check(sender, "KuksoLabs", name, version);

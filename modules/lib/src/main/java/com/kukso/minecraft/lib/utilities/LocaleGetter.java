@@ -13,7 +13,7 @@ public class LocaleGetter {
 
     public static String getPlayerLocale(Player player) {
         try {
-            // Ã–nce Paper API'sini dene (locale())
+            // Önce Paper API'sini dene (locale())
             Method localeMethod = Player.class.getMethod("locale");
             Object result = localeMethod.invoke(player);
             if (result instanceof Locale) {
@@ -25,19 +25,19 @@ public class LocaleGetter {
                 Method getLocaleMethod = Player.class.getMethod("getLocale");
                 Object result = getLocaleMethod.invoke(player);
                 if (result instanceof String) {
-                    // Ã–rn: "en_us" gibi -> sadece dili al
+                    // Örn: "en_us" gibi -> sadece dili al
                     String[] parts = ((String) result).split("_");
                     return parts[0].toLowerCase();
                 }
             } catch (Exception e) {
-                // Hata olduysa fallback'e dÃ¼ÅŸ
+                // Hata olduysa fallback'e düş
                 return getDefaultLocale();
             }
         } catch (Exception e) {
             return getDefaultLocale();
         }
 
-        // HiÃ§bir yÃ¶ntem Ã§alÄ±ÅŸmazsa fallback
+        // Hiçbir yöntem çalışmazsa fallback
         return getDefaultLocale();
     }
 

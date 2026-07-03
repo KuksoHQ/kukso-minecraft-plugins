@@ -15,7 +15,7 @@ public class SetSpawnCmd implements CmdInterface {
     private static final String CMD_NAME = "setspawn";
     private final Main plugin;
 
-    // basit bir confirmation sistemi iÃ§in cache
+    // basit bir confirmation sistemi için cache
     private Location pendingSpawn = null;
 
     public SetSpawnCmd(Main plugin) {
@@ -71,7 +71,7 @@ public class SetSpawnCmd implements CmdInterface {
             return true;
         }
 
-        // yeni spawn adayÄ±nÄ± al
+        // yeni spawn adayını al
         Location loc = player.getLocation();
         World world = player.getWorld();
 
@@ -94,10 +94,10 @@ public class SetSpawnCmd implements CmdInterface {
     }
 
     private void applySpawn(World world, Location loc) {
-        // Bukkit tarafÄ±nda ayarla
+        // Bukkit tarafında ayarla
         world.setSpawnLocation(loc);
 
-        // config tarafÄ±nda gÃ¼ncelle
+        // config tarafında güncelle
         List<Map<?, ?>> worlds = plugin.getConfig().getMapList("worlds");
         for (Map<?, ?> raw : worlds) {
             Object nameObj = raw.get("name");
@@ -117,7 +117,7 @@ public class SetSpawnCmd implements CmdInterface {
         plugin.getConfig().set("worlds", worlds);
         plugin.saveConfig();
 
-        // ðŸ”‘ Burada WorldLoader cache'ini gÃ¼ncelle
+        // 🔑 Burada WorldLoader cache'ini güncelle
         plugin.getWorldLoader().setSpawn(world.getName(), loc);
     }
 

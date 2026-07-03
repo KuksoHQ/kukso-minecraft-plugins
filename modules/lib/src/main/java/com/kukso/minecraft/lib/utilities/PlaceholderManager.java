@@ -20,12 +20,12 @@ public class PlaceholderManager {
 
     /**
      * Replaces placeholders in the given input string using the provided maps.
-     * All log calls honor the LoggingManagerâ€™s debug-mode setting.
+     * All log calls honor the LoggingManager’s debug-mode setting.
      *
      * @param player              the player context (unused currently)
      * @param input               the template string containing placeholders like {key} or <key>
-     * @param staticPlaceholders  keyâ†’value map for fixed replacements
-     * @param dynamicPlaceholders keyâ†’value map for runtime replacements
+     * @param staticPlaceholders  key→value map for fixed replacements
+     * @param dynamicPlaceholders key→value map for runtime replacements
      * @return the fully resolved message (or empty string if input was null/empty)
      */
     public String applyPlaceholders(Player player,
@@ -59,7 +59,7 @@ public class PlaceholderManager {
     }
 
     /**
-     * Overload without Player: you donâ€™t have to pass a Player.
+     * Overload without Player: you don’t have to pass a Player.
      */
     public String applyPlaceholders(String input,
                                     Map<String, String> staticPlaceholders,

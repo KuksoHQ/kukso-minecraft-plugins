@@ -42,7 +42,7 @@ public class ReloadCmd implements CmdInterface {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        logger.info("Â§6[KuksoLib] Â§f'/kukso reload' command used by Â§e" + sender.getName());
+        logger.info("§6[KuksoLib] §f'/kukso reload' command used by §e" + sender.getName());
 
         plugin.reloadConfig();
         ConfigManager.getInstance().init(plugin);
@@ -50,10 +50,10 @@ public class ReloadCmd implements CmdInterface {
 
         ConfigManager.getInstance().printStatus(plugin);
 
-        sender.sendMessage("Â§6KuksoLib Â§freloaded.");
+        sender.sendMessage("§6KuksoLib §freloaded.");
         // Lang.send(sender, "command.reload.success");
-        // Bukkit.getLogger().info("Â§a[KuksoLib] Reloaded by " + sender.getName());
-        logger.info("Â§6[KuksoLib] Â§fReloaded by Â§e" + sender.getName());
+        // Bukkit.getLogger().info("§a[KuksoLib] Reloaded by " + sender.getName());
+        logger.info("§6[KuksoLib] §fReloaded by §e" + sender.getName());
         return true;
     }
 

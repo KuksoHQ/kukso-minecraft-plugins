@@ -37,9 +37,9 @@ public class HelpCmd implements CmdInterface {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        logger.info("Â§6[KuksoLib] Â§f'/kukso help' command used by Â§e" + sender.getName());
+        logger.info("§6[KuksoLib] §f'/kukso help' command used by §e" + sender.getName());
 
-        sender.sendMessage("Â§8Â§m------Â§r Â§aKuksoLib Help Â§8Â§m------");
+        sender.sendMessage("§8§m------§r §aKuksoLib Help §8§m------");
         if (manager == null) return true;
     
     Collection<CmdInterface> commands = manager.getCommands();
@@ -50,7 +50,7 @@ public class HelpCmd implements CmdInterface {
         
         if (!hasPermission) continue;
         
-        sender.sendMessage("Â§e" + cmd.getUsage() + " Â§7- " + cmd.getDescription());
+        sender.sendMessage("§e" + cmd.getUsage() + " §7- " + cmd.getDescription());
     }
     return true;
 }

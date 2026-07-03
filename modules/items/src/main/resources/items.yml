@@ -8,8 +8,8 @@ items:
         - "&7A sharp blade."
         - "&c+10 Strength"
       tr:
-        - "&7Keskin bir kÄ±lÄ±Ã§."
-        - "&c+10 GÃ¼Ã§"
+        - "&7Keskin bir kılıç."
+        - "&c+10 Güç"
     nbt:
       customKey: strength_sword
       rarity: "epic" # to be added in next versions
