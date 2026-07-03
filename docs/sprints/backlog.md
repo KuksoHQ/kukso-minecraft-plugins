@@ -4,10 +4,7 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 
 ## Ready
 
-- [ ] **Module/area:** All plugin modules
-  - **User value:** Regressions in parsing, validation, and command utilities are caught by `./gradlew test` instead of manual Paper server checks.
-  - **Acceptance criteria:** Each module with testable parsing/validation/command-utility logic gets a seeded `modules/<module>/src/test/java` tree with at least one focused `*Test` class covering real behavior (no placeholder asserts), and `./gradlew test` runs them green.
-  - **Validation:** `./gradlew test` and a review that the covered logic matches AGENTS.md testing guidelines.
+- _No ready items._
 
 ## Candidate
 
@@ -18,6 +15,11 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 - _No blocked items yet._
 
 ## Done
+
+- [x] **Module/area:** All plugin modules
+  - **User value:** Regressions in parsing, validation, and command utilities are caught by `./gradlew test` instead of manual Paper server checks.
+  - **Acceptance criteria:** Each module with testable parsing/validation/command-utility logic gets a seeded `modules/<module>/src/test/java` tree with at least one focused `*Test` class covering real behavior (no placeholder asserts), and `./gradlew test` runs them green.
+  - **Validation:** Delivered in `2026-07-03-sprint-3.md`; `./gradlew test` green with 16 tests across five modules.
 
 - [x] **Module/area:** Repository exit workflow
   - **User value:** Completed work exits the repo through a predictable PR, versioning, changelog, tag, artifact, and release process.

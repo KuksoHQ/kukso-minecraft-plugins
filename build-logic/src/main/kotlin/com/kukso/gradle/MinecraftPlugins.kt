@@ -10,6 +10,7 @@ import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.external.javadoc.StandardJavadocDocletOptions
 import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
@@ -25,6 +26,17 @@ class MinecraftBasePlugin : Plugin<Project> {
         extensions.configure<JavaPluginExtension> {
         }
 
+        configurations.named("testCompileOnly") {
+            extendsFrom(configurations.getByName("compileOnly"))
+        }
+
+        configurations.named("testRuntimeOnly") {
+            extendsFrom(configurations.getByName("compileOnly"))
+        }
+
+        dependencies.add("testImplementation", "org.junit.jupiter:junit-jupiter:5.10.3")
+        dependencies.add("testRuntimeOnly", "org.junit.platform:junit-platform-launcher:1.10.3")
+
         tasks.withType<Jar>().configureEach {
             archiveBaseName.set("${kuksoProductName()}-Paper")
             archiveVersion.set(version.toString())
@@ -33,6 +45,10 @@ class MinecraftBasePlugin : Plugin<Project> {
         tasks.withType<JavaCompile>().configureEach {
             options.encoding = "UTF-8"
             options.release.set(21)
+        }
+
+        tasks.withType<Test>().configureEach {
+            useJUnitPlatform()
         }
 
         tasks.withType<Javadoc>().configureEach {
