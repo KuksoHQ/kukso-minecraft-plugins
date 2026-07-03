@@ -29,6 +29,8 @@ The plugins should feel:
 ## Module Roles
 
 - `:lib` is the shared foundation for localization, placeholders, logging, hooks, commands, and cross-plugin services.
+  - **Direction:** every Kukso module will adopt `:lib`. The near-term focus is making `:lib` stable and clear about its core use cases — centralized logging, YAML localization, color/text formatting, and placeholders — before broadening adoption.
+  - **Current adoption:** `:worlds` requires it, `:items` soft-depends on it, `:dialogs` does not use it yet.
 - `:dialogs` provides configurable player-facing dialog flows, screens, validators, and commands.
 - `:dialogs-exp-config-addon` proves that dialog functionality can be extended through a focused service-loaded addon.
 - `:worlds` provides lightweight world management with clear commands and config-driven world behavior.
@@ -45,6 +47,26 @@ The plugins should feel:
 - Reuse `:lib` for shared patterns before duplicating behavior in feature plugins.
 - Keep public APIs and service-loaded extension points small, documented, and stable.
 - Validate configs early and report errors in language a server admin can act on.
+
+## Feature Status Convention
+
+Every feature is in exactly one state, and documentation must not blur them:
+
+- **Shipped:** implemented and verified; may appear in READMEs as available behavior.
+- **Planned:** wanted but not implemented; must have a backlog item in `docs/sprints/backlog.md`, and READMEs may only mention it under an explicit "planned" heading. Config flags reserved for planned features (such as `restful-enabled`) must be documented as reserved.
+- **Not planned:** out of scope; remove stale references instead of keeping them.
+
+Currently planned: `:lib` REST API, `:lib` GUI API, `:lib` auto-updater, and the future plugins KuksoLoots, KuksoSense, KuksoConquest, and KuksoDungeons (unstarted; their `:lib` softdepend entries return when each plugin exists).
+
+## Documentation Audience
+
+- Module `README.md` files are public-facing, written for server owners and plugin users. They must reflect shipped behavior only (plus a clearly marked planned section).
+- Design notes, scratch ideas, and implementation details belong in `docs/sprints/backlog.md` or sprint docs, never in module READMEs.
+- `PRODUCT.md` (this file) is the source of intent: when code and docs disagree, record the ruling here so future sessions do not have to rediscover it.
+
+## License
+
+The repository is proprietary, **All Rights Reserved** (see the root `LICENSE`). Module READMEs and published artifact metadata must state this license and no other.
 
 ## Scope Boundaries
 

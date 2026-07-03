@@ -22,12 +22,16 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `docs`: Added a full development cycle guide covering idea capture, sprint execution, PRs, release prep, and GitHub releases.
 - `ci`: Added a manual per-module release workflow that validates module versions and publishes only the selected module artifact.
 - `repo`: Added Claude Code project skills (`/sprint`, `/release-prep`) that encode the sprint and release workflows, a deterministic release-readiness check script, and a root `CLAUDE.md` importing `AGENTS.md`.
-- `repo`: Added a root Apache 2.0 `LICENSE` (moved from `modules/lib`).
+- `repo`: Added a root `LICENSE` (moved from `modules/lib`; later switched to All Rights Reserved, see Changed).
 - `repo`: `LICENSE` is now bundled into all module jars as `META-INF/LICENSE`.
 - `repo`: Added a root `.gitattributes` for consistent line-ending and text/binary handling.
 
 ### Changed
 
+- `repo`: Switched the repository license from Apache 2.0 to All Rights Reserved; the root `LICENSE`, the `:lib` Maven POM, and module README license statements now match.
+- `lib`: Rewrote the module README to match implemented behavior: documented the ProtocolLib requirement, corrected the consumer list (`:worlds` requires, `:items` soft-depends, `:dialogs` not yet), synced the config example, and moved unimplemented features (REST API, GUI API, auto-updater) to a planned section backed by backlog items.
+- `lib`: Removed `plugin.yml` softdepends on unreleased plugins (KuksoLoots, KuksoSense, KuksoConquest, KuksoDungeons); they return when each plugin exists.
+- `docs`: `PRODUCT.md` now records the `:lib` adoption direction, a Shipped/Planned/Not-planned feature-status convention, documentation audience rules, and the repository license.
 - `docs`: Established `CHANGELOG.md` as the canonical release-to-sprint index.
 - `docs`: Added runtime-reloadable configuration as a cross-plugin product principle, with explicit restart-required exceptions when needed.
 - `docs`: Migrated the 2026-06-07 KuksoWorlds localization implementation note into the sprint workflow at `docs/sprints/2026-06-07-sprint-1.md`.
@@ -42,6 +46,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `items`: Fixed `plugin.yml` load order (`load: POSTWORLD`) and added a `description`.
 - All modules: standardized the `plugin.yml` `website` to `https://kukso.com`.
 - `items`: Fixed the README license statement (MIT to Apache 2.0) to match the repository's actual `LICENSE`.
+- All modules: Repaired double-encoded UTF-8 (mojibake) introduced during the monorepo migration across Java string literals, comments, language files (`lang/tr.yml`), `items.yml`, and module READMEs; player-facing messages and Turkish localization render correctly again.
 
 ### Sprint Links
 
@@ -49,6 +54,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `docs/sprints/2026-06-07-sprint-1.md`
 - `docs/sprints/2026-06-30-sprint-1.md`
 - `docs/sprints/2026-07-01-sprint-2.md`
+- `docs/sprints/2026-07-03-sprint-3.md`
 
 ## Release Template
 

@@ -23,6 +23,36 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
   - **Acceptance criteria:** Evaluate replacing the embedded exp-config addon jar (currently bundled into `:dialogs` as a resource) with a proper Gradle project dependency or an explicit copy task, and document the tradeoffs before implementing.
   - **Validation:** N/A until scoped; this item is evaluation-only until a decision is made.
 
+- [ ] **Module/area:** `:lib`
+  - **User value:** Server owners can query server state over HTTP; the existing `restful-enabled` config flag gains a real implementation instead of being dead config.
+  - **Acceptance criteria:** Implement the REST API behind `restful-enabled` (default off): define the endpoint surface, port/bind config, and auth story before implementation; document it in the lib README once shipped.
+  - **Validation:** Unit tests for request handling plus a manual Paper server check with `restful-enabled: true` and `false`.
+
+- [ ] **Module/area:** `:lib`
+  - **User value:** Plugin developers get a shared GUI API (paged layouts, borders, close/back buttons) so feature plugins stop hand-rolling inventories.
+  - **Acceptance criteria:** Implement the GUI module the config.yml `gui` section and `KuksoAPI.openTestGui` stub anticipate. Preserved design notes: 6-line GUIs use a border in slots [0-9, 17, 18, 26, 27, 35, 36, 44-48, 50-53]; 6-line multi-page uses slots 48/49/50 for Previous/Close/Next; 6-line single-page uses slot 49 for Close; 3-line GUIs may toggle border and use slots 21/22/23 for buttons; 1-line GUIs have no border and 9 custom slots; 2-, 4-, and 5-line layouts are invalid and should error.
+  - **Validation:** Unit tests for layout/slot math; manual Paper server check of border, paging, and close behavior.
+
+- [ ] **Module/area:** `:lib`
+  - **User value:** Server owners get the auto-updater the README used to promise: opt-in automatic download of new KuksoLib releases instead of only the manual `/kukso ver` check.
+  - **Acceptance criteria:** Add an opt-in auto-update config flag (default off) that reuses the GitHub release lookup in `VersionChecker`, downloads the new jar safely, and messages admins about applied/pending updates.
+  - **Validation:** Unit tests for version comparison and download-path handling; manual Paper server check of the update flow.
+
+- [ ] **Module/area:** `:lib`
+  - **User value:** `/kukso ver` no longer risks stalling the main server thread on a slow GitHub API response.
+  - **Acceptance criteria:** Make `VersionChecker`'s HTTP fetch asynchronous (e.g. Bukkit async scheduler or `CompletableFuture`), delivering the result back on the main thread for messaging.
+  - **Validation:** Unit test for the comparison logic; manual `/kukso ver` check confirming no server stall with simulated latency.
+
+- [ ] **Module/area:** New plugins (KuksoLoots, KuksoSense, KuksoConquest, KuksoDungeons)
+  - **User value:** Planned feature plugins that will build on KuksoLib once it is stable.
+  - **Acceptance criteria:** Not yet scoped; these are placeholders so the plan is not lost. When each plugin is started, add it as a module, and re-add its softdepend entry to `modules/lib/src/main/resources/plugin.yml` (removed 2026-07-04 because the plugins do not exist yet).
+  - **Validation:** N/A until scoped.
+
+- [ ] **Module/area:** `:lib`
+  - **User value:** Regressions in the localization core (the lib's main value) are caught by `./gradlew test`.
+  - **Acceptance criteria:** Add focused unit tests for `Lang`, `LocaleLoader`, and `PlaceholderManager` (key lookup, fallback-language behavior, placeholder substitution); only `ColorManagerTest` covers `:lib` today.
+  - **Validation:** `./gradlew :lib:test` green with the new tests executed.
+
 - [ ] **Module/area:** `docs`
   - **User value:** Windows contributors are not silently blocked or given a broken checkout by the `.claude/skills` symlink.
   - **Acceptance criteria:** Document that Windows contributors need `git config core.symlinks=true` (and Developer Mode or admin rights) for the `.agents/skills` -> `.claude/skills` symlink to check out correctly; add this note to the relevant contributor-facing doc.
