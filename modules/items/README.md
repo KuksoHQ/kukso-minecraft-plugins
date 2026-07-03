@@ -48,7 +48,7 @@ Use the kuksoItems NBT key to identify and extend custom items across your plugi
 ---
 
 ## ðŸ“„ License
-MIT â€” do what you want, give credit.
+Licensed under the Apache License 2.0. See the repository-root [LICENSE](../../LICENSE) file.
 
 ---
 

@@ -4,7 +4,7 @@
 
 ## Project Skills
 
-Repeatable workflows are encoded as project skills in `.claude/skills/`:
+Repeatable workflows are encoded as project skills in `.agents/skills/` (shared with other agents like Codex), with `.claude/skills` as a symlink for Claude Code discovery:
 
 - `/sprint` - plan and execute sprint work under `docs/sprints/`.
 - `/release-prep` - prepare and publish a per-module release.

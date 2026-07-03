@@ -2,8 +2,10 @@ name: KuksoItems
 version: ${version}
 main: com.kukso.minecraft.items.Main
 api-version: '1.21'
+load: POSTWORLD
 authors: [ DevBD1 ]
-website: https://kukso.net
+description: Custom item framework driven by items.yml.
+website: https://kukso.com
 softdepend: [KuksoLib]
 commands:
   giveitem:

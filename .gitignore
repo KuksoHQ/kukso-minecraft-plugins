@@ -14,3 +14,7 @@ run/
 credentials*
 .DS_Store
 .claude/settings.local.json
+
+# Local run/server state and per-module credential overrides
+runs/
+modules/*/gradle.properties
