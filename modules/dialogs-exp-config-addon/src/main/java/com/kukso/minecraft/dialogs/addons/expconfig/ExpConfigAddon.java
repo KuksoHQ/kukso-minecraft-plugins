@@ -69,13 +69,14 @@ public class ExpConfigAddon implements KuksoDialogsAddon {
             Float experienceValue = context.payload().getFloat("experience");
             String playerName = context.payload().getText("player_name");
 
-            if (levelValue == null || experienceValue == null) {
+            ExpConfigValues values = ExpConfigValues.from(levelValue, experienceValue);
+            if (values == null) {
                 context.reply("Missing level or experience values");
                 return;
             }
 
-            int levels = Math.max(0, levelValue.intValue());
-            float expPercent = Math.max(0f, Math.min(100f, experienceValue));
+            int levels = values.levels();
+            float expPercent = values.experiencePercent();
 
             UUID senderId = context.playerId();
             Player sender = Bukkit.getPlayer(senderId);

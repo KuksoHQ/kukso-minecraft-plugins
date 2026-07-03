@@ -37,7 +37,7 @@ public final class ConfigManager {
     /**
      * Validates that the config key is non-null and matches allowed characters.
      */
-    private static void validateKey(String key) {
+    static void validateKey(String key) {
         if (key == null || !key.matches("[\\w.-]+")) {
             throw new IllegalArgumentException("Invalid config key: " + key);
         }

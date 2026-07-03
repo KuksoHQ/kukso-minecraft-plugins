@@ -81,11 +81,11 @@ public class ItemManager {
         return REGISTERED_ITEMS.get(key);
     }
 
-    private static String color(String text) {
+    static String color(String text) {
         return text == null ? null : text.replace('&', '\u00A7');
     }
 
-    private static List<String> color(List<String> lines) {
+    static List<String> color(List<String> lines) {
         List<String> colored = new ArrayList<>();
         for (String line : lines) {
             colored.add(color(line));
