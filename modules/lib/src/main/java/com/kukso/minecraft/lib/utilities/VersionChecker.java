@@ -13,14 +13,14 @@ public class VersionChecker {
     public void check(CommandSender sender, String owner, String name, String version) {
         String latestTag = fetchLatestReleaseTag(owner, name);
         if (latestTag == null) {
-            ChatColorHandler.sendMessage(sender, "Â§eCouldn't get the version info.");
+            ChatColorHandler.sendMessage(sender, "§eCouldn't get the version info.");
         } else {
             // latestTag sample: "v1.2.3" or "1.2.3"
             // compare with version; basic semver comparison
             if (isOutdated(version, latestTag)) {
-                ChatColorHandler.sendMessage(sender, "Â§eThere is a new version: Â§6" + latestTag + "Â§ePlease update!");
+                ChatColorHandler.sendMessage(sender, "§eThere is a new version: §6" + latestTag + "§ePlease update!");
             } else {
-                ChatColorHandler.sendMessage(sender, "Â§2You are running the latest version for Â§6" + name + "Â§2.");
+                ChatColorHandler.sendMessage(sender, "§2You are running the latest version for §6" + name + "§2.");
             }
         }
     }
@@ -51,7 +51,7 @@ public class VersionChecker {
             conn.disconnect();
 
             String json = response.toString();
-            // "tag_name":"v1.2.3" kÄ±smÄ±nÄ± ayÄ±kla
+            // "tag_name":"v1.2.3" kısmını ayıkla
             String target = "\"tag_name\":\"";
             int idx = json.indexOf(target);
             if (idx == -1) return null;
@@ -67,7 +67,7 @@ public class VersionChecker {
 
     /**
      * Simple version comparison: It returns true if version < latestTag.
-     * version and latestTag must be in â€œ1.2.3â€ or â€œv1.2.3â€ format.
+     * version and latestTag must be in “1.2.3” or “v1.2.3” format.
      */
     public boolean isOutdated(String localVersion, String latestTag) {
         String v1 = localVersion.startsWith("v") ? localVersion.substring(1) : localVersion;

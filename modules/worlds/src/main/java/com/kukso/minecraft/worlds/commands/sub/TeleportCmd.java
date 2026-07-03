@@ -65,12 +65,12 @@ public class TeleportCmd implements CmdInterface {
             return true;
         }
 
-        // âœ… WorldLoaderâ€™dan config tabanlÄ± spawn Ã§ek
+        // ✅ WorldLoader’dan config tabanlı spawn çek
         WorldLoader loader = plugin.getWorldLoader();
         Location customSpawn = loader.getSpawn(worldName);
 
         if (customSpawn == null) {
-            // Configâ€™te spawn yoksa Bukkit default spawnâ€™a dÃ¼ÅŸ
+            // Config’te spawn yoksa Bukkit default spawn’a düş
             customSpawn = world.getSpawnLocation();
         }
 

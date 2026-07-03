@@ -62,7 +62,7 @@ public class RecycleCmd implements CmdInterface {
             
             if (!recycleBin.exists()) {
                 recycleBin.mkdirs();
-                sender.sendMessage("Â§eRecycle bin is empty.");
+                sender.sendMessage("§eRecycle bin is empty.");
                 return true;
             }
             
@@ -79,10 +79,10 @@ public class RecycleCmd implements CmdInterface {
                 }
             }
             
-            sender.sendMessage("Â§cUsage: " + getUsage());
+            sender.sendMessage("§cUsage: " + getUsage());
             return false;
         } catch (Exception e) {
-            sender.sendMessage("Â§cAn error occurred: " + e.getMessage());
+            sender.sendMessage("§cAn error occurred: " + e.getMessage());
             plugin.getLogger().severe("Error in recyclebin command: " + e.getMessage());
             e.printStackTrace();
             return false;
@@ -93,14 +93,14 @@ public class RecycleCmd implements CmdInterface {
         File[] files = recycleBin.listFiles();
         
         if (files == null || files.length == 0) {
-            sender.sendMessage("Â§eRecycle bin is empty.");
+            sender.sendMessage("§eRecycle bin is empty.");
             return;
         }
         
         // Sort by modification time (newest first)
         Arrays.sort(files, Comparator.comparing(File::lastModified).reversed());
         
-        sender.sendMessage("Â§6Â§lRecycle Bin Contents Â§7(" + files.length + " items):");
+        sender.sendMessage("§6§lRecycle Bin Contents §7(" + files.length + " items):");
         
         // Group files by world name to show how many versions exist
         Map<String, List<File>> worldGroups = new HashMap<>();
@@ -140,7 +140,7 @@ public class RecycleCmd implements CmdInterface {
             totalSize += worldTotalSize;
             
             // Display world name with count and total size
-            sender.sendMessage("Â§eÂ§l" + worldName + " Â§7(" + versions.size() + 
+            sender.sendMessage("§e§l" + worldName + " §7(" + versions.size() + 
                     (versions.size() == 1 ? " version, " : " versions, ") + 
                     formatSize(worldTotalSize) + ")");
             
@@ -163,27 +163,27 @@ public class RecycleCmd implements CmdInterface {
                 
                 // Show version details
                 if (versions.size() == 1) {
-                    sender.sendMessage("  Â§7- Â§fDeleted on: Â§7" + 
+                    sender.sendMessage("  §7- §fDeleted on: §7" + 
                             (timestamp.isEmpty() ? modifiedDate : timestamp) + 
-                            " Â§8(" + formatSize(size) + ")");
+                            " §8(" + formatSize(size) + ")");
                 } else {
-                    sender.sendMessage("  Â§7" + (i + 1) + ". Â§fDeleted on: Â§7" + 
+                    sender.sendMessage("  §7" + (i + 1) + ". §fDeleted on: §7" + 
                             (timestamp.isEmpty() ? modifiedDate : timestamp) + 
-                            " Â§8(" + formatSize(size) + ")");
+                            " §8(" + formatSize(size) + ")");
                 }
             }
         }
         
-        sender.sendMessage("Â§7Total size: Â§f" + formatSize(totalSize));
-        sender.sendMessage("Â§8Â§o(Use /kuksoworlds recyclebin empty to clear all)");
-        sender.sendMessage("Â§8Â§o(Use /kuksoworlds recyclebin restore <name> to restore a world)");
+        sender.sendMessage("§7Total size: §f" + formatSize(totalSize));
+        sender.sendMessage("§8§o(Use /kuksoworlds recyclebin empty to clear all)");
+        sender.sendMessage("§8§o(Use /kuksoworlds recyclebin restore <name> to restore a world)");
     }
     
     private void emptyRecycleBin(CommandSender sender, File recycleBin) {
         File[] files = recycleBin.listFiles();
         
         if (files == null || files.length == 0) {
-            sender.sendMessage("Â§eRecycle bin is already empty.");
+            sender.sendMessage("§eRecycle bin is already empty.");
             return;
         }
         
@@ -198,30 +198,30 @@ public class RecycleCmd implements CmdInterface {
                     count++;
                 }
             } catch (IOException e) {
-                sender.sendMessage("Â§cFailed to delete " + file.getName() + ": " + e.getMessage());
+                sender.sendMessage("§cFailed to delete " + file.getName() + ": " + e.getMessage());
             }
         }
         
-        sender.sendMessage("Â§aRecycle bin emptied. Deleted " + count + " items.");
+        sender.sendMessage("§aRecycle bin emptied. Deleted " + count + " items.");
     }
     
     private void restoreWorld(CommandSender sender, File recycleBin, String worldName) {
         // First, check if a world with this name already exists
         if (Bukkit.getWorld(worldName) != null) {
-            sender.sendMessage("Â§cA world with name '" + worldName + "' is already loaded. Cannot restore.");
+            sender.sendMessage("§cA world with name '" + worldName + "' is already loaded. Cannot restore.");
             return;
         }
         
         File worldDir = new File(Bukkit.getWorldContainer(), worldName);
         if (worldDir.exists()) {
-            sender.sendMessage("Â§cA world folder named '" + worldName + "' already exists. Cannot restore.");
+            sender.sendMessage("§cA world folder named '" + worldName + "' already exists. Cannot restore.");
             return;
         }
         
         // Find the world in the recycle bin
         File[] files = recycleBin.listFiles();
         if (files == null || files.length == 0) {
-            sender.sendMessage("Â§cRecycle bin is empty.");
+            sender.sendMessage("§cRecycle bin is empty.");
             return;
         }
         
@@ -237,7 +237,7 @@ public class RecycleCmd implements CmdInterface {
         }
         
         if (worldVersions.isEmpty()) {
-            sender.sendMessage("Â§cNo world named '" + worldName + "' found in the recycle bin.");
+            sender.sendMessage("§cNo world named '" + worldName + "' found in the recycle bin.");
             return;
         }
         
@@ -247,13 +247,13 @@ public class RecycleCmd implements CmdInterface {
             try {
                 // Move the world back to the server directory
                 Files.move(worldToRestore.toPath(), worldDir.toPath());
-                sender.sendMessage("Â§aWorld '" + worldName + "' has been restored from the recycle bin.");
-                sender.sendMessage("Â§7Use Â§f/kuksoworlds load " + worldName + "Â§7 to load it.");
+                sender.sendMessage("§aWorld '" + worldName + "' has been restored from the recycle bin.");
+                sender.sendMessage("§7Use §f/kuksoworlds load " + worldName + "§7 to load it.");
                 
                 // Add world to config if it doesn't exist
                 addRestoredWorldToConfig(sender, worldName);
             } catch (IOException e) {
-                sender.sendMessage("Â§cFailed to restore world: " + e.getMessage());
+                sender.sendMessage("§cFailed to restore world: " + e.getMessage());
                 plugin.getLogger().severe("Error restoring world " + worldName + ": " + e.getMessage());
             }
             return;
@@ -266,15 +266,15 @@ public class RecycleCmd implements CmdInterface {
         try {
             // Move the world back to the server directory
             Files.move(newestVersion.toPath(), worldDir.toPath());
-            sender.sendMessage("Â§aWorld '" + worldName + "' has been restored from the recycle bin.");
-            sender.sendMessage("Â§7(Used the most recent version from " + 
+            sender.sendMessage("§aWorld '" + worldName + "' has been restored from the recycle bin.");
+            sender.sendMessage("§7(Used the most recent version from " + 
                     new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date(newestVersion.lastModified())) + ")");
-            sender.sendMessage("Â§7Use Â§f/kuksoworlds load " + worldName + "Â§7 to load it.");
+            sender.sendMessage("§7Use §f/kuksoworlds load " + worldName + "§7 to load it.");
             
             // Add world to config if it doesn't exist
             addRestoredWorldToConfig(sender, worldName);
         } catch (IOException e) {
-            sender.sendMessage("Â§cFailed to restore world: " + e.getMessage());
+            sender.sendMessage("§cFailed to restore world: " + e.getMessage());
             plugin.getLogger().severe("Error restoring world " + worldName + ": " + e.getMessage());
         }
     }
@@ -310,8 +310,8 @@ public class RecycleCmd implements CmdInterface {
             config.set("worlds", typedWorlds);
             plugin.saveConfig();
             
-            sender.sendMessage("Â§7Added world to configuration with default settings.");
-            sender.sendMessage("Â§7(You may want to adjust its settings in config.yml)");
+            sender.sendMessage("§7Added world to configuration with default settings.");
+            sender.sendMessage("§7(You may want to adjust its settings in config.yml)");
         }
     }
     
@@ -366,13 +366,13 @@ public class RecycleCmd implements CmdInterface {
     private String extractBaseName(String folderName) {
         int lastUnderscore = folderName.lastIndexOf('_');
         if (lastUnderscore == -1) return folderName;
-        // Son alt Ã§izgiden sonrasÄ± tamamen tarih mi diye kontrol edebilirsiniz
+        // Son alt çizgiden sonrası tamamen tarih mi diye kontrol edebilirsiniz
         String suffix = folderName.substring(lastUnderscore + 1);
-        // EÄŸer suffix tamamen sayÄ±+dash gibi bir pattern ise kes
+        // Eğer suffix tamamen sayı+dash gibi bir pattern ise kes
         if (suffix.matches("\\d{4}-\\d{2}-\\d{2}.*")) {
             return folderName.substring(0, lastUnderscore);
         }
-        return folderName; // gÃ¼venlik: pattern tutmazsa tÃ¼m isim
+        return folderName; // güvenlik: pattern tutmazsa tüm isim
     }
 
     @Override

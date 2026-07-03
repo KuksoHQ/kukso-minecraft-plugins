@@ -34,10 +34,10 @@ public class Main extends JavaPlugin {
         // --- commands
         CmdRegistrar.register(this, logger);
 
-        // --- hooks (PlaceholderAPI, KuksoItems, RealisticSeasonsâ€¦)
+        // --- hooks (PlaceholderAPI, KuksoItems, RealisticSeasons…)
         HookRegistrar.register(this, logger);
 
-        // --- ProtocolLib packetâ€translation hook
+        // --- ProtocolLib packet-translation hook
         ModuleRegistrar.register(this, api, logger);
 
         logger.log("KuksoLib is fully enabled.");

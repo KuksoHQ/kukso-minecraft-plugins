@@ -52,14 +52,14 @@ public class TestLoggerCmd implements CmdInterface {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("Â§e=== Logger Test Commands ===");
-            sender.sendMessage("Â§a/kukso testlogger manager Â§7- Test LoggingManager");
-            sender.sendMessage("Â§a/kukso testlogger player Â§7- Test PlayerLogger (requires player)");
-            sender.sendMessage("Â§a/kukso testlogger stress Â§7- Run stress test");
-            sender.sendMessage("Â§a/kukso testlogger all Â§7- Run all tests");
-            sender.sendMessage("Â§7");
-            sender.sendMessage("Â§7Server logs: ../logs_custom/server_logs/");
-            sender.sendMessage("Â§7Player logs: ../logs_custom/players/<player_name>/");
+            sender.sendMessage("§e=== Logger Test Commands ===");
+            sender.sendMessage("§a/kukso testlogger manager §7- Test LoggingManager");
+            sender.sendMessage("§a/kukso testlogger player §7- Test PlayerLogger (requires player)");
+            sender.sendMessage("§a/kukso testlogger stress §7- Run stress test");
+            sender.sendMessage("§a/kukso testlogger all §7- Run all tests");
+            sender.sendMessage("§7");
+            sender.sendMessage("§7Server logs: ../logs_custom/server_logs/");
+            sender.sendMessage("§7Player logs: ../logs_custom/players/<player_name>/");
             return true;
         }
         
@@ -72,7 +72,7 @@ public class TestLoggerCmd implements CmdInterface {
             }
             case "player" -> {
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage("Â§cThis test requires a player to run!");
+                    sender.sendMessage("§cThis test requires a player to run!");
                     return true;
                 }
                 testPlayerLogger((Player) sender);
@@ -91,7 +91,7 @@ public class TestLoggerCmd implements CmdInterface {
                 return true;
             }
             default -> {
-                sender.sendMessage("Â§cUnknown test type! Use: manager, player, stress, or all");
+                sender.sendMessage("§cUnknown test type! Use: manager, player, stress, or all");
                 return true;
             }
         }
@@ -109,7 +109,7 @@ public class TestLoggerCmd implements CmdInterface {
      * Test all LoggingManager log levels and methods
      */
     private void testLoggingManager(CommandSender sender) {
-        sender.sendMessage("Â§e=== Testing LoggingManager ===");
+        sender.sendMessage("§e=== Testing LoggingManager ===");
         
         // Test all log levels
         loggingManager.severe("SEVERE: This is a severe error message");
@@ -127,21 +127,21 @@ public class TestLoggerCmd implements CmdInterface {
         loggingManager.log(LoggingManager.LogLevel.DEBUG, "LEVEL-SPECIFIC: Debug message using log(level, message)");
         
         // Test with special characters and formatting
-        loggingManager.info("FORMATTING TEST: Message with special chars: Ã¤Ã¶Ã¼ Ã± ä¸­æ–‡ ðŸŽ®");
+        loggingManager.info("FORMATTING TEST: Message with special chars: äöü ñ 中文 🎮");
         loggingManager.info("FORMATTING TEST: Multi-line message\nSecond line\nThird line");
         
         // Show updated paths
         Path serverLogsPath = Path.of("..", "logs_custom", "server_logs").toAbsolutePath();
-        sender.sendMessage("Â§aLoggingManager test completed!");
-        sender.sendMessage("Â§7Check console and server log files at:");
-        sender.sendMessage("Â§b" + serverLogsPath);
+        sender.sendMessage("§aLoggingManager test completed!");
+        sender.sendMessage("§7Check console and server log files at:");
+        sender.sendMessage("§b" + serverLogsPath);
     }
     
     /**
      * Test PlayerLogger functionality
      */
     private void testPlayerLogger(Player player) {
-        player.sendMessage("Â§e=== Testing PlayerLogger ===");
+        player.sendMessage("§e=== Testing PlayerLogger ===");
         
         // Test basic player logging
         playerLogger.logPlayer(player, "Basic player log test");
@@ -158,21 +158,21 @@ public class TestLoggerCmd implements CmdInterface {
         playerLogger.logPlayer(player, "location_test", "Current location logged");
         
         // Test edge cases
-        playerLogger.logPlayer(player, "special_chars", "Testing with special characters: Ã¤Ã¶Ã¼ Ã± ä¸­æ–‡ ðŸŽ®");
+        playerLogger.logPlayer(player, "special_chars", "Testing with special characters: äöü ñ 中文 🎮");
         playerLogger.logPlayer(player, "long_message", "This is a very long message to test how the logger handles longer text entries that might span multiple lines or contain lots of information about what the player is doing in the game");
         
         // Show updated paths
         Path playerLogsPath = Path.of("..", "logs_custom", "players", player.getName()).toAbsolutePath();
-        player.sendMessage("Â§aPlayerLogger test completed!");
-        player.sendMessage("Â§7Check player log files at:");
-        player.sendMessage("Â§b" + playerLogsPath);
+        player.sendMessage("§aPlayerLogger test completed!");
+        player.sendMessage("§7Check player log files at:");
+        player.sendMessage("§b" + playerLogsPath);
     }
     
     /**
      * Run stress test to check performance and queue handling
      */
     private void testStressTest(CommandSender sender) {
-        sender.sendMessage("Â§e=== Running Stress Test ===");
+        sender.sendMessage("§e=== Running Stress Test ===");
         
         // Test LoggingManager under load
         long startTime = System.currentTimeMillis();
@@ -198,22 +198,22 @@ public class TestLoggerCmd implements CmdInterface {
         long duration = endTime - startTime;
         
         loggingManager.info("STRESS TEST: Completed in " + duration + "ms");
-        sender.sendMessage("Â§aStress test completed in " + duration + "ms!");
+        sender.sendMessage("§aStress test completed in " + duration + "ms!");
         
         // Show paths for both log types
         Path serverLogsPath = Path.of("..", "logs_custom", "server_logs").toAbsolutePath();
-        sender.sendMessage("Â§7Server logs: Â§b" + serverLogsPath);
+        sender.sendMessage("§7Server logs: §b" + serverLogsPath);
         
         if (sender instanceof Player player) {
             Path playerLogsPath = Path.of("..", "logs_custom", "players", player.getName()).toAbsolutePath();
-            sender.sendMessage("Â§7Player logs: Â§b" + playerLogsPath);
+            sender.sendMessage("§7Player logs: §b" + playerLogsPath);
         }
         
         // Test queue overflow (optional - only if you want to test queue limits)
-        sender.sendMessage("Â§eRunning queue overflow test...");
+        sender.sendMessage("§eRunning queue overflow test...");
         for (int i = 0; i < 1000; i++) {
             loggingManager.debug("OVERFLOW TEST: Message #" + i);
         }
-        sender.sendMessage("Â§aQueue overflow test completed!");
+        sender.sendMessage("§aQueue overflow test completed!");
     }
 }

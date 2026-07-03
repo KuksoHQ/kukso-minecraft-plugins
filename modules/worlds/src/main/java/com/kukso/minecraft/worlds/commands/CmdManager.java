@@ -34,10 +34,10 @@ public class CmdManager implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            // sender.sendMessage("Â§7Use /kuksoworlds <subCommand>");
+            // sender.sendMessage("§7Use /kuksoworlds <subCommand>");
             // Using a generic help message or relying on usage from main command if defined
             // For now, mapping to unknown subcommand or usage
-            sender.sendMessage("Â§7Use /kuksoworlds <subCommand>"); 
+            sender.sendMessage("§7Use /kuksoworlds <subCommand>"); 
             return true;
         }
 

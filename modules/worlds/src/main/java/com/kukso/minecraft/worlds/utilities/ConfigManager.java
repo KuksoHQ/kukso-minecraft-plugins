@@ -2,9 +2,9 @@ package com.kukso.minecraft.worlds.utilities;
 
 /**
  * Singleton helper to manage configuration.
- * â€¢ Call init(plugin) inside onEnable().
- * â€¢ Provides getString/getBoolean/getInt/getDouble/getList for safe reads with defaults.
- * â€¢ printStatus() logs current config settings to console.
+ * • Call init(plugin) inside onEnable().
+ * • Provides getString/getBoolean/getInt/getDouble/getList for safe reads with defaults.
+ * • printStatus() logs current config settings to console.
  */
 
 import org.bukkit.configuration.file.FileConfiguration;

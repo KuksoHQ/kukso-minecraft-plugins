@@ -25,12 +25,12 @@ public class GiveItemCommand implements CommandExecutor {
         ItemStack item = ItemManager.getItem(key);
 
         if (item == null) {
-            player.sendMessage("Â§cUnknown item: " + key);
+            player.sendMessage("§cUnknown item: " + key);
             return true;
         }
 
         player.getInventory().addItem(item.clone());
-        player.sendMessage("Â§aGiven item: " + key);
+        player.sendMessage("§aGiven item: " + key);
         return true;
     }
 }

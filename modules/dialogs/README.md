@@ -4,7 +4,7 @@ https://i.ibb.co/bMm4Pmpc/Kukso-Dialogs-1.png
 ADDONS SYSTEM!
 Example: https://github.com/DevBD1/ExpConfigAddon
 
-## ðŸ“¦ To be added
+## 📦 To be added
 ### Features:
 - KuksoLib logging support
 - KuksoLib localization support

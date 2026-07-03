@@ -1,6 +1,6 @@
 /**
  * Utility to unregister all KuksoLib services in reverse order.
- * Call this in onDisable() to cleanly remove your pluginâ€™s service registrations.
+ * Call this in onDisable() to cleanly remove your plugin’s service registrations.
  */
 package com.kukso.minecraft.lib.services;
 

@@ -47,7 +47,7 @@ public class WorldLoader {
             }
             default -> creator.environment(World.Environment.NORMAL);
         }
-        // Bukkit world creation asyncâ€“safe: create inside scheduler
+        // Bukkit world creation async–safe: create inside scheduler
         Bukkit.getScheduler().runTaskLater(mainClass, () -> {
             try {
                 World loadedWorld = Bukkit.createWorld(creator);
@@ -101,11 +101,11 @@ public class WorldLoader {
                     float yaw = s.get("yaw") instanceof Number ? ((Number) s.get("yaw")).floatValue() : 0f;
                     float pitch = s.get("pitch") instanceof Number ? ((Number) s.get("pitch")).floatValue() : 0f;
 
-                    // World#setSpawnLocation floora yuvarlar, ama location'Ä± ayrÄ±ca tutacam
+                    // World#setSpawnLocation floora yuvarlar, ama location'ı ayrıca tutacam
                     loadedWorld.setSpawnLocation(new Location(loadedWorld,
                             Math.floor(x), Math.floor(y), Math.floor(z), yaw, pitch));
 
-                    // Tam kesirli konumu ayrÄ± sakliyorum teleportta kullanmk icin
+                    // Tam kesirli konumu ayrı sakliyorum teleportta kullanmk icin
                     spawnLoc = new Location(loadedWorld, x, y, z, yaw, pitch);
                 } else {
                     // config yoksa default spawn
@@ -136,7 +136,7 @@ public class WorldLoader {
     }
 
     /**
-     * DiÄŸer class'lar bu metotla spawn location'a ulaÅŸÄ±r.
+     * Diğer class'lar bu metotla spawn location'a ulaşır.
      */
     public Location getSpawn(String worldName) {
         return spawnLocations.get(worldName.toLowerCase(Locale.ROOT));
