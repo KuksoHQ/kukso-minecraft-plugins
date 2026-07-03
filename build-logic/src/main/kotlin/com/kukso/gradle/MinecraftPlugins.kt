@@ -101,8 +101,8 @@ class MinecraftLibraryPlugin : Plugin<Project> {
                         url.set("https://github.com/KuksoHQ/kukso-minecraft-plugins")
                         licenses {
                             license {
-                                name.set("Apache-2.0")
-                                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                                name.set("All Rights Reserved")
+                                url.set("https://github.com/KuksoHQ/kukso-minecraft-plugins/blob/main/LICENSE")
                             }
                         }
                     }

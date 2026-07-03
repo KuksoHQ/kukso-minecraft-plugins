@@ -1,24 +1,24 @@
 # KuksoItems
 
-âœ¨ Custom item framework for Minecraft servers.  
-ðŸ§± Define items via YAML.  
-ðŸŒ Supports [KuksoLib](https://github.com/DevBD1/KuksoItems) for localized client-side lore.  
-ðŸ”— Works seamlessly with ProtocolLib.
+✨ Custom item framework for Minecraft servers.  
+🧱 Define items via YAML.  
+🌐 Supports [KuksoLib](https://github.com/DevBD1/KuksoItems) for localized client-side lore.  
+🔗 Works seamlessly with ProtocolLib.
 
 ---
 
-## âœ¨ Features
+## ✨ Features
 
-- ðŸ“¦ YAML-defined custom items
-- ðŸ·ï¸ Automatic NBT tagging for identification
-- ðŸ§™ Dynamic lore powered by [KuksoLib](https://github.com/DevBD1/KuksoItems)
-- ðŸŒ Multilingual support with fallback
-- ðŸš€ Fully client-side fake lore with ProtocolLib
-- ðŸ’¡ Easy item distribution with `/giveitem <key>`
+- 📦 YAML-defined custom items
+- 🏷️ Automatic NBT tagging for identification
+- 🧙 Dynamic lore powered by [KuksoLib](https://github.com/DevBD1/KuksoItems)
+- 🌍 Multilingual support with fallback
+- 🚀 Fully client-side fake lore with ProtocolLib
+- 💡 Easy item distribution with `/giveitem <key>`
 
 ---
 
-## ðŸ“¥ Installation
+## 📥 Installation
 
 - Stop the server
 - Place ```KuksoItems.jar``` in ```/plugins```
@@ -34,25 +34,25 @@ Commands | Description | Permission | Group
 
 ---
 
-## ðŸ§© Requirements
+## 🧩 Requirements
 - Spigot or Paper 1.21+
 - ProtocolLib
 - KuksoLib (optional but recommended)
 
 ---
 
-## ðŸ›  Developers
+## 🛠 Developers
 
 Use the kuksoItems NBT key to identify and extend custom items across your plugin ecosystem.
 
 ---
 
-## ðŸ“„ License
-Licensed under the Apache License 2.0. See the repository-root [LICENSE](../../LICENSE) file.
+## 📄 License
+All Rights Reserved. See the repository-root [LICENSE](../../LICENSE) file.
 
 ---
 
-## ðŸ”§ Example `items.yml`
+## 🔧 Example `items.yml`
 
 ```yaml
 items:
@@ -64,8 +64,8 @@ items:
         - "&7A sharp blade."
         - "&c+10 Strength"
       tr:
-        - "&7Keskin bir kÄ±lÄ±Ã§."
-        - "&c+10 GÃ¼Ã§"
+        - "&7Keskin bir kılıç."
+        - "&c+10 Güç"
     nbt:
       customKey: strength_sword
 
