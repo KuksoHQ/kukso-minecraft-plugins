@@ -40,6 +40,9 @@ class MinecraftBasePlugin : Plugin<Project> {
         tasks.withType<Jar>().configureEach {
             archiveBaseName.set("${kuksoProductName()}-Paper")
             archiveVersion.set(version.toString())
+            metaInf {
+                from(rootProject.layout.projectDirectory.file("LICENSE"))
+            }
         }
 
         tasks.withType<JavaCompile>().configureEach {
@@ -96,6 +99,12 @@ class MinecraftLibraryPlugin : Plugin<Project> {
                         name.set("KuksoLib")
                         description.set("Core library for the Kukso Minecraft plugin ecosystem.")
                         url.set("https://github.com/KuksoHQ/kukso-minecraft-plugins")
+                        licenses {
+                            license {
+                                name.set("Apache-2.0")
+                                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                            }
+                        }
                     }
                 }
             }
