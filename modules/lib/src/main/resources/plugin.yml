@@ -10,10 +10,6 @@ depend:
   - ProtocolLib
 softdepend:
   - KuksoItems
-  - KuksoLoots
-  - KuksoSense
-  - KuksoConquest
-  - KuksoDungeons
   - RealisticSeasons
   - PlaceholderAPI
 # You can manage each subcommand in config.yml
