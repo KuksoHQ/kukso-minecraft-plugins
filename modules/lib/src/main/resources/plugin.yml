@@ -5,7 +5,7 @@ api-version: '1.21'
 load: STARTUP
 authors: [ DevBD1 ]
 description: Spigot development library, built for the latest version. It is a dependency for my Minecraft plugins.
-website: https://labs.kukso.net
+website: https://kukso.com
 depend:
   - ProtocolLib
 softdepend:

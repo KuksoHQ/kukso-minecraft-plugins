@@ -39,7 +39,8 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 ### Fixed
 
 - `ci`: Removed a dead nested KuksoLib publish workflow (`modules/lib/.github/workflows/publish.yml`) that echoed a secret-derived value and contradicted the per-module release process, and hardened `.gitignore` against committable secret files.
-- `items`: Fixed `plugin.yml` `website`, load order (`load: POSTWORLD`), and added a `description`.
+- `items`: Fixed `plugin.yml` load order (`load: POSTWORLD`) and added a `description`.
+- All modules: standardized the `plugin.yml` `website` to `https://kukso.com`.
 - `items`: Fixed the README license statement (MIT to Apache 2.0) to match the repository's actual `LICENSE`.
 
 ### Sprint Links
