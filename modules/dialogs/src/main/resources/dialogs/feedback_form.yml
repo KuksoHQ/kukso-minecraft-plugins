@@ -30,7 +30,7 @@ exit_buttons:
     description: "Click to submit your feedback"
     color: "90EE90"
     action:
-      type: "custom_click"
+      type: "custom"
       key: "cublexcore:feedback/submit"
 
   cancel:

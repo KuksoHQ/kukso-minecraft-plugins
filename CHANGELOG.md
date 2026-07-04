@@ -50,6 +50,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 - `items`: Fixed the README license statement to match the repository's All Rights Reserved `LICENSE`.
 - All modules: Repaired double-encoded UTF-8 (mojibake) introduced during the monorepo migration across Java string literals, comments, language files (`lang/tr.yml`), `items.yml`, and module READMEs; player-facing messages and Turkish localization render correctly again.
 - `dialogs`: Aligned command registration, user-facing usage strings, default dialog permissions, and bundled examples with the shipped `/kuksodialogs` namespace.
+- `dialogs`: Corrected README and bundled confirmation examples to use list-shaped inputs, recognized confirmation button keys, and the supported `custom` action type.
 
 ### Config And Permissions
 

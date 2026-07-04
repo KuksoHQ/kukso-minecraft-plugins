@@ -41,16 +41,20 @@ type: "confirmation"
 permission_to_open: "kuksodialogs.dialog.open.feedback"
 
 inputs:
-  feedback:
+  - id: "feedback"
     type: "text"
     label: "Feedback"
 
 exit_buttons:
-  submit:
+  confirm:
     text: "Submit"
     action:
-      type: "custom_click"
+      type: "custom"
       key: "kukso:feedback/submit"
+  cancel:
+    text: "Cancel"
+    action:
+      type: "return"
 ```
 
 ## Example API Usage

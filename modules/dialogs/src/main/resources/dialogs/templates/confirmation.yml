@@ -118,7 +118,7 @@ exit_buttons:
     color: "AEFFC1"
     weight: 100
     action:
-      type: "custom_click"
+      type: "custom"
       key: "example:save_config"
 
   cancel:
