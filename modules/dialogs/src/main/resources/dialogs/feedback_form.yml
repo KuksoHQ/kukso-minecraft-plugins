@@ -1,6 +1,6 @@
 title: "<gold>Feedback Form</gold>"
 type: "confirmation"
-permission_to_open: "cubDialogs.dialog.open.templates"
+permission_to_open: "kuksodialogs.dialog.open.templates"
 
 inputs:
   - id: "feedback"

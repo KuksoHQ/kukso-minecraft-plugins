@@ -1,8 +1,7 @@
 # Static variables. These cannot be changed during runtime. You must stop the server to make changes here
-server-name: kukso.net
+server-name: kukso.com
 fallback-language: en # it is used when the player's client locale is not supported
 logging-enabled: false # enable/disable logging into a separate file under /plugins/KuksoLib folder (universal)
-restful-enabled: false # enable/disable REST API on your server. Check https://labs.kukso.net/docs/category/common-in-all-plugins
 debug-mode: false # enable/disable DEBUG mode
 
 # Localization
@@ -16,22 +15,6 @@ test-prefix: "&c[KuksoLib] &r"
 discord: "https://discord.gg/Hqq3CdnenN" # Chat and announcements
 telegram: "" # Announcements and replies
 mobile-app: "" # In-app purchases and spending shop
-
-# Settings for GUI module (WIP)
-gui:
-  titles:
-    players: "&aOnline Players"
-  close-button:
-    material: BARRIER
-    name: "&cClose"
-    slot: 49
-  border:
-    enabled: true
-    material: GRAY_STAINED_GLASS_PANE
-    name: " "
-    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 45, 46, 47, 48, 50, 51, 52, 53]
-
-# Settings for RealisticSeasons hook (WIP)
 
 # Commands
 commands:
@@ -53,13 +36,3 @@ commands:
     permissions:
       - kuksolib.admin.lang
       - kuksolib.mod.lang
-  log:
-    aliases: [logs]
-    permissions:
-      - kuksolib.admin.log
-      - kuksolib.mod.log
-  gui:
-    aliases: [menu, interface]
-    permissions:
-      - kuksolib.gui
-      - kuksolib.user.gui

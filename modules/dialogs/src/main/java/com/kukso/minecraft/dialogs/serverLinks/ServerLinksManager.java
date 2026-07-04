@@ -109,10 +109,6 @@ public class ServerLinksManager {
      * Adds custom links with custom display names from config using Adventure Components
      */
     private void addCustomLinks(ServerLinks serverLinks) throws URISyntaxException {
-        // Import the ColorManager
-        // Note: Add this import at the top of your class:
-        // import io.github.devbd1.cubDialogs.utilities.ColorManager;
-
         // Check if customLinks section exists in config
         if (!ConfigManager.getConfig().contains("customLinks")) {
             plugin.getLogger().info("No custom links configured, skipping...");

@@ -53,14 +53,14 @@ The plugins should feel:
 Every feature is in exactly one state, and documentation must not blur them:
 
 - **Shipped:** implemented and verified; may appear in READMEs as available behavior.
-- **Planned:** wanted but not implemented; must have a backlog item in `docs/sprints/backlog.md`, and READMEs may only mention it under an explicit "planned" heading. Config flags reserved for planned features (such as `restful-enabled`) must be documented as reserved.
+- **Planned:** wanted but not implemented; must have a backlog item in `docs/sprints/backlog.md` or an active sprint file. Planned work must not be advertised in module READMEs.
 - **Not planned:** out of scope; remove stale references instead of keeping them.
 
-Currently planned: `:lib` REST API, `:lib` GUI API, `:lib` auto-updater, and the future plugins KuksoLoots, KuksoSense, KuksoConquest, and KuksoDungeons (unstarted; their `:lib` softdepend entries return when each plugin exists).
+Use the backlog for the current planned-feature list.
 
 ## Documentation Audience
 
-- Module `README.md` files are public-facing, written for server owners and plugin users. They must reflect shipped behavior only (plus a clearly marked planned section).
+- Module `README.md` files are public-facing, written for server owners and plugin users. They must reflect shipped behavior only: purpose, features, installation, usage examples, API examples when available, terms, and support.
 - Design notes, scratch ideas, and implementation details belong in `docs/sprints/backlog.md` or sprint docs, never in module READMEs.
 - `PRODUCT.md` (this file) is the source of intent: when code and docs disagree, record the ruling here so future sessions do not have to rediscover it.
 

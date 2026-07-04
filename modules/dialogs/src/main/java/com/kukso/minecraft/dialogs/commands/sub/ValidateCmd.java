@@ -50,7 +50,7 @@ public class ValidateCmd implements CmdInterface {
 
     @Override
     public String getUsage() {
-        return "/cubDialogs validate";
+        return "/kuksodialogs validate";
     }
 
     /**

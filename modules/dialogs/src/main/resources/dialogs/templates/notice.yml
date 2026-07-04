@@ -12,7 +12,7 @@
 # • Simple color codes (&a, &b, etc.) add ~2 characters per code
 # • Or you can refuse using colored text in some parts.
 #
-# • Run '/cubDialogs validate' to check for configuration issues!
+# • Run '/kuksodialogs validate' to check for configuration issues!
 #
 # 💡 COLOR FORMATTING EXAMPLES:
 # • Simple: "Hello World" (11 chars)
@@ -32,7 +32,7 @@ title: "Important Notice"
 external_title: "Template: Notice"
 can_close_with_escape: false
 enabled: true
-permission_to_open: "cubDialogs.dialog.open.templates"
+permission_to_open: "kuksodialogs.dialog.open.templates"
 
 # The program respects the order of elements in the body list.
 bodies:

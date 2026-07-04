@@ -43,28 +43,23 @@ commands:
   version:
     aliases: [ver]
     permissions:
-      - cubDialogs.admin.version
+      - kuksodialogs.admin.version
   reload:
 #    aliases: [rl, restart]
     permissions:
-      - cubDialogs.admin.reload
+      - kuksodialogs.admin.reload
   open:
 #    aliases: [op]
     permissions:
-      - cubDialogs.admin.open
+      - kuksodialogs.admin.open
   validate:
 #    aliases: [val]
     permissions:
-      - cubDialogs.admin.validate
-  help:
-#    aliases: [h]
-    permissions:
-      - cubDialogs.admin.help
+      - kuksodialogs.admin.validate
   forceopen:
     aliases: [fo]
     permissions:
-      - cubDialogs.admin.forceopen
-  forceclose:
-#    aliases: [fc]
+      - kuksodialogs.admin.forceopen
+  addons:
     permissions:
-      - cubDialogs.admin.forceclose
+      - kuksodialogs.admin.addons
