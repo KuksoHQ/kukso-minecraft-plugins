@@ -78,6 +78,11 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
   - **Acceptance criteria:** Define the chunk-tracking source of truth, wire `%kuksoworlds_chunks_unlocked%` to that source, and document the placeholder only once the value is meaningful.
   - **Validation:** Unit test the count source if feasible, plus manual PlaceholderAPI check in a Paper server.
 
+- [ ] **Module/area:** `:worlds`
+  - **User value:** Admins can apply supported KuksoWorlds config changes without a full server restart.
+  - **Acceptance criteria:** Implement and register `/kuksoworlds reload`; reload safe runtime state from `config.yml`; clearly message any settings that still require restart or full world lifecycle handling; add command config, permissions, language keys, and README usage only once the command works.
+  - **Validation:** `./gradlew :worlds:build` plus manual Paper server check that a supported config change takes effect after `/kuksoworlds reload` and restart-required changes are reported clearly.
+
 - [ ] **Module/area:** `:items`
   - **User value:** Server owners get real localized or client-side item lore only when the behavior is implemented, verified, and documented accurately.
   - **Acceptance criteria:** Decide whether localized lore belongs in KuksoItems, KuksoLib, or their integration; implement the chosen path; support documented `items.yml` shape; update the README only after the behavior works.
