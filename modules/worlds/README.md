@@ -21,7 +21,7 @@ KuksoWorlds is a lightweight world-management plugin for Paper/Spigot servers. I
 2. Drop `KuksoWorlds-Paper-<version>.jar` into the server `plugins/` folder.
 3. Start the server once so `plugins/KuksoWorlds/config.yml` and language files are generated.
 4. Configure `fallback-world` and the `worlds:` list.
-5. Restart the server, or use `/kuksoworlds reload` for supported reloadable changes.
+5. Restart the server after config changes.
 
 PlaceholderAPI is optional.
 
