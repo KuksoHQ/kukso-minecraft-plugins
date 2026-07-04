@@ -10,7 +10,7 @@
 #   text, make sure 'max_length' is LARGE ENOUGH for the formatted result!
 # • Gradients can expand to 100+ characters, so use max_length: 200+ for safety
 # • Simple color codes (&a, &b, etc.) add ~2 characters per code
-# • Run '/cubDialogs validate' to check for configuration issues
+# • Run '/kuksodialogs validate' to check for configuration issues
 #
 # 💡 FORMATTING EXAMPLES:
 # • Simple: "Hello World" (11 chars)
@@ -22,7 +22,7 @@
 
 title: "&6Example Dialog Template"
 type: "confirmation"
-permission_to_open: "cubDialogs.dialog.open.templates"
+permission_to_open: "kuksodialogs.dialog.open.templates"
 
 inputs:
   # ───────────────────────────────────────────────────────────────────────────
@@ -118,7 +118,7 @@ exit_buttons:
     color: "AEFFC1"
     weight: 100
     action:
-      type: "custom_click"
+      type: "custom"
       key: "example:save_config"
 
   cancel:
@@ -132,7 +132,7 @@ exit_buttons:
     # No action = closes dialog
 # ─────────────────────────────────────────────────────────────────────────────
 # 📚 Additional Notes:
-# • Use '/cubDialogs validate' to check this configuration
+# • Use '/kuksodialogs validate' to check this configuration
 # • Test your dialogs after making changes
 # • Check the console for validation warnings
 # • Keep max_length generous when using formatting

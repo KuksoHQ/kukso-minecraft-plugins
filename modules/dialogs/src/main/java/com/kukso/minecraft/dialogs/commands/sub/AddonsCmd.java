@@ -33,7 +33,7 @@ public class AddonsCmd implements CmdInterface {
 
     @Override
     public String getUsage() {
-        return "/" + getName();
+        return "/kuksodialogs " + getName();
     }
 
     @Override

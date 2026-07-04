@@ -33,7 +33,7 @@ public class CmdManager implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("§7Use /cubDialogs <subCommand>");
+            sender.sendMessage("§7Use /kuksodialogs <subCommand>");
             return true;
         }
 

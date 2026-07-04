@@ -30,12 +30,9 @@ permissions:
   kuksodialogs.admin.validate:
     default: op
     description: Allows you to validate dialogs.
-  kuksodialogs.admin.help:
+  kuksodialogs.admin.addons:
     default: op
-    description: Allows you to see the help.
+    description: Allows you to list loaded addons.
   kuksodialogs.admin.forceopen:
     default: op
     description: Allows you to force open dialogs for others.
-  kuksodialogs.admin.forceclose:
-    default: op
-    description: Allows you to force close dialogs for others.

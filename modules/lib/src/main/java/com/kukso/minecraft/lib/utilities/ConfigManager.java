@@ -92,7 +92,6 @@ public final class ConfigManager {
         plugin.getLogger().info(" - Server Name: "     + getString("server-name",       "Kukso.net"));
         plugin.getLogger().info(" - Default Language: " + getFallbackLanguage());
         plugin.getLogger().info(" - Logging Enabled: "  + getBoolean("logging-enabled",   false));
-        plugin.getLogger().info(" - REST API Enabled: " + getBoolean("restful-enabled",   false));
         plugin.getLogger().info(" - Discord Webhook: "  + getString("discord",            ""));
         plugin.getLogger().info(" - Telegram Bot Key: " + getString("telegram",           ""));
 

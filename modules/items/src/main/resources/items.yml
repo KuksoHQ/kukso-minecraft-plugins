@@ -12,4 +12,3 @@ items:
         - "&c+10 Güç"
     nbt:
       customKey: strength_sword
-      rarity: "epic" # to be added in next versions

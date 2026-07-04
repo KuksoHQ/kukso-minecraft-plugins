@@ -193,8 +193,8 @@ public class DialogConfigManager {
      */
     public static String getPermissionToOpen(String id) {
         FileConfiguration cfg = dialogConfigs.get(id);
-        if (cfg == null) return "cubDialogs.dialog.open.*";
-        return cfg.getString("permission_to_open", "cubDialogs.dialog.open.*");
+        if (cfg == null) return "kuksodialogs.dialog.open.*";
+        return cfg.getString("permission_to_open", "kuksodialogs.dialog.open.*");
     }
 
     /**
@@ -203,8 +203,8 @@ public class DialogConfigManager {
      */
     public static String getPermissionToOpenRemote(String id) {
         FileConfiguration cfg = dialogConfigs.get(id);
-        if (cfg == null) return "cubDialogs.dialog.remote.*";
-        return cfg.getString("permission_to_open_remote", "cubDialogs.dialog.remote.*");
+        if (cfg == null) return "kuksodialogs.dialog.remote.*";
+        return cfg.getString("permission_to_open_remote", "kuksodialogs.dialog.remote.*");
     }
 
     public static Dialog buildDialog(String id) {

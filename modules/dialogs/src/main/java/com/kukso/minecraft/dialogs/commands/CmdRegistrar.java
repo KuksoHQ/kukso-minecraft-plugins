@@ -8,9 +8,9 @@ public class CmdRegistrar {
     private CmdRegistrar() {}
 
     public static void register(Main plugin) {
-        PluginCommand cmd = plugin.getCommand("cubDialogs");
+        PluginCommand cmd = plugin.getCommand("kuksodialogs");
         if (cmd == null) {
-            //logger.severe("COMMAND '/cubDialogs' NOT FOUND! Aborting command registration and disabling the plugin.");
+            //logger.severe("COMMAND '/kuksodialogs' NOT FOUND! Aborting command registration and disabling the plugin.");
             plugin.getServer().getPluginManager().disablePlugin(plugin);
             return;
         }

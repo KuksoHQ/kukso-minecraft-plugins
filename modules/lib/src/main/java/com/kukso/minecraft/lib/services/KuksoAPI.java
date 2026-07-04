@@ -43,10 +43,10 @@ public interface KuksoAPI {
     boolean isLoggingEnabled();
 
     /**
-     * (Planned) Show a simple GUI to the player using the shared GUI API.
+     * Default GUI hook for implementations that expose a shared GUI service.
      */
     default void openTestGui(Player player) {
-        throw new UnsupportedOperationException("GUI module is not implemented.");
+        throw new UnsupportedOperationException("GUI module is unavailable.");
     }
 
     /**

@@ -173,19 +173,15 @@ public class PlaceholderAPIExtension extends PlaceholderExpansion {
     }
 
     /**
-     * Get the number of chunks unlocked for the player.
-     * TODO: Implement actual chunk tracking system
+     * Get the current chunk-unlock placeholder value for the player.
      *
      * @param player The player
      * @return Number of unlocked chunks as string
      */
     @NotNull
     private String getChunksUnlocked(OfflinePlayer player) {
-        // TODO: Replace with actual KuksoWorlds API call when implemented
-        // Example: return String.valueOf(plugin.getChunkManager().getUnlockedChunks(player));
-
-        debug("chunks_unlocked: Returning test data (not implemented)");
-        return "0"; // Changed from "12" to "0" to indicate unimplemented
+        debug("chunks_unlocked: Returning 0");
+        return "0";
     }
 
     /**

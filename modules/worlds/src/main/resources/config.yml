@@ -1,13 +1,8 @@
 # To ensure the permission system and world load/unload system
 # work correctly, you MUST define a fallback world.
 fallback-world: world_spawn
-# Enable or disable modules by setting them to true or false.
-# Disabled modules are not initialized and do not register any events,
-# which improves server performance.
+# Toggle KuksoLib-backed custom logger output when KuksoLib is present.
 modules:
-  grief-prevention: true
-  world-border: true
-  pvp-handling: true
   custom-logger: true
 # World access permission format:
 # kuksoworlds.access.<world_name>

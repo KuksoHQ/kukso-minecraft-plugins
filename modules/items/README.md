@@ -1,58 +1,40 @@
 # KuksoItems
 
-✨ Custom item framework for Minecraft servers.  
-🧱 Define items via YAML.  
-🌐 Supports [KuksoLib](https://github.com/DevBD1/KuksoItems) for localized client-side lore.  
-🔗 Works seamlessly with ProtocolLib.
+KuksoItems is a lightweight custom item plugin for Minecraft servers. It loads item definitions from `items.yml`, builds Bukkit `ItemStack` instances with display names, lore, and NBT tags, then lets players receive configured items with a simple command.
 
----
+## Features And Utilities
 
-## ✨ Features
+- YAML-defined custom items under the top-level `items:` section.
+- Material, display name, lore, and custom NBT fields per item.
+- Internal `kuksoItems` NBT tag generated from `nbt.customKey`.
+- Legacy `&` color-code formatting for display names and lore.
+- `/giveitem <item-key>` command for giving configured items to players.
+- `ItemManager` lookup utility for registered items.
+- `ItemUtils` helpers for checking whether an `ItemStack` is a KuksoItems item and reading its custom item key.
+- Optional KuksoLib soft dependency for ecosystem integration.
 
-- 📦 YAML-defined custom items
-- 🏷️ Automatic NBT tagging for identification
-- 🧙 Dynamic lore powered by [KuksoLib](https://github.com/DevBD1/KuksoItems)
-- 🌍 Multilingual support with fallback
-- 🚀 Fully client-side fake lore with ProtocolLib
-- 💡 Easy item distribution with `/giveitem <key>`
+## Installation
 
----
+1. Drop `KuksoItems-Paper-<version>.jar` into the server `plugins/` folder.
+2. Start the server once so `plugins/KuksoItems/config.yml` and `plugins/KuksoItems/items.yml` are generated.
+3. Edit `items.yml`.
+4. Restart the server to reload item definitions.
 
-## 📥 Installation
+KuksoLib is optional. It is not required for the `/giveitem` command or basic YAML item loading.
 
-- Stop the server
-- Place ```KuksoItems.jar``` in ```/plugins```
-- Install [ProtocolLib](https://ci.dmulloy2.net/job/ProtocolLib/)
-- Install [KuksoLib](https://github.com/DevBD1/KuksoItems) if you want client-side lore implementation
-- Start the server
+## Usage Examples
 
----
+```sh
+/giveitem strength_sword
+```
 
-Commands | Description | Permission | Group
---- | --- | --- | --- 
-/giveitem <key> | Gives a registered item | cubitems.giveitem | cubitems.admin
+Permission:
 
----
+```text
+kuksoitems.giveitem
+```
 
-## 🧩 Requirements
-- Spigot or Paper 1.21+
-- ProtocolLib
-- KuksoLib (optional but recommended)
-
----
-
-## 🛠 Developers
-
-Use the kuksoItems NBT key to identify and extend custom items across your plugin ecosystem.
-
----
-
-## 📄 License
-All Rights Reserved. See the repository-root [LICENSE](../../LICENSE) file.
-
----
-
-## 🔧 Example `items.yml`
+Example `items.yml`:
 
 ```yaml
 items:
@@ -60,13 +42,26 @@ items:
     material: DIAMOND_SWORD
     display_name: "&cSword of Strength"
     lore:
-      en:
-        - "&7A sharp blade."
-        - "&c+10 Strength"
-      tr:
-        - "&7Keskin bir kılıç."
-        - "&c+10 Güç"
+      - "&7A sharp blade."
+      - "&c+10 Strength"
     nbt:
       customKey: strength_sword
+```
 
+## Example API Usage
 
+```java
+ItemStack item = ItemManager.getItem("strength_sword");
+
+if (ItemUtils.isCustomItem(item, "strength_sword")) {
+    String key = ItemUtils.getCustomItemKey(item);
+}
+```
+
+## Terms And Conditions
+
+This plugin is proprietary and All Rights Reserved. See the repository-root [LICENSE](../../LICENSE). You may not copy, redistribute, modify, adapt, remove notices from, or claim ownership of the software unless Kukso grants written permission.
+
+## Support & Contributions
+
+Found an issue or want to request a change? Reach out through the Kukso support channels or open a request on the GitHub repository.

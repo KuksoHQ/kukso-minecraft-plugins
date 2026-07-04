@@ -1,6 +1,6 @@
 title: "<gold>Feedback Form</gold>"
 type: "confirmation"
-permission_to_open: "cubDialogs.dialog.open.templates"
+permission_to_open: "kuksodialogs.dialog.open.templates"
 
 inputs:
   - id: "feedback"
@@ -30,8 +30,8 @@ exit_buttons:
     description: "Click to submit your feedback"
     color: "90EE90"
     action:
-      type: "custom_click"
-      key: "cublexcore:feedback/submit"
+      type: "custom"
+      key: "kukso:feedback/submit"
 
   cancel:
     text: "Cancel"
