@@ -8,6 +8,16 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 
 ## Candidate
 
+- [ ] **Module/area:** `:lib`, all plugin modules
+  - **User value:** Turkish players see command output in Turkish when their client locale is Turkish instead of falling back to English for commands.
+  - **Acceptance criteria:** Diagnose whether player locale detection, language-key lookup, command sender handling, or missing module lang keys cause command output to stay English; update the shared localization path and affected module command messages so Turkish client locale receives Turkish output where translations exist, with clear fallback behavior for missing keys.
+  - **Validation:** Unit tests for the localization/fallback path where feasible, plus manual Paper server checks with a Turkish client locale for `/kukso`, `/kuksodialogs`, `/kuksoworlds`, and other affected command outputs.
+
+- [ ] **Module/area:** `:lib`
+  - **User value:** Admins can run `/kukso version` without a command exception and receive a useful version/update response.
+  - **Acceptance criteria:** Reproduce and fix the `/kukso version` exception, including alias/subcommand handling if `/kukso ver` and `/kukso version` are both intended to work; return a localized error or usage message for any unsupported version-check path instead of throwing.
+  - **Validation:** `./gradlew :lib:test` or the smallest relevant test task, plus a manual Paper server check for `/kukso version` and `/kukso ver`.
+
 - [ ] **Module/area:** `:dialogs`, `:items`
   - **User value:** Non-English players get localized dialog and item text consistent with `:lib` and `:worlds`.
   - **Acceptance criteria:** Add `lang/` files (at minimum `en`, `tr`) for the `:dialogs` and `:items` modules, matching the existing `lang/` structure and key conventions used in `:lib` and `:worlds`.
