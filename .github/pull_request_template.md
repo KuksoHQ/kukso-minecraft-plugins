@@ -9,6 +9,7 @@
 - [ ] `:dialogs-exp-config-addon`
 - [ ] `:worlds`
 - [ ] `:items`
+- [ ] `:votes`
 - [ ] `docs`
 - [ ] `build-logic`
 - [ ] `ci`

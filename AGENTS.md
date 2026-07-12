@@ -9,6 +9,7 @@ This is a Gradle Kotlin DSL monorepo for Kukso Minecraft Paperspigot plugins. Th
 - `modules/dialogs-exp-config-addon` -> `:dialogs-exp-config-addon`, a service-loaded addon for KuksoDialogs.
 - `modules/worlds` -> `:worlds`, world commands, generators, hooks, and lang files.
 - `modules/items` -> `:items`, item commands, utilities, and config resources.
+- `modules/votes` -> `:votes`, KuksoVotes voting-rewards plugin (soft-depends on `:lib`).
 
 Java source lives in `src/main/java`; plugin descriptors, config files, language files, and templates live in `src/main/resources`. Shared Gradle conventions are in `build-logic/src/main/kotlin/com/kukso/gradle/MinecraftPlugins.kt`. Product vision belongs in `PRODUCT.md`. Release history belongs in `CHANGELOG.md`. Sprint planning and delivery notes belong under `docs/sprints/`.
 
@@ -39,7 +40,7 @@ Use `docs/sprints/` as the canonical planning and delivery record for future wor
 
 Use pull requests as the default exit path for completed work. Every PR should connect back to a sprint or backlog item, list changed modules or repository areas, include validation output, and call out changelog, version, config, and permission impact.
 
-Use Conventional Commit messages with the format `type(scope): summary`. Allowed types are `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, and `release`. Allowed scopes are `lib`, `dialogs`, `dialogs-exp-config-addon`, `worlds`, `items`, `docs`, `build-logic`, `ci`, and `repo`.
+Use Conventional Commit messages with the format `type(scope): summary`. Allowed types are `feat`, `fix`, `docs`, `refactor`, `test`, `build`, `ci`, `chore`, and `release`. Allowed scopes are `lib`, `dialogs`, `dialogs-exp-config-addon`, `worlds`, `items`, `votes`, `docs`, `build-logic`, `ci`, and `repo`.
 
 Versioning is per module. Each module's `version.txt` is the source of truth for that module's artifact version. Stable versions use `X.Y.Z`; prereleases use `X.Y.Z-alpha.N`, `X.Y.Z-beta.N`, or `X.Y.Z-rc.N`. Change `version.txt` in a release prep PR by default, not in ordinary feature or fix PRs.
 

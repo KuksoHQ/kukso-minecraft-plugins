@@ -1,0 +1,20 @@
+# lang/en.yml
+
+prefix: "&8[&bKuksoVotes&8] &8» "
+
+general:
+  no-permission: "&cYou don't have permission to use this command."
+  unknown-subcommand: "&cUnknown subcommand: <command>"
+  usage: "&cUsage: <usage>"
+
+commands:
+  help:
+    header: "&6KuksoVotes commands:"
+    version: "&7- /kuksovotes version &8» &7Show plugin version and integration status"
+    reload: "&7- /kuksovotes reload &8» &7Reload configuration and language files"
+  version:
+    info: "&eThis server is running &6KuksoVotes &eversion &6<version> &eby &6<authors>&e."
+    kuksolib-present: "&7KuksoLib detected — ecosystem integration is available."
+    kuksolib-absent: "&7Running standalone (KuksoLib is not installed)."
+  reload:
+    success: "&aKuksoVotes configuration and language files reloaded."

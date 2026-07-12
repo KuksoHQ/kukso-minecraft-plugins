@@ -1,0 +1,5 @@
+# KuksoVotes configuration.
+#
+# language: which file from the lang/ folder to use for messages.
+#           Bundled options are "en" and "tr"; unknown values fall back to "en".
+language: en

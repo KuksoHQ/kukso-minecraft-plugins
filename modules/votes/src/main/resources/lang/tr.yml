@@ -1,0 +1,20 @@
+# lang/tr.yml
+
+prefix: "&8[&bKuksoVotes&8] &8» "
+
+general:
+  no-permission: "&cBu komutu kullanma iznin yok."
+  unknown-subcommand: "&cBilinmeyen alt komut: <command>"
+  usage: "&cKullanım: <usage>"
+
+commands:
+  help:
+    header: "&6KuksoVotes komutları:"
+    version: "&7- /kuksovotes version &8» &7Eklenti sürümünü ve entegrasyon durumunu göster"
+    reload: "&7- /kuksovotes reload &8» &7Yapılandırmayı ve dil dosyalarını yeniden yükle"
+  version:
+    info: "&eBu sunucu &6KuksoVotes &esürüm &6<version>&e, geliştiren &6<authors>&e."
+    kuksolib-present: "&7KuksoLib algılandı — ekosistem entegrasyonu kullanılabilir."
+    kuksolib-absent: "&7Bağımsız çalışıyor (KuksoLib yüklü değil)."
+  reload:
+    success: "&aKuksoVotes yapılandırması ve dil dosyaları yeniden yüklendi."
