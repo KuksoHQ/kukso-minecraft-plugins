@@ -74,6 +74,7 @@ class MinecraftBasePlugin : Plugin<Project> {
             "dialogs-exp-config-addon" -> "KuksoDialogsExpConfigAddon"
             "worlds" -> "KuksoWorlds"
             "items" -> "KuksoItems"
+            "votes" -> "KuksoVotes"
             else -> "Kukso${name.replaceFirstChar { it.uppercase() }}"
         }
     }

@@ -103,6 +103,28 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
   - **Acceptance criteria:** Define supported metadata keys, how they are stored in NBT or item meta, and how other plugins should read them; remove or implement placeholder config comments.
   - **Validation:** Unit tests for metadata parsing plus `./gradlew :items:build`.
 
+- [ ] **Module/area:** `:votes` (P0 — MVP reward plugin) — *scope sharpened by the [switching research](../research/2026-07-12-votingplugin-switching-research.md)*
+  - **User value:** New/greenfield servers and owners stuck on the abandoned NuVotifier two-plugin stack get a single-jar, vote-site-agnostic plugin that receives votes and grants rewards with a *testable* 5-minute setup. It is not another VotingPlugin clone and not a feature-parity race. Stealing installed VotingPlugin setups is a later, higher-friction segment — do NOT target it first (switching inertia is high; owners tolerate VP's setup pain for its power).
+  - **Acceptance criteria:**
+    - Votifier v1 (RSA) + modern token/HMAC receiver in one jar (no separate Votifier/NuVotifier required) — attacks the two-plugin tax, which is the real open surface (NuVotifier's last release was 2021).
+    - **Testable 5-minute happy path:** sensible/auto port binding with clear diagnostics; print the public key/token once, clearly; a `/kuksovotes test` command; a "last inbound vote received" status/log; and ONE default reward that fires with zero YAML edits.
+    - **Service-site footgun guard:** on an unknown service name, log the exact received string plus a copy-paste snippet to register that site (auto-create where possible). This is the #1 real-world failure mode.
+    - Multiple vote sites; configurable rewards (console commands, items, Vault money via soft-dep); offline vote queue delivered on join; broadcast + per-player messages; `/vote` site listing; `/kuksovotes reload`; basic PlaceholderAPI placeholders.
+    - **Exactly one** retention hook (choose VoteParty *or* vote points/shop *or* simple streaks) so it is not rejected as "too simple" after day one — not all three.
+  - **Explicitly out of P0 (evidence says overvalued):** deep GUI/editor parity, full AdvancedCore reward depth, multi-proxy/MySQL perfection, and leaning on the FirstSpawn "verified badge" as an acquisition driver (no public evidence owners choose vote plugins for platform badges).
+  - **Validation:** Unit tests for protocol decode/validation and reward/service-name parsing under `modules/votes/src/test/java`; manual Paper `:votes:runServer` driving a simulated vote. **Kill metric:** measured time-to-first-successful-vote in a clean Paper install must be ≤ ~10 minutes with defaults.
+  - **Distribution (treat as product work, not an afterthought):** Spigot resource listing + a host-style setup guide + a short 5-minute setup video. Without distribution the UX advantage is invisible — cf. VoteRewards, which markets this exact thesis and has ~37 downloads.
+
+- [ ] **Module/area:** `:votes` (P1 — FirstSpawn integration)
+  - **User value:** Owners can opt in to share server-level activity with FirstSpawn to earn a free verified badge, and players can vote for the server through FirstSpawn like any other vote site.
+  - **Acceptance criteria:** Add FirstSpawn as a first-class vote site; add an opt-in, owner-controlled telemetry emitter that sends only server-level aggregate signals; surface exactly what is shared and allow disabling it at runtime; implement the verified-badge handshake. No player-level identity data is collected. Honors the KuksoVotes telemetry ruling in `PRODUCT.md`.
+  - **Validation:** Unit tests for the telemetry payload shape and opt-in gating; manual end-to-end check against a FirstSpawn staging endpoint with telemetry enabled and disabled.
+
+- [ ] **Module/area:** `:votes` (P2 — engagement depth)
+  - **User value:** Servers can drive more voting with streaks, server-wide vote parties, vote points/currency, and network leaderboards.
+  - **Acceptance criteria:** Add vote streaks, vote-party goals and rewards, a vote-points economy, and per-period leaderboards, all config-driven and reloadable via `/kuksovotes reload`. Player-level cross-server identity remains out of scope pending a consent model.
+  - **Validation:** Unit tests for streak/party/points logic; manual Paper server checks for each feature and reload behavior.
+
 - [ ] **Module/area:** `docs`
   - **User value:** Windows contributors are not silently blocked or given a broken checkout by the `.claude/skills` symlink.
   - **Acceptance criteria:** Document that Windows contributors need `git config core.symlinks=true` (and Developer Mode or admin rights) for the `.agents/skills` -> `.claude/skills` symlink to check out correctly; add this note to the relevant contributor-facing doc.

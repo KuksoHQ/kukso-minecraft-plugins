@@ -1,0 +1,24 @@
+name: KuksoVotes
+version: ${version}
+main: com.kukso.minecraft.votes.Main
+api-version: '1.21'
+load: POSTWORLD
+authors: [ DevBD1 ]
+description: Vote-site-agnostic voting rewards for Minecraft servers.
+website: https://kukso.com
+# KuksoLib is a soft dependency by design: KuksoVotes is a zero-friction,
+# single-jar drop-in and does not require a second plugin to be installed.
+softdepend: [KuksoLib, PlaceholderAPI]
+commands:
+  kuksovotes:
+    usage: /kuksovotes <subcommand>
+    permission: kuksovotes.command.root
+    description: KuksoVotes main command
+    aliases: [kv]
+permissions:
+  kuksovotes.command.root:
+    description: Access to the /kuksovotes command
+    default: true
+  kuksovotes.admin:
+    description: Access to administrative KuksoVotes subcommands such as reload
+    default: op

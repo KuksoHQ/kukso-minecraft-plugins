@@ -30,11 +30,13 @@ The plugins should feel:
 
 - `:lib` is the shared foundation for localization, placeholders, logging, hooks, commands, and cross-plugin services.
   - **Direction:** every Kukso module will adopt `:lib`. The near-term focus is making `:lib` stable and clear about its core use cases — centralized logging, YAML localization, color/text formatting, and placeholders — before broadening adoption.
-  - **Current adoption:** `:worlds` requires it, `:items` soft-depends on it, `:dialogs` does not use it yet.
+  - **Current adoption:** `:worlds` requires it, `:items` and `:votes` soft-depend on it, `:dialogs` does not use it yet.
+  - **Deliberate exception:** `:votes` soft-depends by design so it stays a zero-friction, single-jar drop-in. This is a recorded exception to the every-module-adopts-`:lib` direction, justified by KuksoVotes' adoption-maximizing role (see Scope Boundaries).
 - `:dialogs` provides configurable player-facing dialog flows, screens, validators, and commands.
 - `:dialogs-exp-config-addon` proves that dialog functionality can be extended through a focused service-loaded addon.
 - `:worlds` provides lightweight world management with clear commands and config-driven world behavior.
 - `:items` provides YAML-defined custom items, identification utilities, and optional localized lore behavior.
+- `:votes` (**KuksoVotes**) provides voting rewards: a vote-site-agnostic, Votifier-compatible reward plugin intended as a single-jar replacement for the traditional Votifier + reward-plugin stack. It is also the measured-telemetry instrument for the separate FirstSpawn discovery platform, but treats FirstSpawn as one supported vote site and telemetry target among many, never a requirement.
 
 ## Cross-Plugin Principles
 
@@ -71,6 +73,8 @@ The repository is proprietary, **All Rights Reserved** (see the root `LICENSE`).
 ## Scope Boundaries
 
 Kukso Minecraft is not trying to become a large server platform, economy suite, or all-in-one gameplay system. New work should belong because it strengthens the plugin family, improves shared foundations, or solves a focused operational need for Minecraft servers.
+
+**KuksoVotes / FirstSpawn telemetry ruling.** KuksoVotes may integrate with the external FirstSpawn discovery platform by emitting *opt-in, owner-controlled, server-level aggregate* telemetry (for example concurrent players, retention, uptime, and vote-to-join conversion). This does not make KuksoVotes a player-data platform: it must not collect player-level identity data, must remain vote-site-agnostic (never requiring FirstSpawn), and must not grow into an all-in-one system. Player-level cross-server identity features are out of scope pending a dedicated consent model. Server owners must be able to see exactly what is shared and disable sharing at runtime.
 
 ## Release Philosophy
 
