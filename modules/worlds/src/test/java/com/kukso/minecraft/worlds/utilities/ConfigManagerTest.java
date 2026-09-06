@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ConfigManagerTest {
     @Test
     void validateKeyAcceptsDottedDashedAndUnderscoredConfigPaths() {
-        assertDoesNotThrow(() -> ConfigManager.validateKey("commands.reload"));
+        assertDoesNotThrow(() -> ConfigManager.validateKey("commands.create"));
         assertDoesNotThrow(() -> ConfigManager.validateKey("world-border.size"));
         assertDoesNotThrow(() -> ConfigManager.validateKey("default_world"));
     }

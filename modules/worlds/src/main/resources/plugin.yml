@@ -19,12 +19,5 @@ commands:
     aliases: [kw]
 # Permissions are dynamically set for each command in config.yml
 permissions:
-  kuksoworlds.admin:
-    description: Allows high-level admin access to any command
-    default: op
-  kuksoworlds.mod:
-    description: Allows low-level access to some admin commands
-  kuksoworlds.user:
-    description: Allows access to user commands
   kuksoworlds.command.root:
     description: Use it with specific perm(s) of a subcommand
