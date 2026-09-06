@@ -28,6 +28,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 
 ### Changed
 
+- `worlds`: Removed empty unused stubs (`ReloadCmd`, `PvpHandling`, `modules.WorldBorder`, and unused Color/Version/Localization hook classes) and collapsed `CmdRegistrar` to a single registration loop for the live commands.
 - `repo`: Switched the repository license from Apache 2.0 to All Rights Reserved; the root `LICENSE`, the `:lib` Maven POM, and module README license statements now match.
 - `lib`: Rewrote the module README to match implemented behavior: documented the ProtocolLib requirement, corrected the consumer list (`:worlds` requires, `:items` soft-depends, `:dialogs` not yet), synced usage/API examples, and moved unimplemented features (REST API, GUI API, auto-updater) fully into the backlog.
 - `lib`: Removed `plugin.yml` softdepends on unreleased plugins (KuksoLoots, KuksoSense, KuksoConquest, KuksoDungeons); they return when each plugin exists.
@@ -56,6 +57,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 
 ### Config And Permissions
 
+- `worlds`: Removed default config for the unregistered `reload` subcommand and unused `plugin.yml` nodes `kuksoworlds.admin` / `kuksoworlds.mod` / `kuksoworlds.user`.
 - `lib`: Removed the dead `restful-enabled` default, REST status logging, and unregistered `log`/`gui` command config blocks.
 - `dialogs`: Replaced legacy command permissions with `kuksodialogs.admin.*`, added default config for the registered `addons` subcommand, and removed defaults for unregistered `help`/`forceclose` subcommands.
 - `worlds`: Removed unimplemented module toggles from the default config and README example; `modules.custom-logger` remains because it is used by the KuksoLib-backed logger hook.
@@ -64,6 +66,7 @@ This repository releases multiple plugin artifacts from one monorepo. Release en
 ### Sprint Links
 
 - Sprint not assigned yet.
+- `docs/sprints/2026-09-06-sprint-5.md`
 - `docs/sprints/2026-06-07-sprint-1.md`
 - `docs/sprints/2026-06-30-sprint-1.md`
 - `docs/sprints/2026-07-01-sprint-2.md`

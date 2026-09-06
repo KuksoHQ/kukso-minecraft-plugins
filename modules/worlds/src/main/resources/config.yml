@@ -53,11 +53,6 @@ commands:
     permissions:
       - kuksoworlds.command.recycle
       - kuksoworlds.command.admin
-  reload:
-    aliases: [rl]
-    permissions:
-      - kuksoworlds.command.reload
-      - kuksoworlds.command.admin
   setspawn:
     permissions:
       - kuksoworlds.command.setspawn

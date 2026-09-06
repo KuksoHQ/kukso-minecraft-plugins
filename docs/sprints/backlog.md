@@ -136,6 +136,11 @@ Use this file for ongoing product and maintenance backlog items. Keep entries sh
 
 ## Done
 
+- [x] **Module/area:** `:worlds`
+  - **User value:** Maintainers and server owners are not shown empty unused worlds stubs, an unregistered reload command in default config, or unused role permission nodes.
+  - **Acceptance criteria:** Delete confirmed-empty unused worlds stubs (`ReloadCmd`, `PvpHandling`, `modules.WorldBorder`, `hooks.ColorManager`, `hooks.VersionChecker`, `hooks.LocalizationManager`); remove leftover `commands.reload` config; remove unused `plugin.yml` admin/mod/user nodes if unreferenced; collapse `CmdRegistrar` to one register loop matching dialogs style. Leave `LoggingManager` and WorldLoader behavior alone.
+  - **Validation:** Delivered in `2026-09-06-sprint-5.md`; `./gradlew :worlds:build` green, worlds grep for deleted classes clean, `git diff --check` green.
+
 - [x] **Module/area:** All plugin modules
   - **User value:** Regressions in parsing, validation, and command utilities are caught by `./gradlew test` instead of manual Paper server checks.
   - **Acceptance criteria:** Each module with testable parsing/validation/command-utility logic gets a seeded `modules/<module>/src/test/java` tree with at least one focused `*Test` class covering real behavior (no placeholder asserts), and `./gradlew test` runs them green.
